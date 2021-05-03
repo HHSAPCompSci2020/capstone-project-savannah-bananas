@@ -56,6 +56,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		//setting current active screen to be the Main Menu
 		activeScreen = screens.get(MENU_SCREEN);
+		
+		keys = new ArrayList<Integer>();
 	}
 
 	
@@ -70,6 +72,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		scale(ratioX, ratioY);
 		activeScreen.draw();
 		popMatrix();
+		
 		
 	}
 	
