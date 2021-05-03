@@ -1,5 +1,6 @@
 package frog.screen;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import frog.util.Button;
@@ -27,6 +28,8 @@ public class FrogDungeon extends Screen {
 	public FrogDungeon (DrawingSurface surface) {
 		super(surface);
 		
+		player = new Frog(100, 100, 50, 50, 100);
+		
 		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
 	}
 	
@@ -39,6 +42,22 @@ public class FrogDungeon extends Screen {
 		surface.background(0);
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
 		surface.text("Game screen", 400, 300);
+		
+		player.draw(surface);
+		if (surface.isPressed(KeyEvent.VK_W)) {
+			player.accelerate(0, -0.5);
+		}
+		if (surface.isPressed(KeyEvent.VK_A)) {
+			player.accelerate(-0.5, 0);
+		}
+		if (surface.isPressed(KeyEvent.VK_S)) {
+			player.accelerate(0, 0.5);
+		}
+		if (surface.isPressed(KeyEvent.VK_D)) {
+			player.accelerate(0.5, 0);
+		}
+		//player.accelerate(0, 1);
+		player.move();
 	}
 	
 	/**

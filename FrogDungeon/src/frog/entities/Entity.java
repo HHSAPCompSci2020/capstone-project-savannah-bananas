@@ -35,7 +35,8 @@ public abstract class Entity {
 	 * Moves the entity based on its velocity.
 	 */
 	public void move() {
-		
+		x += vX;
+		y += vY;
 	}
 	
 	/**
@@ -44,7 +45,8 @@ public abstract class Entity {
 	 * @param aY, the value to add to the y velocity
 	 */
 	public void accelerate(double aX, double aY) {
-		
+		vX += aX;
+		vY += aY;
 	}
 	
 	/**
@@ -53,7 +55,8 @@ public abstract class Entity {
 	 * @param y, The y coordinate of the new location.
 	 */
 	public void moveTo(double x, double y) {
-		
+		this.x = x;
+		this.y = y;
 	}
 	
 	/**
