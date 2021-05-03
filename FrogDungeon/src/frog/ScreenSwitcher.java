@@ -1,4 +1,4 @@
-package temporary;
+package frog;
 
 public interface ScreenSwitcher {
 
@@ -9,7 +9,7 @@ public interface ScreenSwitcher {
 	
 	//Methods
 	/**
-	 * 
+	 * Switches the current active Screen to the new index
 	 * @param i
 	 */
 	public void switchScreen(int i);

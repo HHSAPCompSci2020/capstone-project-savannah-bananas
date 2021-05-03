@@ -1,4 +1,6 @@
-package temporary;
+package frog.screen;
+
+import frog.DrawingSurface;
 
 public abstract class Screen {
 	
@@ -6,6 +8,10 @@ public abstract class Screen {
 	private final int DRAWING_WIDTH = 0, DRAWING_HEIGHT = 0;
 	private DrawingSurface surface;
 	
+	//Constructor
+	public Screen(DrawingSurface surface) {
+		this.surface = surface;
+	}
 	
 	//Methods
 	/**

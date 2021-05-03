@@ -1,7 +1,9 @@
-package temporary;
+package frog.screen;
 
 import java.awt.Button;
 import java.util.ArrayList;
+
+import frog.DrawingSurface;
 import frog.entities.Frog;
 import frog.entities.Monster;
 import frog.misc.Wall;
@@ -18,10 +20,11 @@ public class FrogDungeon extends Screen {
 	
 	//Constructors
 	/**
-	 * 
+	 * Constructs a new FrogDungeon screen
+	 * @param surface The DrawingSurface that the FrogDungeon Screen exists inside of
 	 */
-	public FrogDungeon () {
-		
+	public FrogDungeon (DrawingSurface surface) {
+		super(surface);
 	}
 	
 	//Methods

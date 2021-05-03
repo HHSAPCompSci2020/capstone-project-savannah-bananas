@@ -1,17 +1,18 @@
-package temporary;
+package frog;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+
+import frog.DrawingSurface;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 public class Main {
 	
 	public static void main(String args[]) {
-		FrogDungeon dungeon = new FrogDungeon();
 		
-		DrawingSurface drawing = new DrawingSurface(dungeon);
+		DrawingSurface drawing = new DrawingSurface();
 		PApplet.runSketch(new String[]{""}, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
