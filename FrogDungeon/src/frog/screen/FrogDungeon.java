@@ -45,16 +45,20 @@ public class FrogDungeon extends Screen {
 		
 		player.draw(surface);
 		if (surface.isPressed(KeyEvent.VK_W)) {
-			player.accelerate(0, -0.5);
+			//player.accelerate(0, -0.5);
+			player.moveTo(player.getX(), player.getY()-5);
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
-			player.accelerate(-0.5, 0);
+			//player.accelerate(-0.5, 0);
+			player.moveTo(player.getX()-5, player.getY());
 		}
 		if (surface.isPressed(KeyEvent.VK_S)) {
-			player.accelerate(0, 0.5);
+			//player.accelerate(0, 0.5);
+			player.moveTo(player.getX(), player.getY()+5);
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
-			player.accelerate(0.5, 0);
+			//player.accelerate(0.5, 0);
+			player.moveTo(player.getX()+5, player.getY());
 		}
 		//player.accelerate(0, 1);
 		player.move();
