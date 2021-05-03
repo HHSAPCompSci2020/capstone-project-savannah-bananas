@@ -3,6 +3,7 @@ package frog.screen;
 import java.util.ArrayList;
 
 import frog.util.Button;
+import processing.core.PApplet;
 import frog.DrawingSurface;
 import frog.entities.Frog;
 import frog.entities.Monster;
@@ -30,6 +31,16 @@ public class FrogDungeon extends Screen {
 	}
 	
 	//Methods
+	
+	/**
+	 * Draws everything
+	 */
+	public void draw() {
+		surface.background(0);
+		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
+		surface.text("Game screen", 400, 300);
+	}
+	
 	/**
 	 * Is called when a Button is pressed
 	 */

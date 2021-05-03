@@ -27,7 +27,7 @@ public class MenuScreen extends Screen {
 		surface.background(0);
 		surface.pushStyle();
 		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
-		surface.text("FROG DUNGEON", 400, 300);
+		//surface.text("FROG DUNGEON", 400, 300);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
