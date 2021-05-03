@@ -7,11 +7,20 @@ import processing.core.PApplet;
 public class Wall {
 
 	//Fields
+	
+	/**
+	 * The type field denotes which type of wall this is.
+	 */
+	private int type;
 	public static final int EMPTY = 0;
 	public static final int WALL = 1;
 	public static final int DOORWAY = 2;
+	
+	/**
+	 * Wall coordinates are weird. See explanation at
+	 * https://drive.google.com/file/d/1D2pyQAjGkIvmENjzkDhlAM6YxHwHwzLL/view?usp=sharing
+	 */
 	private double x, y;
-	private int type;
 	
 	//Constructor
 	public Wall(double x, double y, int type) {
