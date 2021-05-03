@@ -5,8 +5,9 @@ import frog.DrawingSurface;
 public abstract class Screen {
 	
 	//Fields
-	private final int DRAWING_WIDTH = 0, DRAWING_HEIGHT = 0;
-	private DrawingSurface surface;
+	public final int DRAWING_WIDTH = 800;
+	public final int DRAWING_HEIGHT = 600;
+	protected DrawingSurface surface;
 	
 	//Constructor
 	public Screen(DrawingSurface surface) {
