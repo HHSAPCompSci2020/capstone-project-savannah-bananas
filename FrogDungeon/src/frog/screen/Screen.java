@@ -1,17 +1,25 @@
 package frog.screen;
 
-import frog.DrawingSurface;
+import java.awt.Point;
+import java.util.ArrayList;
 
-public abstract class Screen {
+import frog.DrawingSurface;
+import frog.util.Button;
+import frog.util.ButtonListener;
+import processing.core.PApplet;
+
+public abstract class Screen implements ButtonListener {
 	
 	//Fields
 	public final int DRAWING_WIDTH = 800;
 	public final int DRAWING_HEIGHT = 600;
 	protected DrawingSurface surface;
+	protected ArrayList<Button> buttons;
 	
 	//Constructor
 	public Screen(DrawingSurface surface) {
 		this.surface = surface;
+		buttons = new ArrayList<Button>();
 	}
 	
 	//Methods
@@ -30,6 +38,26 @@ public abstract class Screen {
 	 */
 	public void draw() {
 		
+	}
+	
+	/**
+	 * Updates the Buttons
+	 * @param mouseX x-coordinate of the mouse, using actual coords, not assumed
+	 * @param mouseY y-coordinate of the mouse, using actual coords, not assumed
+	 * @param mousePressed True if mouse is currently pressed down, false if not
+	 */
+	public void updateButtons(int mouseX, int mouseY, boolean mousePressed) {
+		for(Button b : buttons)
+			b.update(mouseX, mouseY, mousePressed);
+	}
+	
+	public void updateButtons(Point mouseCoords, boolean mousePressed) {
+		updateButtons(mouseCoords.x, mouseCoords.y, mousePressed);
+	}
+	
+	public void drawButtons(PApplet surface) {
+		for(Button b : buttons)
+			b.draw(surface);
 	}
 	
 	/**

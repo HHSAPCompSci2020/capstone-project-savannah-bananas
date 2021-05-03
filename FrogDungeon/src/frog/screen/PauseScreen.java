@@ -1,7 +1,6 @@
 package frog.screen;
 
-import java.awt.Button;
-
+import frog.util.Button;
 import frog.DrawingSurface;
 
 public class PauseScreen extends Screen {
@@ -18,7 +17,14 @@ public class PauseScreen extends Screen {
 	 */
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
+		
+		//TODO: Create resume, save and exit buttons, and add them to "buttons" arraylist inherited from Screen superclass
 	}
 	
 	//Methods
+
+	@Override
+	public void buttonPressed(Button button) {
+		//if(button.equals(resumeButton) {// do stuff}
+	}
 }

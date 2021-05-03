@@ -1,8 +1,8 @@
 package frog.screen;
 
-import java.awt.Button;
 import java.util.ArrayList;
 
+import frog.util.Button;
 import frog.DrawingSurface;
 import frog.entities.Frog;
 import frog.entities.Monster;
@@ -25,9 +25,21 @@ public class FrogDungeon extends Screen {
 	 */
 	public FrogDungeon (DrawingSurface surface) {
 		super(surface);
+		
+		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
 	}
 	
 	//Methods
+	/**
+	 * Is called when a Button is pressed
+	 */
+	@Override
+	public void buttonPressed(Button button) {
+		if(button.equals(pauseButton)) {
+			//doStuff
+		}
+	}
+	
 	/**
 	 * Generates maze.
 	 */

@@ -1,6 +1,6 @@
 package frog.screen;
 
-import java.awt.Button;
+import frog.util.Button;
 
 import frog.DrawingSurface;
 
@@ -15,6 +15,11 @@ public class MenuScreen extends Screen {
 	 */
 	public MenuScreen(DrawingSurface surface) {
 		super(surface);
+		
+		startButton = new Button(300, 150, 200, 150);
+		startButton.setText("Start");
+		startButton.setButtonListener(this);
+		buttons.add(startButton);
 	}
 	
 	//Methods
@@ -23,6 +28,17 @@ public class MenuScreen extends Screen {
 		surface.pushStyle();
 		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 		surface.text("FROG DUNGEON", 400, 300);
+		
+		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
+		drawButtons(surface);
+		
 		surface.popStyle();
+	}
+
+	@Override
+	public void buttonPressed(Button button) {
+		if(button.equals(startButton)) {
+			surface.switchScreen(surface.GAME_SCREEN);
+		}
 	}
 }

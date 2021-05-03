@@ -108,21 +108,29 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	}
 	
 	/**
-	 * 
+	 * Assumed coordinates are the raw mouseX and mouseY values, which are then converted to the actual x and y expected post-scaling
 	 * @param assumed
 	 * @return
 	 */
 	public Point assumedCoordinatesToActual(Point assumed) {
-		return new Point((int) (assumed.getX() * ratioX), (int) (assumed.getY() * ratioY));
+		return new Point((int) (assumed.getX() / ratioX), (int) (assumed.getY() / ratioY));
+	}
+	
+	public Point assumedCoordinatesToActual(int x, int y) {
+		return assumedCoordinatesToActual(new Point(x, y));
 	}
 	
 	/**
-	 * 
+	 * Assumed coordinates are the raw mouseX and mouseY values, which are then converted to the actual x and y expected post-scaling
 	 * @param actual
 	 * @return
 	 */
 	public Point actualCoordinatesToAssumed(Point actual) {
-		return new Point((int) (actual.getX() / ratioX), (int) (actual.getY() / ratioY));
+		return new Point((int) (actual.getX() * ratioX), (int) (actual.getY() * ratioY));
+	}
+	
+	public Point actualCoordinatesToAssumed(int x, int y) {
+		return actualCoordinatesToAssumed(new Point(x, y));
 	}
 	
 	/**
