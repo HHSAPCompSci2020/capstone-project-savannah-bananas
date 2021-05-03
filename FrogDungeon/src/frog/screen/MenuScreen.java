@@ -18,4 +18,11 @@ public class MenuScreen extends Screen {
 	}
 	
 	//Methods
+	public void draw() {
+		surface.background(0);
+		surface.pushStyle();
+		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
+		surface.text("FROG DUNGEON", 400, 300);
+		surface.popStyle();
+	}
 }
