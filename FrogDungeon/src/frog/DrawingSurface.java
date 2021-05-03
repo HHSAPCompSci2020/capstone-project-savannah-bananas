@@ -5,11 +5,18 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import frog.ScreenSwitcher;
 import frog.screen.FrogDungeon;
+import frog.screen.MenuScreen;
+import frog.screen.PauseScreen;
 import frog.screen.Screen;
 
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	//Fields
+	
+	/**
+	 * ratioX and ratioY are the current scale of the game
+	 */
+	public float ratioX, ratioY;
 	
 	/**
 	 * List of keys that are currently being pressed
@@ -30,68 +37,74 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	private ArrayList<Screen> screens;
 	
+	
+	
+	
 	//Constructors
 	public DrawingSurface() {
+		//adding all the screens, in order
+		screens = new ArrayList<Screen>();
 		
+		MenuScreen menuScreen = new MenuScreen(this);
+		screens.add(menuScreen);
+		
+		FrogDungeon gameScreen = new FrogDungeon(this);
+		screens.add(gameScreen);
+		
+		PauseScreen pauseScreen = new PauseScreen(this);
+		screens.add(pauseScreen);
+		
+		//setting current active screen to be the Main Menu
+		activeScreen = screens.get(MENU_SCREEN);
 	}
+
+	
+	
 	
 	//Methods
-	/**
-	 * 
-	 */
 	public void draw() {
+		ratioX = (float) width / activeScreen.DRAWING_WIDTH;
+		ratioY = (float) height / activeScreen.DRAWING_HEIGHT;
+		
+		pushMatrix();
+		scale(ratioX, ratioY);
+		activeScreen.draw();
+		popMatrix();
 		
 	}
 	
-	/**
-	 * 
-	 */
 	public void keyPressed() {
-		
+		keys.add(keyCode);
 	}
 	
-	/**
-	 * 
-	 */
 	public void keyReleased() {
-		
+		while(keys.contains(keyCode))
+			keys.remove(new Integer(keyCode));
 	}
 	
 	/**
-	 * 
-	 * @param code
+	 * Checks if the given key is currently held down or not
+	 * @param code The KeyCode of the key being checked
 	 * @return true if key is pressed, false otherwise
 	 */
 	public boolean isPressed(Integer code) {
-		return false;
+		return keys.contains(code);
 	}
 	
-	/**
-	 * 
-	 */
 	public void mousePressed() {
-		
+		activeScreen.mousePressed();
 	}
 	
-	/**
-	 * 
-	 */
 	public void mouseMoved() {
-		
+		activeScreen.mouseMoved();
 	}
 	
-	/**
-	 * 
-	 */
 	public void mouseDragged() {
-		
+		activeScreen.mouseDragged();
 	}
 	
-	/**
-	 * 
-	 */
 	public void mouseReleased() {
-		
+		activeScreen.mouseReleased();
 	}
 	
 	/**
@@ -100,7 +113,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 * @return
 	 */
 	public Point assumedCoordinatesToActual(Point assumed) {
-		return null;
+		return new Point((int) (assumed.getX() * ratioX), (int) (assumed.getY() * ratioY));
 	}
 	
 	/**
@@ -109,7 +122,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 * @return
 	 */
 	public Point actualCoordinatesToAssumed(Point actual) {
-		return null;
+		return new Point((int) (actual.getX() / ratioX), (int) (actual.getY() / ratioY));
 	}
 	
 	/**
