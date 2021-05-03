@@ -23,10 +23,17 @@ public class Wall {
 	private double x, y;
 	
 	//Constructor
-	public Wall(double x, double y, int type) {
+	/**
+	 * Wall coordinates are weird. See example at
+	 * https://drive.google.com/file/d/1D2pyQAjGkIvmENjzkDhlAM6YxHwHwzLL/view?usp=sharing
+	 * Default type = WALL
+	 * @param x
+	 * @param y
+	 */
+	public Wall(double x, double y) {
 		this.x = x;
 		this.y = y;
-		this.type = type;
+		this.type = WALL;
 	}
 	
 	//Methods
@@ -44,5 +51,24 @@ public class Wall {
 	 */
 	public void draw(PApplet marker) {
 		
+	}
+	
+	/**
+	 * Returns whether or not this tile is horizontal
+	 * @return True if horizontal, false if vertical
+	 */
+	public boolean isHorizontal() {
+		if((int) (y - 0.5) == (int) y)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * Returns whether or not this tile is vertical
+	 * @return True if vertical, false if horizontal
+	 */
+	public boolean isVertical() {
+		return !isHorizontal();
 	}
 }
