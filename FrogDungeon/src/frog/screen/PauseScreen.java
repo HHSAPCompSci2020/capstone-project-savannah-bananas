@@ -18,13 +18,45 @@ public class PauseScreen extends Screen {
 	public PauseScreen(DrawingSurface surface) {
 		super(surface);
 		
+		resumeButton = new Button(300, 100, 200, 150);
+		resumeButton.setText("Resume");
+		resumeButton.setButtonListener(this);
+		buttons.add(resumeButton);
+		
+		saveButton = new Button(300, 250, 200, 150);
+		saveButton.setText("Save Game");
+		saveButton.setButtonListener(this);
+		buttons.add(saveButton);
+		
+		exitButton = new Button(300, 400, 200, 150);
+		exitButton.setText("Exit");
+		exitButton.setButtonListener(this);
+		buttons.add(exitButton);
+
+		
 		//TODO: Create resume, save and exit buttons, and add them to "buttons" arraylist inherited from Screen superclass
+	}
+	
+	public void draw() {
+		surface.background(0);
+		surface.pushStyle();
+	//	surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
+		surface.text("GAME PAUSED", 355, 50);
+		
+		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
+		drawButtons(surface);
+		
+		surface.popStyle();
 	}
 	
 	//Methods
 
 	@Override
 	public void buttonPressed(Button button) {
-		//if(button.equals(resumeButton) {// do stuff}
+		if(button.equals(resumeButton)) {
+			surface.switchScreen(surface.GAME_SCREEN);
+		} else if(button.equals(exitButton)) {
+			surface.switchScreen(surface.MENU_SCREEN);
+		}
 	}
 }

@@ -54,8 +54,12 @@ public class Frog extends Entity{
 	}
 	
 	public void draw(PApplet marker) {
+		marker.pushStyle();
 		marker.fill(0, 256, 0);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		marker.ellipse((float)(x+width/4), (float)(y), (float)width, (float)height);
+		marker.fill(0);
+		marker.text("Frog", (float)x, (float)y);
+		marker.popStyle();
 	}
 	
 }

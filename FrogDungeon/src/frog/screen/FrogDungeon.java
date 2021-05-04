@@ -28,7 +28,12 @@ public class FrogDungeon extends Screen {
 	public FrogDungeon (DrawingSurface surface) {
 		super(surface);
 		
-		player = new Frog(100, 100, 50, 50, 100);
+		player = new Frog(300, 300, 50, 50, 100);
+		
+		pauseButton = new Button(20, 20, 150, 100);
+		pauseButton.setText("Pause Game");
+		pauseButton.setButtonListener(this);
+		buttons.add(pauseButton);
 		
 		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
 	}
@@ -40,10 +45,17 @@ public class FrogDungeon extends Screen {
 	 */
 	public void draw() {
 		surface.background(0);
+		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
 		surface.text("Game screen", 400, 300);
 		
+		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
+		drawButtons(surface);
+		
+		surface.popStyle();
+		
 		player.draw(surface);
+		
 		if (surface.isPressed(KeyEvent.VK_W)) {
 			//player.accelerate(0, -0.5);
 			player.moveTo(player.getX(), player.getY()-5);
@@ -70,7 +82,7 @@ public class FrogDungeon extends Screen {
 	@Override
 	public void buttonPressed(Button button) {
 		if(button.equals(pauseButton)) {
-			//doStuff
+			surface.switchScreen(surface.PAUSE_SCREEN);
 		}
 	}
 	
