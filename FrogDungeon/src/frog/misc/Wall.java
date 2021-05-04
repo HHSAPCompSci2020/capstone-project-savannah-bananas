@@ -35,9 +35,10 @@ public class Wall {
 	
 	/**
 	 * WALL_WIDTH should be greater than WALL_HEIGHT
+	 * Original values of WALL_WIDTH and WALL_HEIGHT are 400 and 20, respectively
 	 */
-	public static final int WALL_WIDTH = 500;
-	public static final int WALL_HEIGHT = 40;
+	public static final int WALL_WIDTH = 400;
+	public static final int WALL_HEIGHT = 20;
 	
 	//Constructor
 	/**
@@ -84,6 +85,15 @@ public class Wall {
 	}
 	
 	/**
+	 * Returns two Points of tiles on either side of this wall. May be out of bounds.
+	 * @return Array of two Points (always exactly 2 Points, no more, no less) of the neighboring tiles.
+	 */
+	public Point[] getBothNeighbors() {
+		Point point1 = new Point((int) this.x, (int) this.y);
+		return new Point[] {point1, getTileOnOtherSide(point1)};
+	}
+	
+	/**
 	 * Returns true if the Point (tile coordinates) neighbors this wall, false if not
 	 */
 	private boolean neighborsTile(Point p) {
@@ -104,6 +114,13 @@ public class Wall {
 		marker.noStroke();
 
 		Point centerPoint = wallCoordsToPixelCoords(this.x, this.y);
+		
+		int width = this.width;
+		int height = this.height;
+		if(isHorizontal())
+			width += this.height;
+		else
+			height += this.width;
 		
 		if(type == WALL) {
 			marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height);
@@ -164,5 +181,19 @@ public class Wall {
 	 */
 	public int getType() {
 		return this.type;
+	}
+	
+	/**
+	 * Gets x
+	 */
+	public double getX() {
+		return this.x;
+	}
+	
+	/**
+	 * Gets y
+	 */
+	public double getY() {
+		return this.y;
 	}
 }
