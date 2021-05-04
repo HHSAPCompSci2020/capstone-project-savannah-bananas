@@ -28,6 +28,19 @@ public class FrogDungeon extends Screen {
 	public FrogDungeon (DrawingSurface surface) {
 		super(surface);
 		
+		//adds all the walls to the maze
+		walls = new ArrayList<Wall>();
+		double mazeSize = 10.0;
+		for(double x = 0; x <= mazeSize; x += 0.5) {
+			if((int) x == x) { //if x is a whole number
+				for(double y = 0.5; y < mazeSize; y++)
+					walls.add(new Wall(x, y));
+			} else { //x is not a whole number, walls are horizontal
+				for(double y = 0; y <= mazeSize; y++)
+					walls.add(new Wall(x, y));
+			}
+		}
+		
 		player = new Frog(300, 300, 50, 50, 100);
 		
 		pauseButton = new Button(20, 20, 150, 100);
@@ -74,6 +87,10 @@ public class FrogDungeon extends Screen {
 		}
 		//player.accelerate(0, 1);
 		player.move();
+		
+		for(Wall wall : walls) {
+			wall.draw(surface);
+		}
 	}
 	
 	/**

@@ -1,5 +1,6 @@
 package frog.misc;
 
+import java.awt.Color;
 import java.awt.Point;
 
 import processing.core.PApplet;
@@ -7,6 +8,11 @@ import processing.core.PApplet;
 public class Wall {
 
 	//Fields
+	
+	/**
+	 * Color of default walls.
+	 */
+	public static final Color WALL_COLOR = new Color(0, 96, 255);
 	
 	/**
 	 * The type field denotes which type of wall this is.
@@ -30,7 +36,7 @@ public class Wall {
 	/**
 	 * WALL_WIDTH should be greater than WALL_HEIGHT
 	 */
-	public static final int WALL_WIDTH = 400;
+	public static final int WALL_WIDTH = 500;
 	public static final int WALL_HEIGHT = 40;
 	
 	//Constructor
@@ -94,11 +100,22 @@ public class Wall {
 	 */
 	public void draw(PApplet marker) {
 		marker.pushStyle();
-		marker.fill(0, 100, 0);
+		marker.fill(WALL_COLOR.getRed(), WALL_COLOR.getGreen(), WALL_COLOR.getBlue());
 		marker.noStroke();
-		
+
 		Point centerPoint = wallCoordsToPixelCoords(this.x, this.y);
-		marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height);
+		
+		if(type == WALL) {
+			marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height);
+		} else if(type == DOORWAY) {
+			if(isHorizontal()) {
+				marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width/2 - height, height);
+				marker.rect(centerPoint.x + height, centerPoint.y - height/2, width/2 - height, height);
+			} else {
+				marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height - height/2 - width);
+				marker.rect(centerPoint.x - width/2, centerPoint.y + width, width, height - height/2 - width);
+			}
+		}
 			
 		marker.popStyle();
 	}
@@ -111,7 +128,7 @@ public class Wall {
 	 */
 	public static Point wallCoordsToPixelCoords(double x, double y) {
 		double newX = x * WALL_WIDTH;
-		double newY = x * WALL_HEIGHT;
+		double newY = y * WALL_WIDTH;
 		
 		return new Point((int) newX, (int) newY);
 	}
@@ -121,7 +138,7 @@ public class Wall {
 	 * @return True if horizontal, false if vertical
 	 */
 	public boolean isHorizontal() {
-		if((int) (y - 0.5) == (int) y)
+		if(this.y == (int) this.y)
 			return true;
 		else
 			return false;
@@ -133,5 +150,19 @@ public class Wall {
 	 */
 	public boolean isVertical() {
 		return !isHorizontal();
+	}
+	
+	/**
+	 * Sets wall type (wall, door, or empty)
+	 */
+	public void setType(int x) {
+		this.type = x;
+	}
+	
+	/**
+	 * Gets wall type
+	 */
+	public int getType() {
+		return this.type;
 	}
 }
