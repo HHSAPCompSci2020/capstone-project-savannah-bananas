@@ -49,13 +49,13 @@ public class FrogDungeon extends Screen {
 	 * Draws everything
 	 */
 	public void draw() {
+		surface.pushMatrix();
+		surface.translate(0 - (int) player.getX() + 400, 0 - (int) player.getY() + 300); 
+		
 		surface.background(0);
 		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
 		surface.text("Game screen", 400, 300);
-		
-		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
-		drawButtons(surface);
 		
 		surface.popStyle();
 		
@@ -83,6 +83,13 @@ public class FrogDungeon extends Screen {
 		for(Wall wall : walls) {
 			wall.draw(surface);
 		}
+		
+		surface.popMatrix();
+		
+
+		
+		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
+		drawButtons(surface);
 	}
 	
 	/**
