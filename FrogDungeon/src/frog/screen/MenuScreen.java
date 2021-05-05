@@ -8,7 +8,7 @@ public class MenuScreen extends Screen {
 	//Fields
 	private Button startButton;
 	private Button infoButton;
-	private PImage gorf;
+	private PImage frog;
 	
 	//Constructors
 	/**
@@ -18,7 +18,7 @@ public class MenuScreen extends Screen {
 	public MenuScreen(DrawingSurface surface) {
 		super(surface);
 		
-		gorf = new PImage();
+		frog = new PImage();
 		
 		startButton = new Button(300, 250, 200, 150);
 		startButton.setText("Start");
@@ -33,8 +33,7 @@ public class MenuScreen extends Screen {
 	}
 	
 	public void draw() {
-		gorf = surface.loadImage("gorf1.png");
-
+		frog = surface.loadImage("resources/frog.png");
 
 		surface.background(0);
 		surface.pushStyle();
@@ -45,7 +44,7 @@ public class MenuScreen extends Screen {
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
 		
-		surface.image(gorf, 335, 85);
+		surface.image(frog, 335, 85);
 
 		surface.popStyle();
 	}
