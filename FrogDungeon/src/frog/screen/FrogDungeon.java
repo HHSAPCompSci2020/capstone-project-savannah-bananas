@@ -129,6 +129,9 @@ public class FrogDungeon extends Screen {
 				}
 				
 			}
+			else {
+				monsters.remove(i);
+			}
 		}
 		
 		
