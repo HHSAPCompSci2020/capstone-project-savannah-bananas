@@ -1,12 +1,13 @@
 package frog.screen;
 
 import frog.util.Button;
-
+import processing.core.PImage;
 import frog.DrawingSurface;
 
 public class InfoScreen extends Screen {
 	//Fields
 	private Button returnButton;
+	private PImage gorf;
 	
 	//Constructors
 	/**
@@ -15,6 +16,8 @@ public class InfoScreen extends Screen {
 	 */
 	public InfoScreen(DrawingSurface surface) {
 		super(surface);
+		
+		gorf = new PImage();
 		
 		returnButton = new Button(20, 20, 150, 100);
 		returnButton.setText("Return to Main Menu");
@@ -25,13 +28,17 @@ public class InfoScreen extends Screen {
 	
 	//Methods
 	public void draw() {
+		gorf = surface.loadImage("resources/gorf1.png");
+		
 		surface.background(0);
 		surface.pushStyle();
-		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
-		surface.text("GAME CONTROLS, BACKGROUND INFO, ETC", 400, 300);
+		//surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
+		surface.text("HOW TO PLAY", 355, 50);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
+		
+		surface.image(gorf, 335, 85);
 		
 		surface.popStyle();
 	}
