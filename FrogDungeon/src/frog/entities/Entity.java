@@ -1,5 +1,8 @@
 package frog.entities;
 
+import java.awt.Point;
+import java.awt.Rectangle;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -23,11 +26,37 @@ public abstract class Entity {
 	
 	//Methods
 	/**
-	 * Detects if this entity is touching another entity.
-	 * @param other, the entity that is tested with this entity.
-	 * @return boolean, true if they are touching, false if not.
+	 * Detects if this entity is touching a rectangle belonging to another entity/item/projectile.
+	 * @param other, the rectangle hitbox of another entity/item/projectile.
 	 */
-	public boolean isTouching(Entity other) {
+	public boolean isTouching(Rectangle other) {
+		Rectangle r1 = new Rectangle((int)x, (int)y, (int)width, (int)height);
+		if(r1.contains(new Point((int)other.getX(), (int)other.getY()))) {
+			return true;
+		}
+		else if(r1.contains(new Point((int)(other.getX() + other.getWidth()), (int)other.getY()))) {
+			return true;
+		}
+		else if(r1.contains(new Point((int)other.getX(), (int)(other.getY() + other.getHeight())))) {
+			return true;
+		}
+		else if(r1.contains(new Point((int)(other.getX() + other.getWidth()), (int)(other.getY() + other.getHeight())))) {
+			return true;
+		}
+		
+		if(other.contains(new Point((int)x, (int)y))) {
+			return true;
+		}
+		else if(other.contains(new Point((int)(x + width), (int)y))) {
+			return true;
+		}
+		else if(other.contains(new Point((int)x, (int)(y + height)))) {
+			return true;
+		}
+		else if(other.contains(new Point((int)(x + width), (int)(y + height)))) {
+			return true;
+		}
+		
 		return false;
 	}
 	
