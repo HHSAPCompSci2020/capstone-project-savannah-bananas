@@ -1,5 +1,7 @@
 package frog.entities;
 
+import processing.core.PApplet;
+
 public class Fly extends Monster{
 
 	//Fields
@@ -11,4 +13,8 @@ public class Fly extends Monster{
 	}
 	
 	//Methods
+	public void draw(PApplet marker) {
+		marker.fill(0, 0, 256);
+		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+	}
 }

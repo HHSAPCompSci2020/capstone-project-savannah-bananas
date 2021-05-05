@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import frog.util.Button;
 import processing.core.PApplet;
 import frog.DrawingSurface;
+import frog.entities.Fly;
 import frog.entities.Frog;
 import frog.entities.Monster;
 import frog.misc.*;
@@ -21,6 +22,7 @@ public class FrogDungeon extends Screen {
 	private boolean gamePaused;
 	private ArrayList<Wall> walls;
 	private ArrayList<Item> items;
+	private int ticks;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -40,11 +42,15 @@ public class FrogDungeon extends Screen {
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new HealthPotion(350, 500, 50, 50));
 		
+		monsters = new ArrayList<Monster>();
+		monsters.add(new Fly(100, 300, 50, 50, 50));
+		
 		pauseButton = new Button(20, 20, 150, 100);
 		pauseButton.setText("Pause Game");
 		pauseButton.setButtonListener(this);
 		buttons.add(pauseButton);
 		
+		ticks = 0;
 		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
 	}
 	
@@ -61,6 +67,7 @@ public class FrogDungeon extends Screen {
 		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
 		surface.text("Game screen", 400, 300);
+		surface.text("Health: " + player.getHealth(), 200, 100);
 		
 		surface.popStyle();
 		
@@ -85,13 +92,16 @@ public class FrogDungeon extends Screen {
 		//player.accelerate(0, 1);
 		player.move();
 		
+		//WALLS DRAWING
 		for(Wall wall : walls) {
 			wall.draw(surface);
 		}
 		
+		//ITEMS DRAWING
 		for(int i = 0; i < items.size(); i++) {
 			Rectangle hb = new Rectangle((int)(items.get(i).getX()), (int)(items.get(i).getY()), (int)(items.get(i).getWidth()), (int)(items.get(i).getHeight()));
 			if(player.isTouching(hb)) {
+				items.get(i).doAction(this);
 				items.remove(i);
 				i--;
 			}
@@ -101,6 +111,22 @@ public class FrogDungeon extends Screen {
 			
 		}
 		
+		//MONSTER DRAWINGS
+		for(int i = 0; i < monsters.size(); i++) {
+			if(monsters.get(i).getHealth() > 0) {
+				monsters.get(i).draw(surface);
+				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
+				if(player.isTouching(hb)) {
+					//PUT THE DAMAGE METHOD HERE
+					if(ticks % 60 == 0) {
+						player.setHealth(player.getHealth()-5);
+					}
+					
+				}
+				
+			}
+		}
+		
 		
 		surface.popMatrix();
 		
@@ -108,6 +134,8 @@ public class FrogDungeon extends Screen {
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
+		
+		ticks++;
 	}
 	
 	/**
