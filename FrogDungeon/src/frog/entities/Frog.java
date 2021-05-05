@@ -17,6 +17,7 @@ public class Frog extends Entity{
 		super(x, y, width, height, health);
 		speedMultiplyer = 1;
 		strengthMultiplyer = 1;
+		melee = new Knife();
 	}
 
 	//Methods
@@ -48,11 +49,10 @@ public class Frog extends Entity{
 	
 	/**
 	 * Attacks using the melee weapon that the frog has.
-	 * @param x, the x coordinate of where the frog is attacking.
-	 * @param y, the y coordinate of where the frog is attacking.
+	 * @param monster, the Monster which is taking the damage
 	 */
-	public void meleeAttack(int x, int y) {
-		
+	public void meleeAttack(Monster monster) {
+		monster.setHealth(monster.getHealth() - melee.getDamage());
 	}
 	
 	public void draw(PApplet marker) {

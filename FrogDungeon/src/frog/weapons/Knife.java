@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public class Knife extends MeleeWeapon{
 
 	//Fields
-	public static final double KNIFE_DAMAGE = 0.0;
+	public static final double KNIFE_DAMAGE = 25;
 	
 	//Constructors
 	public Knife() {
@@ -20,4 +20,6 @@ public class Knife extends MeleeWeapon{
 	public void draw(PApplet marker) {
 		
 	}
+	
+	
 }

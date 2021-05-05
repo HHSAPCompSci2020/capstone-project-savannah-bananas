@@ -116,6 +116,7 @@ public class FrogDungeon extends Screen {
 		//MONSTER DRAWINGS
 		for(int i = 0; i < monsters.size(); i++) {
 			if(monsters.get(i).getHealth() > 0) {
+				
 				monsters.get(i).draw(surface);
 				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
 				if(player.isTouching(hb)) {
@@ -123,6 +124,7 @@ public class FrogDungeon extends Screen {
 					if(ticks % 60 == 0) {
 						player.setHealth(player.getHealth()-5);
 					}
+					
 					
 				}
 				
@@ -270,4 +272,16 @@ public class FrogDungeon extends Screen {
 	public void drawWalls() {
 		
 	}
+	
+	public void mousePressed() {
+		for(int i = 0; i < monsters.size(); i++) {
+
+			Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
+			if(player.isTouching(hb)) {
+				player.meleeAttack(monsters.get(i));
+					
+			}		
+		}
+	}
+	
 }

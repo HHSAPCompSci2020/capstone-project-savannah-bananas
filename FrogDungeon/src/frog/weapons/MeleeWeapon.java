@@ -20,4 +20,8 @@ public abstract class MeleeWeapon {
 	public void draw(PApplet marker) {
 		
 	}
+	
+	public double getDamage() {
+		return damage;
+	}
 }
