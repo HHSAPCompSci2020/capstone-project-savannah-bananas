@@ -1,6 +1,7 @@
 package frog.screen;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import processing.core.PApplet;
 import frog.DrawingSurface;
 import frog.entities.Frog;
 import frog.entities.Monster;
-import frog.misc.Wall;
+import frog.misc.*;
 
 public class FrogDungeon extends Screen {
 	
@@ -19,6 +20,7 @@ public class FrogDungeon extends Screen {
 	private Button pauseButton;
 	private boolean gamePaused;
 	private ArrayList<Wall> walls;
+	private ArrayList<Item> items;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -34,6 +36,9 @@ public class FrogDungeon extends Screen {
 		generateMaze(); //adds all the walls
 		
 		player = new Frog(300, 300, 50, 50, 100);
+		items = new ArrayList<Item>();
+		items.add(new HealthPotion(100, 100, 50, 50));
+		items.add(new HealthPotion(350, 500, 50, 50));
 		
 		pauseButton = new Button(20, 20, 150, 100);
 		pauseButton.setText("Pause Game");
@@ -83,6 +88,19 @@ public class FrogDungeon extends Screen {
 		for(Wall wall : walls) {
 			wall.draw(surface);
 		}
+		
+		for(int i = 0; i < items.size(); i++) {
+			Rectangle hb = new Rectangle((int)(items.get(i).getX()), (int)(items.get(i).getY()), (int)(items.get(i).getWidth()), (int)(items.get(i).getHeight()));
+			if(player.isTouching(hb)) {
+				items.remove(i);
+				i--;
+			}
+			else {
+				items.get(i).draw(surface);
+			}
+			
+		}
+		
 		
 		surface.popMatrix();
 		
@@ -205,6 +223,9 @@ public class FrogDungeon extends Screen {
 		return null;
 	}
 	
+	public Frog getFrog() {
+		return player;
+	}
 	
 	/**
 	 * Draws monsters onto Maze.

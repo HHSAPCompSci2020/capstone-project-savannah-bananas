@@ -120,5 +120,8 @@ public abstract class Entity {
 	public double getHealth() {
 		return health;
 	}
+	public void setHealth(double amount) {
+		health = amount;
+	}
 	
 }
