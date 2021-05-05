@@ -139,7 +139,13 @@ public class FrogDungeon extends Screen {
 			
 			if(newTile != null) {
 				tilesAlreadyAdded.add(newTile);
-				wall.setType(Wall.EMPTY);
+				
+				//randomly generates if wall should be empty or a doorway. Doorway 1/3 of time, empty 2/3 of time
+				int num = (int) (Math.random() * 3);
+				if(num == 0)
+					wall.setType(Wall.DOORWAY);
+				else
+					wall.setType(Wall.EMPTY);
 				ArrayList<Wall> newWalls = getNeighboringWalls(newTile);
 				for(Wall w : newWalls)
 					if(!wallsToProcess.contains(w))

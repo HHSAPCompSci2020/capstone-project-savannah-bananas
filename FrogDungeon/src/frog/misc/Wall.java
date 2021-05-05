@@ -126,11 +126,11 @@ public class Wall {
 			marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height);
 		} else if(type == DOORWAY) {
 			if(isHorizontal()) {
-				marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width/2 - height, height);
-				marker.rect(centerPoint.x + height, centerPoint.y - height/2, width/2 - height, height);
+				marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width/2 - width/10, height);
+				marker.rect(centerPoint.x + width/10, centerPoint.y - height/2, width/2 - width/10, height);
 			} else {
-				marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height - height/2 - width);
-				marker.rect(centerPoint.x - width/2, centerPoint.y + width, width, height - height/2 - width);
+				marker.rect(centerPoint.x - width/2, centerPoint.y - height/2, width, height/2 - height/10);
+				marker.rect(centerPoint.x - width/2, centerPoint.y + height/10, width, height/2 - height/10);
 			}
 		}
 			
