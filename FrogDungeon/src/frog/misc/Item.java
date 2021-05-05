@@ -17,10 +17,19 @@ public abstract class Item {
 	}
 	
 	//Methods
+	/**
+	 * Abstract method for all Items to draw themselves.
+	 * @param marker, the PApplet to draw the item on
+	 */
 	public abstract void draw(PApplet marker);
 	
+	/**
+	 * Abstract method for all items to do their intended feature.
+	 * @param x, the FrogDungeon to access its fields for its effects.
+	 */
 	public abstract void doAction(FrogDungeon x);
 	
+	//Getters & Setters
 	public double getX() {
 		return x;
 	}

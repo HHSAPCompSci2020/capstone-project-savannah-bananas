@@ -11,6 +11,7 @@ public abstract class Entity {
 	protected double x, y, width, height;
 	protected double vX, vY;
 	protected double health;
+	protected double speedMultiplyer, strengthMultiplyer;
 	protected PImage image;
 	
 	//Constructors
@@ -123,5 +124,16 @@ public abstract class Entity {
 	public void setHealth(double amount) {
 		health = amount;
 	}
-	
+	public double getSpeed() {
+		return speedMultiplyer;
+	}
+	public double getStrength() {
+		return strengthMultiplyer;
+	}
+	public void increaseSpeed(double amount) {
+		speedMultiplyer += amount;
+	}
+	public void increaseStrength(double amount) {
+		strengthMultiplyer += amount;
+	}
 }

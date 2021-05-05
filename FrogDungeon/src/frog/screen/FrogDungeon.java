@@ -40,7 +40,8 @@ public class FrogDungeon extends Screen {
 		player = new Frog(300, 300, 50, 50, 100);
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
-		items.add(new HealthPotion(350, 500, 50, 50));
+		items.add(new SpeedPotion(350, 500, 50, 50));
+		items.add(new StrengthPotion(500, 350, 50, 50));
 		
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50));
@@ -66,8 +67,9 @@ public class FrogDungeon extends Screen {
 		surface.background(0);
 		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
+		surface.fill(256, 256, 256);
 		surface.text("Game screen", 400, 300);
-		surface.text("Health: " + player.getHealth(), 200, 100);
+		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength(), 200, 100);
 		
 		surface.popStyle();
 		
@@ -75,19 +77,19 @@ public class FrogDungeon extends Screen {
 		
 		if (surface.isPressed(KeyEvent.VK_W)) {
 			//player.accelerate(0, -0.5);
-			player.moveTo(player.getX(), player.getY()-5);
+			player.moveTo(player.getX(), player.getY()-(5*player.getSpeed()));
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
 			//player.accelerate(-0.5, 0);
-			player.moveTo(player.getX()-5, player.getY());
+			player.moveTo(player.getX()-(5*player.getSpeed()), player.getY());
 		}
 		if (surface.isPressed(KeyEvent.VK_S)) {
 			//player.accelerate(0, 0.5);
-			player.moveTo(player.getX(), player.getY()+5);
+			player.moveTo(player.getX(), player.getY()+(5*player.getSpeed()));
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
 			//player.accelerate(0.5, 0);
-			player.moveTo(player.getX()+5, player.getY());
+			player.moveTo(player.getX()+(5*player.getSpeed()), player.getY());
 		}
 		//player.accelerate(0, 1);
 		player.move();

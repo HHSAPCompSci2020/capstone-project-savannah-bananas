@@ -15,6 +15,8 @@ public class Frog extends Entity{
 	//Constructors
 	public Frog(double x, double y, double width, double height, double health) {
 		super(x, y, width, height, health);
+		speedMultiplyer = 1;
+		strengthMultiplyer = 1;
 	}
 
 	//Methods
@@ -61,5 +63,6 @@ public class Frog extends Entity{
 		marker.text("Frog", (float)x, (float)y);
 		marker.popStyle();
 	}
+
 	
 }
