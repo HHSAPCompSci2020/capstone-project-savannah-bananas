@@ -46,7 +46,7 @@ public class FrogDungeon extends Screen {
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50));
 		
-		pauseButton = new Button(20, 20, 150, 100);
+		pauseButton = new Button(620, 20, 150, 100);
 		pauseButton.setText("Pause Game");
 		pauseButton.setButtonListener(this);
 		buttons.add(pauseButton);
@@ -61,15 +61,16 @@ public class FrogDungeon extends Screen {
 	 * Draws everything
 	 */
 	public void draw() {
+		
+		
 		surface.pushMatrix();
+		surface.background(0);
 		surface.translate(0 - (int) player.getX() + 400, 0 - (int) player.getY() + 300); 
 		
-		surface.background(0);
 		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
 		surface.fill(256, 256, 256);
 		surface.text("Game screen", 400, 300);
-		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength(), 200, 100);
 		
 		surface.popStyle();
 		
@@ -137,6 +138,10 @@ public class FrogDungeon extends Screen {
 		
 		surface.popMatrix();
 		
+		surface.fill(255);
+		surface.rect(20, 20, 150, 100);
+		surface.fill(0);
+		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength(), 30, 50);
 
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
