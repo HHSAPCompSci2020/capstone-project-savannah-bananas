@@ -8,6 +8,11 @@ import frog.DrawingSurface;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
+/**
+ * Main class, creates new DrawingSurface window.
+ * @author Justin Hwang, Mikaela Kwan, Jeremy Mills
+ *
+ */
 public class Main {
 	
 	public static void main(String args[]) {

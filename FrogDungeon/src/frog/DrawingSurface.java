@@ -10,6 +10,12 @@ import frog.screen.MenuScreen;
 import frog.screen.PauseScreen;
 import frog.screen.Screen;
 
+/**
+ * Drawing surface that contains screens, and passes along mouse events to the active screen.
+ * Most of this code is copied from Mr. Shelby's "ProcessingScreenSwitching" demo.
+ * @author Justin Hwang
+ *
+ */
 public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	//Fields

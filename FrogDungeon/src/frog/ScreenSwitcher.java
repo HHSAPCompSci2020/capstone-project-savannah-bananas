@@ -1,5 +1,11 @@
 package frog;
 
+/**
+ * Simple interface used by DrawingSurface to switch between screens.
+ * Mostly copied from Mr. Shelby's "ProcessingScreenSwitching" demo.
+ * @author Justin Hwang
+ *
+ */
 public interface ScreenSwitcher {
 
 	//Fields
