@@ -1,6 +1,9 @@
 package frog.entities;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import frog.DrawingSurface;
 import frog.misc.Wall;
 import frog.weapons.*;
 import processing.core.PApplet;
@@ -27,11 +30,29 @@ public class Frog extends Entity{
 
 	//Methods
 	/**
-	 * Moves the Frog through the maze.
+	 * Moves the Frog through the maze. Also handles user input.
 	 * @param walls, the Walls that are in the maze.
+	 * @param surface The DrawingSurface that the Frog is drawn in.
 	 */
-	public void move(ArrayList<Wall> walls) {
+	public void move(ArrayList<Wall> walls, DrawingSurface surface) {
 		
+		double baseSpeed = 5.0;
+		
+		if (surface.isPressed(KeyEvent.VK_W))
+			vY = 0 - (baseSpeed * getSpeed());
+		if (surface.isPressed(KeyEvent.VK_A))
+			vX = 0 - (baseSpeed * getSpeed());
+		if (surface.isPressed(KeyEvent.VK_S))
+			vY = (baseSpeed * getSpeed());
+		if (surface.isPressed(KeyEvent.VK_D))
+			vX = (baseSpeed * getSpeed());
+
+		if(!surface.isPressed(KeyEvent.VK_W) && !surface.isPressed(KeyEvent.VK_S))
+			vY = 0;
+		if(!surface.isPressed(KeyEvent.VK_A) && !surface.isPressed(KeyEvent.VK_D))
+			vX = 0;
+		
+		super.move();
 	}
 	
 	/**

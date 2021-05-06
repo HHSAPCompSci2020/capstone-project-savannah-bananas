@@ -66,11 +66,12 @@ public class FrogDungeon extends Screen {
 	 * Draws everything
 	 */
 	public void draw() {
-		
+
+		player.move(walls, surface);
 		
 		surface.pushMatrix();
 		surface.background(0);
-		surface.translate(0 - (int) player.getX() + 400, 0 - (int) player.getY() + 300); 
+		surface.translate(0 - (float) player.getX() + 400, 0 - (float) player.getY() + 300); 
 		
 		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
@@ -80,25 +81,6 @@ public class FrogDungeon extends Screen {
 		surface.popStyle();
 		
 		player.draw(surface);
-		
-		if (surface.isPressed(KeyEvent.VK_W)) {
-			//player.accelerate(0, -0.5);
-			player.moveTo(player.getX(), player.getY()-(5*player.getSpeed()));
-		}
-		if (surface.isPressed(KeyEvent.VK_A)) {
-			//player.accelerate(-0.5, 0);
-			player.moveTo(player.getX()-(5*player.getSpeed()), player.getY());
-		}
-		if (surface.isPressed(KeyEvent.VK_S)) {
-			//player.accelerate(0, 0.5);
-			player.moveTo(player.getX(), player.getY()+(5*player.getSpeed()));
-		}
-		if (surface.isPressed(KeyEvent.VK_D)) {
-			//player.accelerate(0.5, 0);
-			player.moveTo(player.getX()+(5*player.getSpeed()), player.getY());
-		}
-		//player.accelerate(0, 1);
-		player.move();
 		
 		//WALLS DRAWING
 		for(Wall wall : walls) {
