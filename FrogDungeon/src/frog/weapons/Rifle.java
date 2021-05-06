@@ -2,8 +2,15 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
-public class Rifle extends ProjectileWeapon{
 
+/**
+ * A rifle class that extends Projectile Weapon
+ * @author Mikaela Kwan
+ *
+ */
+
+public class Rifle extends ProjectileWeapon{
+	
 	//Fields
 	public static final double RIFLE_DAMAGE = 0.0;
 	public static final double RIFLE_RANGE = 0.0;

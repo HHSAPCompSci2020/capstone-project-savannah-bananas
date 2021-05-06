@@ -2,6 +2,12 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
+/**
+ * An abstract class that represents a projectile weapon. All projectile weapons will extend this class.
+ * @author Mikaela Kwan
+ *
+ */
+
 public abstract class ProjectileWeapon {
 
 	//Fields

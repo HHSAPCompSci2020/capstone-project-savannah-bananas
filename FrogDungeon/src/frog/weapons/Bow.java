@@ -2,6 +2,11 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
+/**
+ * A bow class that extends Projectile Weapon
+ * @author Mikaela Kwan
+ *
+ */
 public class Bow extends ProjectileWeapon {
 	
 	//Fields

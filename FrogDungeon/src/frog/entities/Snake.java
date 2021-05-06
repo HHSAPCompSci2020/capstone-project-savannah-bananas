@@ -1,5 +1,10 @@
 package frog.entities;
 
+/**
+ * Represents a higher level snake monster that extends the Monster class.
+ * @author Mikaela Kwan
+ *
+ */
 public class Snake extends Monster{
 
 	//Fields
