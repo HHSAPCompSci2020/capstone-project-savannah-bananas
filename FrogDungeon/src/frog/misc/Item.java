@@ -3,6 +3,11 @@ package frog.misc;
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
+/**
+ * Abstract class that represents all consumable items.
+ * @author Jeremy Mills
+ *
+ */
 public abstract class Item {
 	//Fields
 	protected double x, y;

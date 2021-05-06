@@ -2,6 +2,11 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
+/**
+ * Abstract class that represents a melee weapon. All melee weapons will extend this class.
+ * @author Jeremy Mills
+ *
+ */
 public abstract class MeleeWeapon {
 
 	//Fields

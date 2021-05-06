@@ -3,6 +3,11 @@ package frog.misc;
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
+/**
+ * Represents a SpeedPotion that increases the speed of the player when the player touches the potion.
+ * @author Jeremy Mills
+ *
+ */
 public class SpeedPotion extends Item{
 	
 	//Fields

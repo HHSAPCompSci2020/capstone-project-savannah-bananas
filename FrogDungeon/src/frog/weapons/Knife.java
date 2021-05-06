@@ -2,6 +2,11 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
+/**
+ * A knife class, that extends Melee Weapon
+ * @author Jeremy Mills
+ *
+ */
 public class Knife extends MeleeWeapon{
 
 	//Fields
