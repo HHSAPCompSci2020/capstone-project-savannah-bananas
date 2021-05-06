@@ -3,6 +3,11 @@ package frog.entities;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * A monster class where all monsters extend this class.
+ * @author Jeremy Mills
+ *
+ */
 public abstract class Monster extends Entity {
 
 	//Fields

@@ -2,6 +2,11 @@ package frog.entities;
 
 import processing.core.PApplet;
 
+/**
+ * Represents a lower level fly monster that extends the Monster class.
+ * @author Mikaela Kwan
+ *
+ */
 public class Fly extends Monster{
 
 	//Fields

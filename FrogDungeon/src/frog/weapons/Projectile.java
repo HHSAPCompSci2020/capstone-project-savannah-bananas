@@ -1,5 +1,11 @@
 package frog.weapons;
 
+/**
+ * A class that represents a projectile fired from a projectile weapon.
+ * @author Mikaela Kwan
+ *
+ */
+
 public class Projectile {
 
 	//Fields

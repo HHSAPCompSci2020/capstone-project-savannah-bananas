@@ -6,6 +6,11 @@ import java.awt.Rectangle;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * Represents an abstract entity which all other entities will extend, detects collisions using awt rectangles.
+ * @author Jeremy Mills
+ *
+ */
 public abstract class Entity {
 	//Fields
 	protected double x, y, width, height;

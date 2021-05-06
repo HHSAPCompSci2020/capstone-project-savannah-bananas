@@ -1,10 +1,15 @@
 package frog.entities;
 
 import java.util.ArrayList;
-
 import frog.misc.Wall;
 import frog.weapons.*;
 import processing.core.PApplet;
+
+/**
+ * Represents a frog that extends Entity. Contains one melee and one projectile weapon.
+ * @author Jeremy Mills
+ *
+ */
 
 public class Frog extends Entity{
 	

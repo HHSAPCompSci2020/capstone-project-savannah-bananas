@@ -1,5 +1,11 @@
 package frog.entities;
 
+
+/**
+ * Represents the Sorcerer final boss. Extends Monster.
+ * @author Mikaela Kwan
+ *
+ */
 public class Sorcerer extends Monster {
 
 	//Fields

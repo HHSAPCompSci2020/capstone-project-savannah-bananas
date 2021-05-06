@@ -3,6 +3,11 @@ package frog.misc;
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
+/**
+ * Represents a HealthPotion that increases the health of the player. If the player runs over this potion, it increases the player's health by a constant.
+ * @author Jeremy Mills
+ *
+ */
 public class HealthPotion extends Item {
 
 	public static final double POTION_HEALTH = 15;

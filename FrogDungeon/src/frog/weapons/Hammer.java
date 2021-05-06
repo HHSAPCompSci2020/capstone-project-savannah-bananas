@@ -2,6 +2,11 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
+/**
+ * A hammer class, that extends Melee Weapon, and deals a constant damage. To use, give the player this weapon in their meleeweapon field.
+ * @author Jeremy Mills
+ *
+ */
 public class Hammer extends MeleeWeapon{
 
 	//Fields

@@ -2,6 +2,12 @@ package frog.weapons;
 
 import processing.core.PApplet;
 
+/**
+ * A pistol class that extends Projectile Weapon
+ * @author Mikaela Kwan
+ *
+ */
+
 public class Pistol extends ProjectileWeapon{
 
 	//Fields
