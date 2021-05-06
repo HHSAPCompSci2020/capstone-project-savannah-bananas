@@ -5,6 +5,11 @@ import java.awt.Point;
 
 import processing.core.PApplet;
 
+
+/**
+ * Represents a Button on the screen. To use, implement ButtonListener and add it to the Button.
+ * @author Justin Hwang
+ */
 public class Button {
 	/**
 	 * ButtonListener that this Button calls when it is pressed

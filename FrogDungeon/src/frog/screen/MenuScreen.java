@@ -4,6 +4,11 @@ import frog.util.Button;
 import processing.core.PImage;
 import frog.DrawingSurface;
 
+/**
+ * Default screen that appears when the program is run. Displays a start button and a how to play button.
+ * @author Justin Hwang
+ *
+ */
 public class MenuScreen extends Screen {
 	//Fields
 	private Button startButton;

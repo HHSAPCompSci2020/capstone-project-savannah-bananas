@@ -1,5 +1,10 @@
 package frog.util;
 
+/**
+ * Button event listener. Add the ButtonListener to the Button and override the buttonPressed method in order to use.
+ * @author Justin Hwang
+ *
+ */
 public interface ButtonListener {
 
 	/**

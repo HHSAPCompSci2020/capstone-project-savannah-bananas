@@ -5,6 +5,11 @@ import java.awt.Point;
 
 import processing.core.PApplet;
 
+/**
+ * Represents a wall in the maze. Can be solid, have a doorway, or be completely empty.
+ * @author Justin Hwang
+ *
+ */
 public class Wall {
 
 	//Fields

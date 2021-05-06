@@ -4,6 +4,11 @@ import frog.util.Button;
 import processing.core.PImage;
 import frog.DrawingSurface;
 
+/**
+ * Represents the "How to Play" screen that can be accessed from the MenuScreen. Displays the controls.
+ * @author Mikaela Kwan
+ *
+ */
 public class InfoScreen extends Screen {
 	//Fields
 	private Button returnButton;

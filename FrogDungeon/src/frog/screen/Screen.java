@@ -8,6 +8,11 @@ import frog.util.Button;
 import frog.util.ButtonListener;
 import processing.core.PApplet;
 
+/**
+ * Abstract screen. Subclasses will be used by PApplets to draw navigation screens within the program.
+ * @author Justin Hwang
+ *
+ */
 public abstract class Screen implements ButtonListener {
 	
 	//Fields

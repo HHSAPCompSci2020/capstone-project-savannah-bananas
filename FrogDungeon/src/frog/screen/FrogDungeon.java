@@ -13,6 +13,11 @@ import frog.entities.Frog;
 import frog.entities.Monster;
 import frog.misc.*;
 
+/**
+ * The primary game screen that contains the maze, monsters, player, etc.
+ * @author Justin Hwang, Mikaela Kwan, Jeremy Mills
+ *
+ */
 public class FrogDungeon extends Screen {
 	
 	//Fields

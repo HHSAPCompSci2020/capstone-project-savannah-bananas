@@ -3,6 +3,11 @@ package frog.screen;
 import frog.util.Button;
 import frog.DrawingSurface;
 
+/**
+ * Represents the Screen that appears while the game is Paused.
+ * @author Mikaela Kwan
+ *
+ */
 public class PauseScreen extends Screen {
 	
 	//Fields
