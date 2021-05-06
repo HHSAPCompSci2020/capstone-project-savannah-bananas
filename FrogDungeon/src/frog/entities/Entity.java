@@ -7,7 +7,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * Represents an abstract entity which all other entities will extend
+ * Represents an abstract entity which all other entities will extend, detects collisions using awt rectangles.
  * @author Jeremy Mills
  *
  */

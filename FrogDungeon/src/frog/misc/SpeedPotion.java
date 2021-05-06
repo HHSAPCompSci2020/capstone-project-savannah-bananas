@@ -4,7 +4,7 @@ import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
 /**
- * Represents a SpeedPotion that increases the speed of the player when the player touches the potion.
+ * Represents a SpeedPotion that increases the speed of the player by a percentage when the player touches the potion.
  * @author Jeremy Mills
  *
  */

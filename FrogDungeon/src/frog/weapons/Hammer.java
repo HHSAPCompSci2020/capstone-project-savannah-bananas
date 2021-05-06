@@ -3,7 +3,7 @@ package frog.weapons;
 import processing.core.PApplet;
 
 /**
- * A hammer class, that extends Melee Weapon
+ * A hammer class, that extends Melee Weapon, and deals a constant damage.
  * @author Jeremy Mills
  *
  */

@@ -3,7 +3,7 @@ package frog.weapons;
 import processing.core.PApplet;
 
 /**
- * A sword class, that extends Melee Weapon
+ * A sword class, that extends Melee Weapon, and deals a constant damage.
  * @author Jeremy Mills
  *
  */

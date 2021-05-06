@@ -3,7 +3,7 @@ package frog.weapons;
 import processing.core.PApplet;
 
 /**
- * A knife class, that extends Melee Weapon
+ * A knife class, that extends Melee Weapon, and deals a constant amount of damage.
  * @author Jeremy Mills
  *
  */

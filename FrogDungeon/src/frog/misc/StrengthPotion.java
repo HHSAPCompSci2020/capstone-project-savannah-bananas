@@ -4,7 +4,7 @@ import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
 /**
- * Represents a StrengthPotion that increases the player's strength when the player touches it.
+ * Represents a StrengthPotion that increases the player's strength by a percentage when the player touches it.
  * @author Jeremy Mills
  *
  */

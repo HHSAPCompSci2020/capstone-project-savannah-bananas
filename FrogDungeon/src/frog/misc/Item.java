@@ -4,7 +4,7 @@ import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
 /**
- * Abstract class that represents all consumable items.
+ * Abstract class that represents all consumable items, it has a method that allows it to do its funtion.
  * @author Jeremy Mills
  *
  */
