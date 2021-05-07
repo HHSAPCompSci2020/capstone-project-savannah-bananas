@@ -1,5 +1,6 @@
 package frog.entities;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -52,7 +53,79 @@ public class Frog extends Entity{
 		if(!surface.isPressed(KeyEvent.VK_A) && !surface.isPressed(KeyEvent.VK_D))
 			vX = 0;
 		
+		
+		
+		
+		//makes a list of all rectangles that make up the walls
+		ArrayList<Rectangle> wallRectangles = new ArrayList<Rectangle>();
+		for(Wall wall : walls)
+			wallRectangles.addAll(wall.getRectangles());
+		
+		//moves by the new vX and vY. This will be undone if a collision happens.
 		super.move();
+		
+		//saves some values for later use
+		double oldX = x;
+		double oldY = y;
+		double shiftX = Integer.MAX_VALUE;
+		double shiftY = Integer.MAX_VALUE;
+		
+		for(Rectangle r : wallRectangles) {
+			if(isTouching(r)) {
+				double thisLeft = this.x;
+				double thisRight = this.x + this.width;
+				double rectLeft = r.x;
+				double rectRight = r.x + r.width;
+				
+				if((rectLeft - thisRight > 0) != (rectRight - thisLeft > 0)) {
+					if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX && vX != 0)
+						shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
+				}
+				
+				double thisTop = this.y;
+				double thisBottom = this.y + this.height;
+				double rectTop = r.y;
+				double rectBottom = r.y + r.height;
+				
+				if((rectTop - thisBottom > 0) != (rectBottom - thisTop > 0)) {
+					if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY && vY != 0)
+						shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
+				}
+			}
+		}
+		
+		if(shiftX != Integer.MAX_VALUE && shiftX < 1.1*(baseSpeed*this.getSpeed())) {
+			shiftX++;
+			if(vX < 0)
+				shiftX = 0 - shiftX;
+			super.moveBy(0 - shiftX, 0);
+			vX = 0.0;
+		}
+		
+		if(shiftY != Integer.MAX_VALUE && shiftY < 1.1*(baseSpeed*this.getSpeed())) {
+			shiftY++;
+			if(vY < 0)
+				shiftY = 0 - shiftY;
+			super.moveBy(0, 0 - shiftY);
+			vY = 0.0;
+		}
+		
+		/*if(shiftX != Integer.MAX_VALUE || shiftY != Integer.MAX_VALUE) {
+			if(shiftX < shiftY) {
+				shiftX++;
+				if(vX < 0)
+					shiftX = 0 - shiftX;
+				super.moveBy(0 - shiftX, 0);
+				vX = 0.0;
+			} else {
+				shiftY++;
+				if(vY < 0)
+					shiftY = 0 - shiftY;
+				super.moveBy(0, 0 - shiftY);
+				vY = 0.0;
+			}
+		}*/
+		
 	}
 	
 	/**
@@ -61,6 +134,9 @@ public class Frog extends Entity{
 	 * @return boolean, true if they are touching, false if they are not.
 	 */
 	public boolean isTouchingWall(Wall wall) {
+		for(Rectangle r : wall.getRectangles())
+			if(isTouching(r))
+				return true;
 		return false;
 	}
 	
@@ -84,9 +160,14 @@ public class Frog extends Entity{
 	public void draw(PApplet marker) {
 		marker.pushStyle();
 		marker.fill(0, 256, 0);
-		marker.ellipse((float)(x+width/4), (float)(y), (float)width, (float)height);
+		marker.ellipse((float)(x+width/2), (float)(y+height/2), (float)width, (float)height);
 		marker.fill(0);
-		marker.text("Frog", (float)x, (float)y);
+		marker.textAlign(PApplet.CENTER);
+		marker.text("Frog", (float)x+(float)width/2, (float)y+(float)height/2);
+		
+		marker.noFill();
+		marker.stroke(255, 0, 0);
+		marker.rect((float) this.x, (float) this.y, (float) this.width, (float) this.height);
 		marker.popStyle();
 	}
 

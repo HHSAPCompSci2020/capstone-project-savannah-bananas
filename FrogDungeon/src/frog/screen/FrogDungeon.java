@@ -71,7 +71,7 @@ public class FrogDungeon extends Screen {
 		
 		surface.pushMatrix();
 		surface.background(0);
-		surface.translate(0 - (float) player.getX() + 400, 0 - (float) player.getY() + 300); 
+		surface.translate(0 - (float) player.getX() - (float) player.getWidth()/2 + 400, 0 - (float) player.getY() - (float) player.getHeight()/2 + 300); 
 		
 		surface.pushStyle();
 		surface.textAlign(PApplet.CENTER, PApplet.CENTER);

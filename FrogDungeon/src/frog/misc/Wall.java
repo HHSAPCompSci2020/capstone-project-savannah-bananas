@@ -2,6 +2,8 @@ package frog.misc;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import processing.core.PApplet;
 
@@ -140,6 +142,37 @@ public class Wall {
 		}
 			
 		marker.popStyle();
+	}
+	
+	/**
+	 * Returns the Rectangles of this wall. If Wall is empty, no Rectangle. If solid, one Rectangle. If doorway, two Rectangles.
+	 * @return ArrayList of Rectangles that represent this wall. Either nothing, one solid rectangle, or two partial rectangles.
+	 */
+	public ArrayList<Rectangle> getRectangles() {
+		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+
+		Point centerPoint = wallCoordsToPixelCoords(this.x, this.y);
+		
+		int width = this.width;
+		int height = this.height;
+		if(isHorizontal())
+			width += this.height;
+		else
+			height += this.width;
+		
+		if(type == WALL)
+			rectangles.add(new Rectangle(centerPoint.x - width/2, centerPoint.y - height/2, width, height));
+		else if(type == DOORWAY) {
+			if(isHorizontal()) {
+				rectangles.add(new Rectangle(centerPoint.x - width/2, centerPoint.y - height/2, width/2 - width/10, height));
+				rectangles.add(new Rectangle(centerPoint.x + width/10, centerPoint.y - height/2, width/2 - width/10, height));
+			} else {
+				rectangles.add(new Rectangle(centerPoint.x - width/2, centerPoint.y - height/2, width, height/2 - height/10));
+				rectangles.add(new Rectangle(centerPoint.x - width/2, centerPoint.y + height/10, width, height/2 - height/10));
+			}
+		}
+		
+		return rectangles;
 	}
 	
 	/**

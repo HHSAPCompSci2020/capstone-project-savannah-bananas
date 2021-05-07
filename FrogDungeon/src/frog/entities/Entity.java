@@ -75,6 +75,16 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Moves the entity by the given amount
+	 * @param x Amount to move the entity by in the x-direction
+	 * @param y Amount to move the entity by in the y-direction
+	 */
+	public void moveBy(double x, double y) {
+		this.x += x;
+		this.y += y;
+	}
+	
+	/**
 	 * Changes the entity's velocity by accelerating.
 	 * @param aX, the value to add to the x velocity.
 	 * @param aY, the value to add to the y velocity
