@@ -45,7 +45,7 @@ public class FrogDungeon extends Screen {
 		generateMaze(); //adds all the walls
 		
 		player = new Frog(300, 300, 50, 50, 100);
-		shopKeep = new Shopkeeper(400, 500, 50, 50, 100);
+		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new SpeedPotion(350, 500, 50, 50));
@@ -142,6 +142,15 @@ public class FrogDungeon extends Screen {
 		surface.rect(200, 20, 200, 35);
 		surface.fill(256, 0, 0);
 		surface.rect(200, 20, (float)((player.getHealth()/100)*200), 35);
+		surface.fill(255);
+		surface.rect(425, 20, 100, 50);
+		if(player.getMelee() != null) {
+			player.getMelee().draw(surface, 425, 20, 50, 50);
+		}
+		else if(player.getProjectile() != null) {
+			player.getProjectile().draw(surface, 475, 20, 50, 50);
+		}
+		
 
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);

@@ -26,7 +26,7 @@ public class Rifle extends ProjectileWeapon{
 	 * Draws this rifle.
 	 * @param draw, the PApplet to draw the rifle on.
 	 */
-	public void draw(PApplet draw) {
+	public void draw(PApplet marker, double x, double y, double width, double height) {
 		
 	}
 	

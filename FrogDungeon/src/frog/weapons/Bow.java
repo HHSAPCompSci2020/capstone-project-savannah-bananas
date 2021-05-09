@@ -1,6 +1,7 @@
 package frog.weapons;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * A bow class that extends Projectile Weapon
@@ -24,8 +25,9 @@ public class Bow extends ProjectileWeapon {
 	 * Draws this bow.
 	 * @param draw, the PApplet to draw the bow on.
 	 */
-	public void draw(PApplet draw) {
-		
+	public void draw(PApplet marker, double x, double y, double width, double height) {
+		PImage image = marker.loadImage("resources/bow.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	/**

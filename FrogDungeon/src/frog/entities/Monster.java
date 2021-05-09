@@ -73,17 +73,74 @@ public abstract class Monster extends Entity {
                 refAngle = Math.PI - refAngle;
             }
 
-            x = x + (1.5 * Math.cos(refAngle));
-            y = y - (1.5 * Math.sin(refAngle));
+            vX = (1.5 * Math.cos(refAngle));
+            vY = -(1.5 * Math.sin(refAngle));
             if(dropItem != null) {
-            	dropItem.setX(dropItem.getX() + (1.5 * Math.cos(refAngle)));
-            	dropItem.setY(dropItem.getY() - (1.5 * Math.sin(refAngle)));
+            	dropItem.setX(dropItem.getX() + (speed * Math.cos(refAngle)));
+            	dropItem.setY(dropItem.getY() - (speed * Math.sin(refAngle)));
             }
         }
 
         
         //COLLISIONS
         
+		//makes a list of all rectangles that make up the walls
+		ArrayList<Rectangle> wallRectangles = new ArrayList<Rectangle>();
+		for(Wall wall : walls)
+			wallRectangles.addAll(wall.getRectangles());
+		
+		super.move();
+		
+		//saves some values for later use
+		double oldX = x;
+		double oldY = y;
+		double shiftX = Integer.MAX_VALUE;
+		double shiftY = Integer.MAX_VALUE;
+		
+		for(Rectangle r : wallRectangles) {
+			if(isTouching(r)) {
+				//System.out.println("YES");
+				double thisLeft = this.x;
+				double thisRight = this.x + this.width;
+				double rectLeft = r.x;
+				double rectRight = r.x + r.width;
+				
+				if((rectLeft - thisRight > 0) != (rectRight - thisLeft > 0)) {
+					if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX && vX != 0)
+						shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
+				}
+				
+				double thisTop = this.y;
+				double thisBottom = this.y + this.height;
+				double rectTop = r.y;
+				double rectBottom = r.y + r.height;
+				
+				if((rectTop - thisBottom > 0) != (rectBottom - thisTop > 0)) {
+					if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY && vY != 0)
+						shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
+				}
+			}
+		}
+		
+		if(shiftX != Integer.MAX_VALUE && shiftX < 1.1*(5*this.getSpeed())) {
+			shiftX++;
+			if(vX < 0)
+				shiftX = 0 - shiftX;
+			super.moveBy(0 - shiftX, 0);
+			System.out.println("x 0");
+			vX = 0.0;
+		}
+		
+		if(shiftY != Integer.MAX_VALUE && shiftY < 1.1*(5*this.getSpeed())) {
+			shiftY++;
+			if(vY < 0)
+				shiftY = 0 - shiftY;
+			super.moveBy(0, 0 - shiftY);
+			System.out.println("y 0");
+			vY = 0.0;
+		}
+		
+		//System.out.println(vX + " " + vY);
 	}
 	
 	public Item getItem() {

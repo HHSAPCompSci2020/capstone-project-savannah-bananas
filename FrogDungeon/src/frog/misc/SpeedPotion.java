@@ -20,8 +20,8 @@ public class SpeedPotion extends Item{
 
 	//Methods
 	public void draw(PApplet marker) {
-		marker.fill(135,206,250);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		image = marker.loadImage("resources/speedpotion.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 
 	public void doAction(FrogDungeon x) {

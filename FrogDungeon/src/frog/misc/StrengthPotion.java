@@ -20,8 +20,8 @@ public class StrengthPotion extends Item{
 	
 	//Methods
 	public void draw(PApplet marker) {
-		marker.fill(128,0,0);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		image = marker.loadImage("resources/strengthpotion.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	public void doAction(FrogDungeon x) {

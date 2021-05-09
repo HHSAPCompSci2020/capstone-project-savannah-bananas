@@ -27,9 +27,7 @@ public abstract class ProjectileWeapon {
 	 * Draws this projectile weapon.
 	 * @param draw, the PApplet to draw the projectile weapon on.
 	 */
-	public void draw(PApplet draw) {
-		
-	}
+	public abstract void draw(PApplet marker, double x, double y, double width, double height);
 	
 	/**
 	 * Shoots this projectile weapon to the point (x, y)

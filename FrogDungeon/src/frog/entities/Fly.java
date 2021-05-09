@@ -12,7 +12,7 @@ public class Fly extends Monster{
 	//Fields
 	public static final double FLY_DAMAGE = 10.0;
 	public static final double FLY_RANGE = 500.0;
-	public static final double FLY_SPEED = 0.0;
+	public static final double FLY_SPEED = 10.0;
 	
 	//Constructors
 	public Fly(double x, double y, double width, double height, double health) {

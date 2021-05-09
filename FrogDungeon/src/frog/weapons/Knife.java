@@ -1,6 +1,7 @@
 package frog.weapons;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * A knife class, that extends Melee Weapon, and deals a constant amount of damage. To use, give the player this weapon in their meleeweapon field.
@@ -22,8 +23,9 @@ public class Knife extends MeleeWeapon{
 	 * Draws this Knife.
 	 * @param marker, the PApplet to draw the Knife on. 
 	 */
-	public void draw(PApplet marker) {
-		
+	public void draw(PApplet marker, double x, double y, double width, double height) {
+		PImage image = marker.loadImage("resources/knife.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	

@@ -1,6 +1,7 @@
 package frog.weapons;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * A sword class, that extends Melee Weapon, and deals a constant damage. To use, give the player this weapon in their meleeweapon field.
@@ -22,7 +23,8 @@ public class Sword extends MeleeWeapon{
 	 * Draws this Sword.
 	 * @param marker, the PApplet to draw the Sword on. 
 	 */
-	public void draw(PApplet marker) {
-		
+	public void draw(PApplet marker, double x, double y, double width, double height) {
+		PImage image = marker.loadImage("resources/sword.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 }

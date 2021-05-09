@@ -22,9 +22,7 @@ public abstract class MeleeWeapon {
 	 * Draws this MeleeWeapon.
 	 * @param marker, the PApplet to draw the MeleeWeapon on. 
 	 */
-	public void draw(PApplet marker) {
-		
-	}
+	public abstract void draw(PApplet marker, double x, double y, double width, double height);
 	
 	public double getDamage() {
 		return damage;

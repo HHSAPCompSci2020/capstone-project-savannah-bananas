@@ -2,6 +2,7 @@ package frog.misc;
 
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Abstract class that represents all consumable items, it has a method that allows it to do its funtion.
@@ -12,6 +13,7 @@ public abstract class Item {
 	//Fields
 	protected double x, y;
 	protected double width, height;
+	protected PImage image;
 	
 	//Constructor
 	public Item(double x, double y, double width, double height) {

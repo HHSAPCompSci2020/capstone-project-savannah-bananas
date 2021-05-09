@@ -27,6 +27,7 @@ public class Frog extends Entity{
 		speedMultiplyer = 1;
 		strengthMultiplyer = 1;
 		melee = new Knife();
+	    ranged = null;
 	}
 
 	//Methods
@@ -171,5 +172,12 @@ public class Frog extends Entity{
 		marker.popStyle();
 	}
 
+	public MeleeWeapon getMelee() {
+		return melee;
+	}
+	
+	public ProjectileWeapon getProjectile() {
+		return ranged;
+	}
 	
 }

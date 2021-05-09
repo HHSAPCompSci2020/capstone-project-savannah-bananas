@@ -21,8 +21,10 @@ public class HealthPotion extends Item {
 	 * @param marker, the PApplet to draw the HealthPotion on.
 	 */
 	public void draw(PApplet marker) {
-		marker.fill(256, 0, 0);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		image = marker.loadImage("resources/healthpotion.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		//marker.fill(256, 0, 0);
+		//marker.ellipse((float)x, (float)y, (float)width, (float)height);
 	}
 	
 	/**
