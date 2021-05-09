@@ -11,6 +11,7 @@ import frog.DrawingSurface;
 import frog.entities.Fly;
 import frog.entities.Frog;
 import frog.entities.Monster;
+import frog.entities.Shopkeeper;
 import frog.misc.*;
 
 /**
@@ -22,6 +23,7 @@ public class FrogDungeon extends Screen {
 	
 	//Fields
 	private Frog player;
+	private Shopkeeper shopKeep;
 	private ArrayList<Monster> monsters;
 	private Button pauseButton;
 	private boolean gamePaused;
@@ -43,6 +45,7 @@ public class FrogDungeon extends Screen {
 		generateMaze(); //adds all the walls
 		
 		player = new Frog(300, 300, 50, 50, 100);
+		shopKeep = new Shopkeeper(400, 500, 50, 50, 100);
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new SpeedPotion(350, 500, 50, 50));
@@ -81,6 +84,7 @@ public class FrogDungeon extends Screen {
 		surface.popStyle();
 		
 		player.draw(surface);
+		shopKeep.draw(surface);
 		
 		//WALLS DRAWING
 		for(Wall wall : walls) {
@@ -134,6 +138,10 @@ public class FrogDungeon extends Screen {
 		surface.rect(20, 20, 150, 100);
 		surface.fill(0);
 		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength(), 30, 50);
+		surface.fill(255);
+		surface.rect(200, 20, 200, 35);
+		surface.fill(256, 0, 0);
+		surface.rect(200, 20, (float)((player.getHealth()/100)*200), 35);
 
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);

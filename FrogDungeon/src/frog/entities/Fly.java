@@ -23,5 +23,6 @@ public class Fly extends Monster{
 	public void draw(PApplet marker) {
 		marker.fill(0, 0, 256);
 		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		
 	}
 }
