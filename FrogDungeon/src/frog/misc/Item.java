@@ -47,4 +47,10 @@ public abstract class Item {
 	public double getHeight() {
 		return height;
 	}
+	public void setX(double amount) {
+		x = amount;
+	}
+	public void setY(double amount) {
+		y = amount;
+	}
 }

@@ -88,9 +88,10 @@ public class FrogDungeon extends Screen {
 		}
 		
 		//ITEMS DRAWING
+		
 		for(int i = 0; i < items.size(); i++) {
 			Rectangle hb = new Rectangle((int)(items.get(i).getX()), (int)(items.get(i).getY()), (int)(items.get(i).getWidth()), (int)(items.get(i).getHeight()));
-			if(player.isTouching(hb)) {
+			if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(hb)) {
 				items.get(i).doAction(this);
 				items.remove(i);
 				i--;
@@ -98,19 +99,20 @@ public class FrogDungeon extends Screen {
 			else {
 				items.get(i).draw(surface);
 			}
-			
+				
 		}
+		
 		
 		//MONSTER DRAWINGS
 		for(int i = 0; i < monsters.size(); i++) {
 			if(monsters.get(i).getHealth() > 0) {
-				
+				monsters.get(i).move(walls, this);
 				monsters.get(i).draw(surface);
 				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
 				if(player.isTouching(hb)) {
 					//PUT THE DAMAGE METHOD HERE
 					if(ticks % 60 == 0) {
-						player.setHealth(player.getHealth()-5);
+						player.setHealth(player.getHealth()-monsters.get(i).getDamage());
 					}
 					
 					
@@ -118,6 +120,9 @@ public class FrogDungeon extends Screen {
 				
 			}
 			else {
+				if(monsters.get(i).getItem() != null) {
+					items.add(monsters.get(i).getItem());
+				}
 				monsters.remove(i);
 			}
 		}
