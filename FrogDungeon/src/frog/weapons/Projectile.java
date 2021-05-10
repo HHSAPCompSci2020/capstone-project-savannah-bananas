@@ -1,5 +1,7 @@
 package frog.weapons;
 
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import frog.entities.Monster;
@@ -26,19 +28,6 @@ public class Projectile {
 	
 	//Constructor
 	public Projectile(double startX, double startY, double endX, double endY, double damage, double range, double shootingSpeed) {
-		// KAELA'S CODE AS OF 5/10/2021, 12:23 AM
-		/*this.x = startX;
-		this.y = startY;
-		this.deltaX = endX - startX;
-		this.deltaY = endY - startY;
-		this.damage = damage;
-		this.range = range;
-		this.shootingSpeed = shootingSpeed;
-			
-		dir = Math.atan(deltaY / deltaX);
-		System.out.println(dir);*/
-
-		//JUSTIN'S CODE
 		this.x = startX;
 		this.y = startY;
 		this.deltaX = endX - startX;
@@ -108,5 +97,28 @@ public class Projectile {
 	
 	public boolean shouldDie() {
 		return distanceTraveled > range;
+	}
+	
+	public boolean isTouchingWall(ArrayList<Wall> walls) {
+		ArrayList<Rectangle> wallRectangles = new ArrayList<Rectangle>();
+		for(Wall wall : walls)
+			wallRectangles.addAll(wall.getRectangles());
+		for(Rectangle r : wallRectangles) {
+			if(r.contains(new Point((int)x, (int)y)))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean hitMonster(ArrayList<Monster> monsters) {
+		Point thisPoint = new Point((int) x, (int) y);
+		for(Monster m : monsters) {
+			Rectangle monsterRect = new Rectangle((int) m.getX(), (int) m.getY(), (int) m.getWidth(), (int) m.getHeight());
+			if(monsterRect.contains(thisPoint)) {
+				m.setHealth(m.getHealth() - this.damage);
+				return true;
+			}
+		}
+		return false;
 	}
 }

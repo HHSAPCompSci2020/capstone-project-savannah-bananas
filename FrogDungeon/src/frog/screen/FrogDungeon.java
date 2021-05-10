@@ -136,7 +136,7 @@ public class FrogDungeon extends Screen {
 		ArrayList<Projectile> p = player.getProjectile().getProjectiles();
 		if (p.size() > 0)
 		for (int i = 0; i < p.size(); i++) {
-			if(p.get(i).shouldDie()) {
+			if(p.get(i).shouldDie() || p.get(i).isTouchingWall(walls) || p.get(i).hitMonster(monsters)) {
 				p.remove(i);
 				i--;
 			} else {
@@ -240,6 +240,14 @@ public class FrogDungeon extends Screen {
 			}
 			
 			wallsToProcess.remove(wall);
+		}
+		
+		//removes empty walls
+		for(int i = 0; i < walls.size(); i++) {
+			if(walls.get(i).getType() == Wall.EMPTY) {
+				walls.remove(i);
+				i--;
+			}
 		}
 	}
 	
