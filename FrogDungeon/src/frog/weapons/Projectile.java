@@ -50,6 +50,9 @@ public class Projectile {
 		surface.circle((float)x, (float)y, 10);
 	}
 	
+	/**
+	 * Moves the projectile at its angle by distance shootingSpeed
+	 */
 	public void move() {
 		
 		x += (shootingSpeed * Math.cos(dir));
@@ -99,6 +102,11 @@ public class Projectile {
 		return distanceTraveled > range;
 	}
 	
+	/**
+	 * Returns true if the implicit Projectile is touching at least one wall
+	 * @param walls List of walls that the Projectile may collide with
+	 * @return True if at least one wall is touched.
+	 */
 	public boolean isTouchingWall(ArrayList<Wall> walls) {
 		ArrayList<Rectangle> wallRectangles = new ArrayList<Rectangle>();
 		for(Wall wall : walls)
@@ -110,6 +118,12 @@ public class Projectile {
 		return false;
 	}
 	
+	/**
+	 * Returns whether or not the Projectile has hit a Monster. This also handles the health subtraction of the Monster.
+	 * @param monsters List of monsters the Projectile may hit
+	 * @post This method subtracts health from hit Monsters.
+	 * @return True if at least one monster is hit, false if otherwise.
+	 */
 	public boolean hitMonster(ArrayList<Monster> monsters) {
 		Point thisPoint = new Point((int) x, (int) y);
 		for(Monster m : monsters) {
