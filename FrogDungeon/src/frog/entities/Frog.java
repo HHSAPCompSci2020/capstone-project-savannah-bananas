@@ -27,7 +27,7 @@ public class Frog extends Entity{
 		speedMultiplyer = 1;
 		strengthMultiplyer = 1;
 		melee = new Knife();
-	    ranged = null;
+	    ranged = new Bow();
 	}
 
 	//Methods
@@ -147,7 +147,7 @@ public class Frog extends Entity{
 	 * @param y, the y coordinate of where the frog is shooting.
 	 */
 	public void shootRangedWeapon(int x, int y) {
-		
+		ranged.shoot((int)this.getX(), (int)this.getY(), x, y);
 	}
 	
 	/**

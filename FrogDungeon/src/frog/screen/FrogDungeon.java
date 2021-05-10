@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import frog.util.Button;
+import frog.weapons.Projectile;
 import processing.core.PApplet;
 import frog.DrawingSurface;
 import frog.entities.Fly;
@@ -129,6 +130,14 @@ public class FrogDungeon extends Screen {
 				}
 				monsters.remove(i);
 			}
+		}
+		
+		
+		ArrayList<Projectile> p = player.getProjectile().getProjectiles();
+		if (p.size() > 0)
+		for (int i = 0; i < p.size(); i++) {
+			p.get(i).move();
+			p.get(i).draw(surface);
 		}
 		
 		
@@ -291,14 +300,22 @@ public class FrogDungeon extends Screen {
 	}
 	
 	public void mousePressed() {
-		for(int i = 0; i < monsters.size(); i++) {
+		
+		if (surface.mouseButton == surface.LEFT) {
+			for(int i = 0; i < monsters.size(); i++) {
+	
+				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
+				if(player.isTouching(hb)) {
+					player.meleeAttack(monsters.get(i));
+						
+				}		
+			}
+		} else if (surface.mouseButton == surface.RIGHT) {
+				System.out.println("Click X = " + surface.mouseX + ", Click Y = " + surface.mouseY);
+				player.shootRangedWeapon(surface.mouseX, surface.mouseY);
 
-			Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
-			if(player.isTouching(hb)) {
-				player.meleeAttack(monsters.get(i));
-					
-			}		
 		}
+		
 	}
 	
 }

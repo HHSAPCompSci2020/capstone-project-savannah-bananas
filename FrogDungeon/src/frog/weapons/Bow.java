@@ -13,7 +13,7 @@ public class Bow extends ProjectileWeapon {
 	//Fields
 	public static final double BOW_DAMAGE = 0.0;
 	public static final double BOW_RANGE = 0.0;
-	public static final double BOW_SPEED = 0.0;
+	public static final double BOW_SPEED = 4;
 	
 	//Constructors
 	public Bow() {
@@ -28,6 +28,7 @@ public class Bow extends ProjectileWeapon {
 	public void draw(PApplet marker, double x, double y, double width, double height) {
 		PImage image = marker.loadImage("resources/bow.png");
 		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+	
 	}
 	
 	/**
@@ -35,7 +36,8 @@ public class Bow extends ProjectileWeapon {
 	 * @param x, the x coordinate of the target
 	 * @param y, the y coordinate of the target
 	 */
-	public void shoot(int x, int y) {
+	public void shoot(int startX, int startY, int endX, int endY) {
+		super.shoot(startX, startY, endX, endY);
 		
 	}
 }

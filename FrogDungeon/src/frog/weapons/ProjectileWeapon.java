@@ -1,5 +1,7 @@
 package frog.weapons;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 /**
@@ -14,12 +16,14 @@ public abstract class ProjectileWeapon {
 	private double damage;
 	private double range;
 	private double shootingSpeed;
+	private ArrayList<Projectile> projectiles;
 	
 	//Constructors
 	public ProjectileWeapon(double damage, double range, double speed) {
 		this.damage = damage;
 		this.range = range;
 		this.shootingSpeed = speed;
+		this.projectiles = new ArrayList<Projectile>();
 	}
 	
 	//Methods
@@ -34,7 +38,13 @@ public abstract class ProjectileWeapon {
 	 * @param x, the x coordinate of the target
 	 * @param y, the y coordinate of the target
 	 */
-	public void shoot(int x, int y) {
+	public void shoot(int startX, int startY, int endX, int endY) {
+		Projectile bullet = new Projectile (startX, startY, endX, endY, damage, range, shootingSpeed);
+		projectiles.add(bullet);
 		
+	}
+	
+	public ArrayList<Projectile> getProjectiles() {
+		return projectiles;
 	}
 }
