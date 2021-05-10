@@ -331,7 +331,7 @@ public class FrogDungeon extends Screen {
 			}
 		} else if (surface.mouseButton == surface.RIGHT) {
 				//System.out.println("Click X = " + surface.mouseX + ", Click Y = " + surface.mouseY);
-				player.shootRangedWeapon(surface.mouseX, surface.mouseY);
+				player.shootRangedWeapon(surface.mouseX, surface.mouseY, surface);
 
 		}
 		
