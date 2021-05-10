@@ -29,5 +29,7 @@ public class Fly extends Monster{
 		marker.stroke(255, 0, 0);
 		marker.rect((float) x, (float) y, (float) width, (float) height);
 		marker.popStyle();
+		
+		super.draw(marker);
 	}
 }

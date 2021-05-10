@@ -18,6 +18,7 @@ public abstract class Entity {
 	protected double health;
 	protected double speedMultiplyer, strengthMultiplyer;
 	protected PImage image;
+	protected double maxHealth;
 	
 	//Constructors
 	public Entity(double x, double y, double width, double height, double health) {
@@ -26,6 +27,7 @@ public abstract class Entity {
 		this.width = width;
 		this.height = height;
 		this.health = health;
+		this.maxHealth = health;
 		vX = 0;
 		vY = 0;
 	}
