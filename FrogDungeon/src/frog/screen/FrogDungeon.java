@@ -136,8 +136,13 @@ public class FrogDungeon extends Screen {
 		ArrayList<Projectile> p = player.getProjectile().getProjectiles();
 		if (p.size() > 0)
 		for (int i = 0; i < p.size(); i++) {
-			p.get(i).move();
-			p.get(i).draw(surface);
+			if(p.get(i).shouldDie()) {
+				p.remove(i);
+				i--;
+			} else {
+				p.get(i).move();
+				p.get(i).draw(surface);
+			}
 		}
 		
 		
@@ -311,7 +316,7 @@ public class FrogDungeon extends Screen {
 				}		
 			}
 		} else if (surface.mouseButton == surface.RIGHT) {
-				System.out.println("Click X = " + surface.mouseX + ", Click Y = " + surface.mouseY);
+				//System.out.println("Click X = " + surface.mouseX + ", Click Y = " + surface.mouseY);
 				player.shootRangedWeapon(surface.mouseX, surface.mouseY);
 
 		}

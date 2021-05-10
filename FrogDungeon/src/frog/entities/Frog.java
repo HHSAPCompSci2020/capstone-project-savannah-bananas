@@ -147,7 +147,12 @@ public class Frog extends Entity{
 	 * @param y, the y coordinate of where the frog is shooting.
 	 */
 	public void shootRangedWeapon(int x, int y) {
-		ranged.shoot((int)this.getX(), (int)this.getY(), x, y);
+		int offsetX = (int) ((float) this.getX() + (float) this.getWidth()/2 - 400); //this is the X amount the screen is shifted
+		int offsetY = (int) ((float) this.getY() + (float) this.getHeight()/2 - 300); //this is the Y amount the screen is shifted
+		
+		offsetY += 20; //idk why but mouseY includes the height of the window
+		
+		ranged.shoot((int)this.getX() + (int) (this.width/2), (int)this.getY() + (int) (this.height/2), x + offsetX, y + offsetY);
 	}
 	
 	/**

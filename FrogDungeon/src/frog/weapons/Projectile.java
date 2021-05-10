@@ -21,11 +21,13 @@ public class Projectile {
 	private double damage;
 	private double shootingSpeed;
 	private double dir;
+	private double distanceTraveled;
 	
 	
 	//Constructor
 	public Projectile(double startX, double startY, double endX, double endY, double damage, double range, double shootingSpeed) {
-		this.x = startX;
+		// KAELA'S CODE AS OF 5/10/2021, 12:23 AM
+		/*this.x = startX;
 		this.y = startY;
 		this.deltaX = endX - startX;
 		this.deltaY = endY - startY;
@@ -34,8 +36,22 @@ public class Projectile {
 		this.shootingSpeed = shootingSpeed;
 			
 		dir = Math.atan(deltaY / deltaX);
-		System.out.println(dir);
+		System.out.println(dir);*/
 
+		//JUSTIN'S CODE
+		this.x = startX;
+		this.y = startY;
+		this.deltaX = endX - startX;
+		this.deltaY = startY - endY; //flipped because downwards Y is positive
+		this.damage = damage;
+		this.range = range;
+		this.shootingSpeed = shootingSpeed;
+		this.distanceTraveled = 0;
+			
+		dir = Math.atan(deltaY / deltaX);
+		if(deltaX < 0)
+			dir = Math.PI + dir;
+		//System.out.println(dir);
 	}
 	
 	//Methods
@@ -48,8 +64,8 @@ public class Projectile {
 	public void move() {
 		
 		x += (shootingSpeed * Math.cos(dir));
-		y += (shootingSpeed * Math.sin(dir));
-
+		y -= (shootingSpeed * Math.sin(dir)); //flipped because downwards Y is positive
+		distanceTraveled += shootingSpeed;
 		/*
 		double temp = dir * (shootingSpeed + x) + intercept;
 		x += shootingSpeed;
@@ -88,5 +104,9 @@ public class Projectile {
 	
 	public double getY() {
 		return y;
+	}
+	
+	public boolean shouldDie() {
+		return distanceTraveled > range;
 	}
 }
