@@ -36,6 +36,10 @@ public abstract class Entity {
 	 * @param other, the rectangle hitbox of another entity/item/projectile.
 	 */
 	public boolean isTouching(Rectangle other) {
+		if(Math.abs(x - other.x) > this.width + other.width)
+			return false;
+		else if(Math.abs(y - other.y) > this.height + other.height )
+			return false;
 		Rectangle r1 = new Rectangle((int)x, (int)y, (int)width, (int)height);
 		if(r1.contains(new Point((int)other.getX(), (int)other.getY()))) {
 			return true;
