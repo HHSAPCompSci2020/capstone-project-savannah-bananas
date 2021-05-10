@@ -1,6 +1,7 @@
 package frog.weapons;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * A pistol class that extends Projectile Weapon
@@ -26,7 +27,8 @@ public class Pistol extends ProjectileWeapon{
 	 * @param draw, the PApplet to draw the pistol on.
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		
+		PImage image = marker.loadImage("resources/pistol.png");
+		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	/**
