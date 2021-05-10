@@ -28,7 +28,6 @@ public class Bow extends ProjectileWeapon {
 	public void draw(PApplet marker, double x, double y, double width, double height) {
 		PImage image = marker.loadImage("resources/bow.png");
 		marker.image(image, (float)x, (float)y, (float)width, (float)height);
-	
 	}
 	
 	/**
