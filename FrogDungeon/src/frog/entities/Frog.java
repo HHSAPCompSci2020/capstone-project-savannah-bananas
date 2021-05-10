@@ -1,5 +1,6 @@
 package frog.entities;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -190,14 +191,15 @@ public class Frog extends Entity{
 	 * Shoots the ranged weapon that this frog has.
 	 * @param x, the x coordinate of where the frog is shooting.
 	 * @param y, the y coordinate of where the frog is shooting.
+	 * @param surface, the DrawingSurface that the Projectile will exist inside of
 	 */
-	public void shootRangedWeapon(int x, int y) {
+	public void shootRangedWeapon(int x, int y, DrawingSurface surface) {
 		int offsetX = (int) ((float) this.getX() + (float) this.getWidth()/2 - 400); //this is the X amount the screen is shifted
 		int offsetY = (int) ((float) this.getY() + (float) this.getHeight()/2 - 300); //this is the Y amount the screen is shifted
 		
 		offsetY += 20; //idk why but mouseY includes the height of the window
-		
-		ranged.shoot((int)this.getX() + (int) (this.width/2), (int)this.getY() + (int) (this.height/2), x + offsetX, y + offsetY);
+		Point actualMousePoint = surface.assumedCoordinatesToActual(x, y);
+		ranged.shoot((int)this.getX() + (int) (this.width/2), (int)this.getY() + (int) (this.height/2), actualMousePoint.x + offsetX, actualMousePoint.y + offsetY);
 	}
 	
 	/**
