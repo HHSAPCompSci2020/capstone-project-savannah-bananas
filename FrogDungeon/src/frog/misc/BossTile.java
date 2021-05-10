@@ -1,5 +1,6 @@
 package frog.misc;
 
+import frog.DrawingSurface;
 import processing.core.PApplet;
 
 public class BossTile {
@@ -19,8 +20,8 @@ public class BossTile {
 		marker.rect((float)x, (float)y, 50f, 50f);
 	}
 	
-	public void changeScreen() {
-		
+	public void changeScreen(DrawingSurface surface) {
+		surface.switchScreen(surface.BOSS_GUI);
 	}
 	
 	public double getX() {
@@ -28,6 +29,13 @@ public class BossTile {
 	}
 	public double getY() {
 		return y;
+	}
+	
+	public boolean isInsideTile(double x, double y) {
+		if (this.x <= x && this.y <= y && (this.x + 50f) > x && (this.y + 50f) > y) 
+			return true;
+		
+		return false;
 	}
 	
 	

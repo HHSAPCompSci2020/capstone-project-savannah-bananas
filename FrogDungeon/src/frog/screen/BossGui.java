@@ -40,8 +40,8 @@ public class BossGui extends Screen {
 		surface.background(0);
 		surface.pushStyle();
 	//	surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
-		surface.text("YOU HAVE FOUND THE SORCERER'S CHAMBER", 355, 50);
-		surface.text("DO YOU WISH TO CONTINUE?", 355, 60);
+		surface.text("YOU HAVE FOUND THE SORCERER'S CHAMBER", 265, 150);
+		surface.text("DO YOU WISH TO CONTINUE?", 315, 170);
 
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
@@ -56,7 +56,7 @@ public class BossGui extends Screen {
 		if(button.equals(yesButton)) {
 			surface.switchScreen(surface.GAME_SCREEN);
 		} else if(button.equals(noButton)) {
-			surface.switchScreen(surface.MENU_SCREEN);
+			surface.switchScreen(surface.GAME_SCREEN);
 		}
 	}
 }
