@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import frog.ScreenSwitcher;
+import frog.screen.BossGui;
 import frog.screen.FrogDungeon;
 import frog.screen.InfoScreen;
 import frog.screen.MenuScreen;
@@ -63,6 +64,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		InfoScreen infoScreen = new InfoScreen(this);
 		screens.add(infoScreen);
+		
+		BossGui bossGui = new BossGui(this);
+		screens.add(bossGui);
 		
 		//setting current active screen to be the Main Menu
 		activeScreen = screens.get(MENU_SCREEN);
