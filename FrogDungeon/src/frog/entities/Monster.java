@@ -64,6 +64,9 @@ public abstract class Monster extends Entity {
         double changeY = y - targetY;
 
         double hyp = Math.sqrt(changeX * changeX + changeY * changeY);
+        
+        if(hyp > range)
+        	return;
 
         if(hyp != 0 && hyp < range) {
             double refAngle = Math.asin(changeY/hyp);
@@ -127,7 +130,6 @@ public abstract class Monster extends Entity {
 			if(vX < 0)
 				shiftX = 0 - shiftX;
 			super.moveBy(0 - shiftX, 0);
-			System.out.println("x 0");
 			vX = 0.0;
 		}
 		
@@ -136,7 +138,6 @@ public abstract class Monster extends Entity {
 			if(vY < 0)
 				shiftY = 0 - shiftY;
 			super.moveBy(0, 0 - shiftY);
-			System.out.println("y 0");
 			vY = 0.0;
 		}
 		
