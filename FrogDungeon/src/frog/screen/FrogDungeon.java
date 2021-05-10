@@ -165,7 +165,13 @@ public class FrogDungeon extends Screen {
 			player.getProjectile().draw(surface, 475, 20, 50, 50);
 		}
 		
-
+		//draws mini-map
+		surface.fill(100);
+		surface.stroke(255);
+		surface.rect(10, 490, 100, 100, 5);
+		surface.fill(255);
+		surface.noStroke();
+		surface.ellipse((float) (10 + 100*player.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)), (float) (490 + 100*player.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)), 5, 5);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
