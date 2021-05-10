@@ -20,6 +20,7 @@ public class Frog extends Entity{
 	//Fields
 	private MeleeWeapon melee;
 	private ProjectileWeapon ranged;
+	private int coins;
 	
 	//Constructors
 	public Frog(double x, double y, double width, double height, double health) {
@@ -228,6 +229,14 @@ public class Frog extends Entity{
 	
 	public ProjectileWeapon getProjectile() {
 		return ranged;
+	}
+	
+	public int getCoins() {
+		return coins;
+	}
+	
+	public void incrementCoins(int amount) {
+		coins += amount;
 	}
 	
 }

@@ -20,16 +20,18 @@ public abstract class Monster extends Entity {
 	protected Item dropItem;
 	protected double range;
 	protected double speed;
+	protected int coinValue;
 	
 	//Constructors
-	public Monster(double x, double y, double width, double height, double health, double damage, double range, double speed) {
+	public Monster(double x, double y, double width, double height, double health, double damage, double range, double speed, int coinValue) {
 		super(x, y, width, height, health);
 		this.damage = damage;
 		this.range = range;
 		this.speed = speed;
+		this.coinValue = coinValue;
 		
 		int i = (int)(Math.random()*10);
-		System.out.println(i);
+		
 		if(i == 1) {
 			dropItem = new HealthPotion(this.x, this.y, 50, 50);
 		}
@@ -149,6 +151,9 @@ public abstract class Monster extends Entity {
 	}
 	public double getDamage() {
 		return damage;
+	}
+	public int getCoinValue() {
+		return coinValue;
 	}
 	
 	public void draw(PApplet marker) {
