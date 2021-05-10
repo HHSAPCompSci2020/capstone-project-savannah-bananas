@@ -48,6 +48,7 @@ public class FrogDungeon extends Screen {
 		
 		player = new Frog(300, 300, 50, 50, 100);
 		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
+		//boss = new BossTile(0, 0);
 		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
 		
 		System.out.println(boss.getX() + " " + boss.getY());
@@ -76,6 +77,11 @@ public class FrogDungeon extends Screen {
 	public void draw() {
 
 		player.move(walls, surface);
+		
+		if (boss.isInsideTile(player.getX(), player.getY())) {
+			boss.changeScreen(surface);
+			player.moveTo(player.getX() + 50, player.getY() + 50);
+		}	
 		
 		surface.pushMatrix();
 		surface.background(0);
@@ -181,6 +187,8 @@ public class FrogDungeon extends Screen {
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
+		
+	
 		
 		ticks++;
 	}
