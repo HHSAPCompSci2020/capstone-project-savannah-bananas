@@ -39,8 +39,9 @@ public class Frog extends Entity{
 	public void move(ArrayList<Wall> walls, DrawingSurface surface) {
 		
 		double baseSpeed = 5.0;
+		double maxSpeed = baseSpeed * getSpeed();
 		
-		if (surface.isPressed(KeyEvent.VK_W))
+		/*if (surface.isPressed(KeyEvent.VK_W))
 			vY = 0 - (baseSpeed * getSpeed());
 		if (surface.isPressed(KeyEvent.VK_A))
 			vX = 0 - (baseSpeed * getSpeed());
@@ -52,9 +53,51 @@ public class Frog extends Entity{
 		if(!surface.isPressed(KeyEvent.VK_W) && !surface.isPressed(KeyEvent.VK_S))
 			vY = 0;
 		if(!surface.isPressed(KeyEvent.VK_A) && !surface.isPressed(KeyEvent.VK_D))
-			vX = 0;
+			vX = 0;*/
 		
+		if (surface.isPressed(KeyEvent.VK_W)) {
+			if(vY > (0-maxSpeed/2))
+				vY -= maxSpeed/6;
+			else
+				vY -= (maxSpeed + vY)/6;
+		}
+		if (surface.isPressed(KeyEvent.VK_A)) {
+			if(vX > (0-maxSpeed/2))
+				vX -= maxSpeed/6;
+			else
+				vX -= (maxSpeed + vX)/6;
+		}
+		if (surface.isPressed(KeyEvent.VK_S)) {
+			if(vY < (maxSpeed/2))
+				vY += maxSpeed/6;
+			else
+				vY += (maxSpeed - vY)/6;
+		}
+		if (surface.isPressed(KeyEvent.VK_D)) {
+			if(vX < (maxSpeed/2))
+				vX += maxSpeed/6;
+			else
+				vX += (maxSpeed - vX)/6;
+		}
 		
+
+		double deceleration = 0.8;
+		if(!surface.isPressed(KeyEvent.VK_W) && !surface.isPressed(KeyEvent.VK_S)) {
+			if(vY > deceleration)
+				vY -= deceleration;
+			else if(vY < 0-deceleration)
+				vY += deceleration;
+			else if(vY < deceleration && vY > 0 || vY > 0-deceleration && vY < 0)
+				vY = 0;
+		}
+		if(!surface.isPressed(KeyEvent.VK_A) && !surface.isPressed(KeyEvent.VK_D)) {
+			if(vX > deceleration)
+				vX -= deceleration;
+			else if(vX < 0-deceleration)
+				vX += deceleration;
+			else if(vX < deceleration && vX > 0 || vX > 0-deceleration && vX < 0)
+				vX = 0;
+		}
 		
 		
 		//makes a list of all rectangles that make up the walls
@@ -128,6 +171,8 @@ public class Frog extends Entity{
 		}*/
 		
 	}
+		
+	//}
 	
 	/**
 	 * Detects if this Frog is touching the given wall.
