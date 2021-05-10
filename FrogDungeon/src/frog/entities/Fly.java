@@ -21,8 +21,13 @@ public class Fly extends Monster{
 	
 	//Methods
 	public void draw(PApplet marker) {
+		marker.pushStyle();
 		marker.fill(0, 0, 256);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		marker.ellipse((float)x + (float)width/2, (float)y + (float)height/2, (float)width, (float)height);
 		
+		marker.noFill();
+		marker.stroke(255, 0, 0);
+		marker.rect((float) x, (float) y, (float) width, (float) height);
+		marker.popStyle();
 	}
 }

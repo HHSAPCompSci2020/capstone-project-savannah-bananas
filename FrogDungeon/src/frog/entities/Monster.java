@@ -122,7 +122,7 @@ public abstract class Monster extends Entity {
 			}
 		}
 		
-		if(shiftX != Integer.MAX_VALUE && shiftX < 1.1*(5*this.getSpeed())) {
+		if(shiftX != Integer.MAX_VALUE && Math.abs(shiftX) < Math.abs(vX)) {
 			shiftX++;
 			if(vX < 0)
 				shiftX = 0 - shiftX;
@@ -131,7 +131,7 @@ public abstract class Monster extends Entity {
 			vX = 0.0;
 		}
 		
-		if(shiftY != Integer.MAX_VALUE && shiftY < 1.1*(5*this.getSpeed())) {
+		if(shiftY != Integer.MAX_VALUE && Math.abs(shiftY) < Math.abs(vY)) {
 			shiftY++;
 			if(vY < 0)
 				shiftY = 0 - shiftY;
