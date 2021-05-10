@@ -33,6 +33,9 @@ public class HealthPotion extends Item {
 	 */
 	public void doAction(FrogDungeon x) {
 		x.getFrog().setHealth(x.getFrog().getHealth()+POTION_HEALTH);
+		if(x.getFrog().getHealth() > 100) {
+			x.getFrog().setHealth(100);
+		}
 	}
 
 }

@@ -25,6 +25,7 @@ public class FrogDungeon extends Screen {
 	//Fields
 	private Frog player;
 	private Shopkeeper shopKeep;
+	private BossTile boss;
 	private ArrayList<Monster> monsters;
 	private Button pauseButton;
 	private boolean gamePaused;
@@ -47,6 +48,9 @@ public class FrogDungeon extends Screen {
 		
 		player = new Frog(300, 300, 50, 50, 100);
 		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
+		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
+		
+		System.out.println(boss.getX() + " " + boss.getY());
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new SpeedPotion(350, 500, 50, 50));
@@ -86,6 +90,7 @@ public class FrogDungeon extends Screen {
 		
 		player.draw(surface);
 		shopKeep.draw(surface);
+		boss.draw(surface);
 		
 		//WALLS DRAWING
 		for(Wall wall : walls) {
@@ -161,7 +166,8 @@ public class FrogDungeon extends Screen {
 		if(player.getMelee() != null) {
 			player.getMelee().draw(surface, 425, 20, 50, 50);
 		}
-		else if(player.getProjectile() != null) {
+		if(player.getProjectile() != null) {
+			//System.out.println("yaya");
 			player.getProjectile().draw(surface, 475, 20, 50, 50);
 		}
 		
