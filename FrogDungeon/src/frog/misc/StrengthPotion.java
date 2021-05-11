@@ -20,7 +20,8 @@ public class StrengthPotion extends Item{
 	
 	//Methods
 	public void draw(PApplet marker) {
-		image = marker.loadImage("resources/strengthpotion.png");
+		if(image == null)
+			image = marker.loadImage("resources/strengthpotion.png");
 		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 	

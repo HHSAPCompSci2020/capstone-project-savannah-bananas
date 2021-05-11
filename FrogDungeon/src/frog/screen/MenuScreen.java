@@ -23,7 +23,7 @@ public class MenuScreen extends Screen {
 	public MenuScreen(DrawingSurface surface) {
 		super(surface);
 		
-		frog = new PImage();
+		//frog = new PImage();
 		
 		startButton = new Button(300, 250, 200, 150);
 		startButton.setText("Start");
@@ -38,7 +38,8 @@ public class MenuScreen extends Screen {
 	}
 	
 	public void draw() {
-		frog = surface.loadImage("resources/frog.png");
+		if(frog == null)
+			frog = surface.loadImage("resources/frog.png");
 
 		surface.background(0);
 		surface.pushStyle();
