@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import frog.ScreenSwitcher;
+import frog.entities.Frog;
 import frog.entities.Shopkeeper;
 import frog.screen.BossGui;
 import frog.screen.FrogDungeon;
@@ -167,4 +168,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(i);
 	}
 
+	public Frog getFrog() {
+		Screen dungeon = screens.get(1);
+		return ((FrogDungeon) dungeon).getFrog();
+	}
 }
