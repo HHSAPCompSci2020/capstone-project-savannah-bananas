@@ -9,6 +9,7 @@ import frog.DrawingSurface;
 import frog.misc.Wall;
 import frog.weapons.*;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Represents a frog that extends Entity. Contains one melee and one projectile weapon.
@@ -22,6 +23,13 @@ public class Frog extends Entity{
 	private MeleeWeapon melee;
 	private ProjectileWeapon ranged;
 	
+	private ArrayList<PImage> idleImages, runningImages, damageImages;
+	private int state;
+	private int timeInState;
+	private static final int IDLE = 0;
+	private static final int RUNNING = 1;
+	private static final int DAMAGE = 2;
+	
 	//Constructors
 	public Frog(double x, double y, double width, double height, double health) {
 		super(x, y, width, height, health);
@@ -29,6 +37,12 @@ public class Frog extends Entity{
 		strengthMultiplyer = 1;
 		melee = new Knife();
 	    ranged = new Bow();
+	    
+	    idleImages = new ArrayList<PImage>();
+	    runningImages = new ArrayList<PImage>();
+	    damageImages = new ArrayList<PImage>();
+	    timeInState = 0;
+	    state = IDLE;
 	}
 
 	//Methods
@@ -171,6 +185,17 @@ public class Frog extends Entity{
 			}
 		}*/
 		
+		if(vX != 0 || vY != 0) {
+			if(state != RUNNING) {
+				state = RUNNING;
+				timeInState = 0;
+			}
+		} else {
+			if(state != IDLE) {
+				state = IDLE;
+				timeInState = 0;
+			}
+		}
 	}
 		
 	//}
@@ -221,6 +246,23 @@ public class Frog extends Entity{
 		marker.noFill();
 		marker.stroke(255, 0, 0);
 		marker.rect((float) this.x, (float) this.y, (float) this.width, (float) this.height);
+		
+		PImage image = idleImages.get(0);
+		int frame = this.timeInState / 2;
+		if(state == RUNNING)
+			image = runningImages.get(frame % 12);
+		else if(state == DAMAGE)
+			image = damageImages.get(frame % 7);
+		else
+			image = idleImages.get(frame % 10);
+		timeInState++;
+		
+		marker.pushMatrix();
+		marker.translate((float) (x), (float) (y));
+		marker.scale((float) (width/image.width), (float) (width/image.height));
+		marker.image(image, 0, 0);
+		marker.popMatrix();
+		
 		marker.popStyle();
 	}
 
@@ -230,6 +272,15 @@ public class Frog extends Entity{
 	
 	public ProjectileWeapon getProjectile() {
 		return ranged;
+	}
+	
+	public void loadImages(DrawingSurface surface) {
+		for(int i = 0; i < 10; i++)
+	    	idleImages.add(surface.loadImage("resources/player/idle/" + i + ".png"));
+		for(int i = 0; i < 12; i++)
+	    	runningImages.add(surface.loadImage("resources/player/run/" + i + ".png"));
+		for(int i = 0; i < 7; i++)
+	    	damageImages.add(surface.loadImage("resources/player/hit/" + i + ".png"));
 	}
 	
 }

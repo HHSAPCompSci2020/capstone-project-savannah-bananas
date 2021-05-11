@@ -47,6 +47,8 @@ public class FrogDungeon extends Screen {
 		generateMaze(); //adds all the walls
 		
 		player = new Frog(300, 300, 50, 50, 100);
+		player.loadImages(surface);
+		
 		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
 		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
 		

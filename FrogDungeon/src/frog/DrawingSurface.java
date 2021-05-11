@@ -49,27 +49,30 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	//Constructors
 	public DrawingSurface() {
-		//adding all the screens, in order
-		screens = new ArrayList<Screen>();
 		
+	}
+	
+	public void setup() {
+		// adding all the screens, in order
+		screens = new ArrayList<Screen>();
+
 		MenuScreen menuScreen = new MenuScreen(this);
 		screens.add(menuScreen);
-		
+
 		FrogDungeon gameScreen = new FrogDungeon(this);
 		screens.add(gameScreen);
-		
+
 		PauseScreen pauseScreen = new PauseScreen(this);
 		screens.add(pauseScreen);
-		
+
 		InfoScreen infoScreen = new InfoScreen(this);
 		screens.add(infoScreen);
-		
-		//setting current active screen to be the Main Menu
+
+		// setting current active screen to be the Main Menu
 		activeScreen = screens.get(MENU_SCREEN);
-		
+
 		keys = new ArrayList<Integer>();
 	}
-
 	
 	
 	
