@@ -1,8 +1,14 @@
 package frog.screen;
 
 import frog.DrawingSurface;
+import frog.misc.HealthPotion;
 import frog.misc.SpeedPotion;
+import frog.misc.StrengthPotion;
 import frog.util.Button;
+import frog.weapons.Hammer;
+import frog.weapons.Pistol;
+import frog.weapons.Rifle;
+import frog.weapons.Sword;
 
 public class ShopkeeperGUI extends Screen {
 	
@@ -14,6 +20,7 @@ public class ShopkeeperGUI extends Screen {
 	private Button healthbutton;
 	private Button speedbutton;
 	private Button strengthbutton;
+
 
 	public ShopkeeperGUI(DrawingSurface surface) {
 		super(surface);
@@ -58,6 +65,7 @@ public class ShopkeeperGUI extends Screen {
 		exit.setText("Exit");
 		exit.setButtonListener(this);
 		buttons.add(exit);
+		
 	}
 
 	public void buttonPressed(Button button) {
@@ -65,18 +73,49 @@ public class ShopkeeperGUI extends Screen {
 			surface.switchScreen(surface.GAME_SCREEN);
 		} else if(button.equals(swordbutton)) {
 			//PURCHASE SWORD
+			if(surface.getFrog().getCoins() >= 50) {
+				surface.getFrog().setMelee(new Sword());
+				surface.getFrog().incrementCoins(-50);
+			}
 		} else if(button.equals(hammerbutton)) {
 			//PURCHASE HAMMER
+			if(surface.getFrog().getCoins() >= 75) {
+				surface.getFrog().setMelee(new Hammer());
+				surface.getFrog().incrementCoins(-75);
+			}
 		} else if(button.equals(pistolbutton)) {
 			//PURCHASE PISTOL
+			if(surface.getFrog().getCoins() >= 75) {
+				surface.getFrog().setProjectile(new Pistol());
+				surface.getFrog().incrementCoins(-75);
+			}
 		} else if(button.equals(riflebutton)) {
 			//PURCHASE RIFLE
+			if(surface.getFrog().getCoins() >= 100) {
+				surface.getFrog().setProjectile(new Rifle());
+				surface.getFrog().incrementCoins(-100);
+			}
 		} else if(button.equals(healthbutton)) {
 			//PURCHASE HEALTHPOTION
+			if(surface.getFrog().getCoins() >= 25) {
+				surface.getFrog().setHealth(surface.getFrog().getHealth()+HealthPotion.POTION_HEALTH);
+				if(surface.getFrog().getHealth() > 100) {
+					surface.getFrog().setHealth(100);
+				}
+				surface.getFrog().incrementCoins(-25);
+			}
 		} else if(button.equals(speedbutton)) {
 			//PURCHASE SPEEDPOTION
+			if(surface.getFrog().getCoins() >= 25) {
+				surface.getFrog().increaseSpeed(SpeedPotion.SPEED_BUFF);
+				surface.getFrog().incrementCoins(-25);
+			}
 		} else if(button.equals(strengthbutton)) {
 			//PURCHASE STRENGTHPOTION
+			if(surface.getFrog().getCoins() >= 50) {
+				surface.getFrog().increaseStrength(StrengthPotion.STRENGTH_BUFF);
+				surface.getFrog().incrementCoins(-50);
+			}
 		}
 		
 	}
@@ -94,4 +133,5 @@ public class ShopkeeperGUI extends Screen {
 		drawButtons(surface);
 		surface.popStyle();
 	}
+
 }

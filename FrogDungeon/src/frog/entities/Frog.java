@@ -291,6 +291,14 @@ public class Frog extends Entity{
 		return ranged;
 	}
 	
+	public void setMelee(MeleeWeapon melee) {
+		this.melee = melee;
+	}
+	
+	public void setProjectile(ProjectileWeapon ranged) {
+		this.ranged = ranged;
+	}
+	
 	public void loadImages(DrawingSurface surface) {
 		for(int i = 0; i < 10; i++)
 	    	idleRightImages.add(surface.loadImage("resources/player/idle/right/" + i + ".png"));

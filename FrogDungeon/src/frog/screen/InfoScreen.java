@@ -53,7 +53,7 @@ public class InfoScreen extends Screen {
 		surface.text("Left Click to Melee Attack", 305, 275);
 		surface.text("Right Click to Projectile Attack", 290, 300);
 		surface.text("Press E to Get Items as you Defeat Monsters", 240, 325);
-		surface.text("Use Coins to Buy New Weapons", 290, 415);
+		surface.text("Use Coins to Buy New Weapons at the ShopKeeper", 220, 415);
 		surface.text("Once you are ready, take on the final boss!", 250, 450);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
