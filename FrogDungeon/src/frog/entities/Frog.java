@@ -24,11 +24,11 @@ public class Frog extends Entity{
 	private ProjectileWeapon ranged;
 	private int coins;
 	
-	private ArrayList<PImage> idleImages, runningRightImages, runningLeftImages, damageImages;
+	private ArrayList<PImage> idleLeftImages, idleRightImages, runningRightImages, runningLeftImages, damageImages;
 	/**
 	 * This variable will either point to runningRightImages or runningLeftImages, depending on which way he should be facing.
 	 */
-	private ArrayList<PImage> runningImages;
+	private ArrayList<PImage> runningImages, idleImages;
 	private int state;
 	private int timeInState;
 	private static final int IDLE = 0;
@@ -43,11 +43,13 @@ public class Frog extends Entity{
 		melee = new Knife();
 	    ranged = new Bow();
 	    
-	    idleImages = new ArrayList<PImage>();
 	    runningRightImages = new ArrayList<PImage>();
 	    runningLeftImages = new ArrayList<PImage>();
+	    idleRightImages = new ArrayList<PImage>();
+	    idleLeftImages = new ArrayList<PImage>();
 	    damageImages = new ArrayList<PImage>();
 	    runningImages = runningRightImages;
+	    idleImages = idleRightImages;
 	    timeInState = 0;
 	    state = IDLE;
 	}
@@ -192,10 +194,13 @@ public class Frog extends Entity{
 			}
 		}*/
 		
-		if(vX > 0)
+		if(vX > 0) {
 			runningImages = runningRightImages;
-		else if(vX < 0)
+			idleImages = idleRightImages;
+		} else if(vX < 0) {
 			runningImages = runningLeftImages;
+			idleImages = idleLeftImages;
+		}
 		
 		if(vX != 0 || vY != 0) {
 			if(state != RUNNING) {
@@ -249,7 +254,7 @@ public class Frog extends Entity{
 	
 	public void draw(PApplet marker) {
 		marker.pushStyle();
-		marker.fill(0, 256, 0);
+		/*marker.fill(0, 256, 0);
 		marker.ellipse((float)(x+width/2), (float)(y+height/2), (float)width, (float)height);
 		marker.fill(0);
 		marker.textAlign(PApplet.CENTER);
@@ -257,7 +262,7 @@ public class Frog extends Entity{
 		
 		marker.noFill();
 		marker.stroke(255, 0, 0);
-		marker.rect((float) this.x, (float) this.y, (float) this.width, (float) this.height);
+		marker.rect((float) this.x, (float) this.y, (float) this.width, (float) this.height);*/
 		
 		PImage image = idleImages.get(0);
 		int frame = this.timeInState / 2;
@@ -270,8 +275,8 @@ public class Frog extends Entity{
 		timeInState++;
 		
 		marker.pushMatrix();
-		marker.translate((float) (x), (float) (y));
-		marker.scale((float) (width/image.width), (float) (width/image.height));
+		marker.translate((float) (x) - (float)(width/6), (float) (y - width/6 - 8));
+		marker.scale((float) ((width*4)/(3*image.width)), (float) ((height*4)/(3*image.height)));
 		marker.image(image, 0, 0);
 		marker.popMatrix();
 		
@@ -288,7 +293,9 @@ public class Frog extends Entity{
 	
 	public void loadImages(DrawingSurface surface) {
 		for(int i = 0; i < 10; i++)
-	    	idleImages.add(surface.loadImage("resources/player/idle/" + i + ".png"));
+	    	idleRightImages.add(surface.loadImage("resources/player/idle/right/" + i + ".png"));
+		for(int i = 0; i < 10; i++)
+	    	idleLeftImages.add(surface.loadImage("resources/player/idle/left/" + i + ".png"));
 		for(int i = 0; i < 12; i++)
 	    	runningRightImages.add(surface.loadImage("resources/player/run/right/" + i + ".png"));
 		for(int i = 0; i < 12; i++)
