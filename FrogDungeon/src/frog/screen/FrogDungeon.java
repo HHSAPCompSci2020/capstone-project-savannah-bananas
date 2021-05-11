@@ -34,6 +34,7 @@ public class FrogDungeon extends Screen {
 	private ArrayList<Item> items;
 	private int ticks;
 	private PImage brick;
+	private PImage frame;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -70,6 +71,7 @@ public class FrogDungeon extends Screen {
 		buttons.add(pauseButton);
 		
 		brick = surface.loadImage("resources/brick.png");
+		frame = surface.loadImage("resources/frame.png");
 		
 		//surface.image(brick, 0, 0, 4000, 4000);
 		//surface.image(brick, 0, 0, 50, 50);
@@ -188,9 +190,10 @@ public class FrogDungeon extends Screen {
 		surface.popMatrix();
 		
 		surface.fill(255);
-		surface.rect(20, 20, 150, 100);
+		surface.image(frame, -5, -10, 200, 150);
+		//surface.rect(20, 20, 150, 100);
 		surface.fill(0);
-		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 30, 50);
+		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 50, 45);
 		surface.fill(255);
 		surface.rect(200, 20, 200, 35);
 		surface.fill(256, 0, 0);
