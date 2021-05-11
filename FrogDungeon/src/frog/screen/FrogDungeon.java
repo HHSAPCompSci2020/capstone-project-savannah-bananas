@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import frog.util.Button;
 import frog.weapons.Projectile;
 import processing.core.PApplet;
+import processing.core.PImage;
 import frog.DrawingSurface;
 import frog.entities.Fly;
 import frog.entities.Frog;
@@ -32,6 +33,7 @@ public class FrogDungeon extends Screen {
 	private ArrayList<Wall> walls;
 	private ArrayList<Item> items;
 	private int ticks;
+	private PImage brick;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -49,8 +51,10 @@ public class FrogDungeon extends Screen {
 		player = new Frog(300, 300, 50, 50, 100);
 		player.loadImages(surface);
 		
-		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
+		shopKeep = new Shopkeeper(50, 50, 50, 50, 100);
+		//shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
 		//boss = new BossTile(0, 0);
+		
 		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
@@ -65,6 +69,11 @@ public class FrogDungeon extends Screen {
 		pauseButton.setButtonListener(this);
 		buttons.add(pauseButton);
 		
+		brick = surface.loadImage("resources/brick.png");
+		
+		//surface.image(brick, 0, 0, 4000, 4000);
+		//surface.image(brick, 0, 0, 50, 50);
+		
 		ticks = 0;
 		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
 	}
@@ -75,13 +84,17 @@ public class FrogDungeon extends Screen {
 	 * Draws everything
 	 */
 	public void draw() {
+		
+		
 
 		player.move(walls, surface);
+		//surface.image(brick, 0, 0);
 		
 		if (boss.isInsideTile(player.getX(), player.getY())) {
 			boss.changeScreen(surface);
 			player.moveTo(player.getX() + 50, player.getY() + 50);
 		}	
+		
 		
 		surface.pushMatrix();
 		surface.background(0);
@@ -93,6 +106,15 @@ public class FrogDungeon extends Screen {
 		surface.text("Game screen", 400, 300);
 		
 		surface.popStyle();
+		
+		
+		//for(int i = 0; i < surface.width; i+=1200) {
+			//for(int j = 0; j < surface.height; j+=1200) {
+				//if(i > player.getX()-400-1200 && i < player.getX() + player.getWidth() && j > player.getY() - 400 - 1200 && j < player.getY() + player.getHeight()) {
+					//surface.image(brick, i, j, 1200, 1200);
+				//}
+			//}
+		//}
 		
 		player.draw(surface);
 		shopKeep.draw(surface);
@@ -144,6 +166,11 @@ public class FrogDungeon extends Screen {
 			}
 		}
 		
+		//SHOPKEEPER
+		
+		if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int)(shopKeep.getX()), (int)(shopKeep.getY()), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+			shopKeep.changeScreen(surface);
+		}
 		
 		ArrayList<Projectile> p = player.getProjectile().getProjectiles();
 		if (p.size() > 0)

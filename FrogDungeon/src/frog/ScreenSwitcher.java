@@ -14,6 +14,7 @@ public interface ScreenSwitcher {
 	public final int PAUSE_SCREEN = 2;
 	public final int INFO_SCREEN = 3;
 	public final int BOSS_GUI = 4;
+	public final int SHOPKEEPER_GUI = 5;
 	
 	//Methods
 	/**

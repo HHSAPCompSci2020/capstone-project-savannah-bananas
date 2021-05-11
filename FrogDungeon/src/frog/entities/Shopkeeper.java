@@ -1,5 +1,6 @@
 package frog.entities;
 
+import frog.DrawingSurface;
 import processing.core.PApplet;
 
 public class Shopkeeper extends Entity{
@@ -14,4 +15,8 @@ public class Shopkeeper extends Entity{
 		
 	}
 
+	public void changeScreen(DrawingSurface surface) {
+		//System.out.println("yaya");
+		surface.switchScreen(surface.SHOPKEEPER_GUI);
+	}
 }
