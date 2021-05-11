@@ -12,10 +12,11 @@ public class Sorcerer extends Monster {
 	public static final double SORCERER_DAMAGE = 0.0;
 	public static final double SORCERER_RANGE = 0.0;
 	public static final double SORCERER_SPEED = 0.0;
+	public static final int SORCERER_COIN_VALUE = 15;
 	
 	//Constructors
 	public Sorcerer(double x, double y, double width, double height, double health) {
-		super(x, y, width, height, health, SORCERER_DAMAGE, SORCERER_RANGE, SORCERER_SPEED);
+		super(x, y, width, height, health, SORCERER_DAMAGE, SORCERER_RANGE, SORCERER_SPEED, SORCERER_COIN_VALUE);
 	}
 	
 	//Methods

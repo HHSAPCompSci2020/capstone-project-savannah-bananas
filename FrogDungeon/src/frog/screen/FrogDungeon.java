@@ -50,9 +50,8 @@ public class FrogDungeon extends Screen {
 		player.loadImages(surface);
 		
 		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
+		//boss = new BossTile(0, 0);
 		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
-		
-		System.out.println(boss.getX() + " " + boss.getY());
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new SpeedPotion(350, 500, 50, 50));
@@ -78,6 +77,11 @@ public class FrogDungeon extends Screen {
 	public void draw() {
 
 		player.move(walls, surface);
+		
+		if (boss.isInsideTile(player.getX(), player.getY())) {
+			boss.changeScreen(surface);
+			player.moveTo(player.getX() + 50, player.getY() + 50);
+		}	
 		
 		surface.pushMatrix();
 		surface.background(0);
@@ -135,7 +139,8 @@ public class FrogDungeon extends Screen {
 				if(monsters.get(i).getItem() != null) {
 					items.add(monsters.get(i).getItem());
 				}
-				monsters.remove(i);
+				player.incrementCoins(monsters.remove(i).getCoinValue());
+				
 			}
 		}
 		
@@ -158,7 +163,7 @@ public class FrogDungeon extends Screen {
 		surface.fill(255);
 		surface.rect(20, 20, 150, 100);
 		surface.fill(0);
-		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength(), 30, 50);
+		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 30, 50);
 		surface.fill(255);
 		surface.rect(200, 20, 200, 35);
 		surface.fill(256, 0, 0);
@@ -169,7 +174,6 @@ public class FrogDungeon extends Screen {
 			player.getMelee().draw(surface, 425, 20, 50, 50);
 		}
 		if(player.getProjectile() != null) {
-			//System.out.println("yaya");
 			player.getProjectile().draw(surface, 475, 20, 50, 50);
 		}
 		
@@ -183,6 +187,8 @@ public class FrogDungeon extends Screen {
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
+		
+	
 		
 		ticks++;
 	}

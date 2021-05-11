@@ -22,8 +22,13 @@ public class Frog extends Entity{
 	//Fields
 	private MeleeWeapon melee;
 	private ProjectileWeapon ranged;
+	private int coins;
 	
-	private ArrayList<PImage> idleImages, runningImages, damageImages;
+	private ArrayList<PImage> idleImages, runningRightImages, runningLeftImages, damageImages;
+	/**
+	 * This variable will either point to runningRightImages or runningLeftImages, depending on which way he should be facing.
+	 */
+	private ArrayList<PImage> runningImages;
 	private int state;
 	private int timeInState;
 	private static final int IDLE = 0;
@@ -39,8 +44,10 @@ public class Frog extends Entity{
 	    ranged = new Bow();
 	    
 	    idleImages = new ArrayList<PImage>();
-	    runningImages = new ArrayList<PImage>();
+	    runningRightImages = new ArrayList<PImage>();
+	    runningLeftImages = new ArrayList<PImage>();
 	    damageImages = new ArrayList<PImage>();
+	    runningImages = runningRightImages;
 	    timeInState = 0;
 	    state = IDLE;
 	}
@@ -185,6 +192,11 @@ public class Frog extends Entity{
 			}
 		}*/
 		
+		if(vX > 0)
+			runningImages = runningRightImages;
+		else if(vX < 0)
+			runningImages = runningLeftImages;
+		
 		if(vX != 0 || vY != 0) {
 			if(state != RUNNING) {
 				state = RUNNING;
@@ -278,9 +290,19 @@ public class Frog extends Entity{
 		for(int i = 0; i < 10; i++)
 	    	idleImages.add(surface.loadImage("resources/player/idle/" + i + ".png"));
 		for(int i = 0; i < 12; i++)
-	    	runningImages.add(surface.loadImage("resources/player/run/" + i + ".png"));
+	    	runningRightImages.add(surface.loadImage("resources/player/run/right/" + i + ".png"));
+		for(int i = 0; i < 12; i++)
+			runningLeftImages.add(surface.loadImage("resources/player/run/left/" + i + ".png"));
 		for(int i = 0; i < 7; i++)
 	    	damageImages.add(surface.loadImage("resources/player/hit/" + i + ".png"));
+	}
+
+	public int getCoins() {
+		return coins;
+	}
+	
+	public void incrementCoins(int amount) {
+		coins += amount;
 	}
 	
 }
