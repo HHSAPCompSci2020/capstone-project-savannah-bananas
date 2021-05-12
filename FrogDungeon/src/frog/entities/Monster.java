@@ -72,11 +72,13 @@ public abstract class Monster extends Entity {
 
         if(hyp != 0 && hyp < range) {
             double refAngle = Math.asin(changeY/hyp);
-            double cosAngle = Math.acos(changeX/hyp);
+            //double cosAngle = Math.acos(changeX/hyp);
 
-            if(cosAngle > Math.PI/2) {
-                refAngle = Math.PI - refAngle;
-            }
+            //if(cosAngle > Math.PI/2) {
+            //    refAngle = Math.PI - refAngle;
+            //}
+            if(changeX < 0)
+            	refAngle = Math.PI - refAngle;
 
             vX = (1.5 * Math.cos(refAngle));
             vY = -(1.5 * Math.sin(refAngle));

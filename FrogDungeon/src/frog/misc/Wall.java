@@ -234,4 +234,15 @@ public class Wall {
 	public double getY() {
 		return this.y;
 	}
+	
+	/**
+	 * Gets width
+	 */
+	public double getWidth() {
+		return this.width;
+	}
+	
+	public double getHeight() {
+		return this.height;
+	}
 }

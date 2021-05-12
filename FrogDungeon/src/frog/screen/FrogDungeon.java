@@ -125,9 +125,7 @@ public class FrogDungeon extends Screen {
 		boss.draw(surface);
 		
 		//WALLS DRAWING
-		for(Wall wall : walls) {
-			wall.draw(surface);
-		}
+		drawWalls();
 		
 		//ITEMS DRAWING
 		
@@ -363,7 +361,17 @@ public class FrogDungeon extends Screen {
 	 * Draws walls.
 	 */
 	public void drawWalls() {
-		
+		//draws the walls that are near the screen
+		int screenLeft = (int) (player.getX() - 400 + player.getWidth()/2);
+		int screenTop = (int) (player.getY() - 300 + player.getHeight()/2);
+		int screenRight = (int) (player.getX() + 400 + player.getWidth());
+		int screenBottom = (int) (player.getY() + 300 + player.getHeight());
+		for(Wall wall : walls) {
+			Point pixelCoords = Wall.wallCoordsToPixelCoords(wall.getX(), wall.getY());
+			pixelCoords.setLocation(pixelCoords.getX() - wall.getWidth()/2, pixelCoords.getY() - wall.getHeight()/2);
+			if(pixelCoords.x > screenLeft - wall.getWidth() && pixelCoords.x < screenRight && pixelCoords.y > screenTop - wall.getHeight() && pixelCoords.y < screenBottom)
+				wall.draw(surface);
+		}
 	}
 	
 	public void mousePressed() {
