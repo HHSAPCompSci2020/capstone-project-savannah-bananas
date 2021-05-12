@@ -111,9 +111,16 @@ public class Button {
 		this.width = width;
 		this.height = height;
 		this.radius = radius;
+		/*
 		this.mainColor = new Color(0, 255, 0); // neon green
 		this.hoveredColor = new Color(0, 180, 0); // darker green
 		this.pressedColor = new Color(255, 255, 255); // white
+		*/
+		
+		this.mainColor = new Color(139, 182, 47); // green
+		this.hoveredColor = new Color(72, 124, 56); // darker green
+		this.pressedColor = new Color(247, 229, 215); // beige	
+		
 		this.mainBorderColor = new Color(0, 0, 0); // black
 		this.hoveredBorderColor = new Color(0, 0, 0); // black
 		this.pressedBorderColor = new Color(0, 0, 0); // black

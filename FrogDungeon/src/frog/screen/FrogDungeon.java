@@ -34,7 +34,8 @@ public class FrogDungeon extends Screen {
 	private ArrayList<Item> items;
 	private int ticks;
 	private PImage brick;
-	private PImage frame;
+	private PImage frame1;
+	private PImage frame2;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -71,7 +72,8 @@ public class FrogDungeon extends Screen {
 		buttons.add(pauseButton);
 		
 		brick = surface.loadImage("resources/brick.png");
-		frame = surface.loadImage("resources/frame.png");
+		frame1 = surface.loadImage("resources/frame1.png");
+		frame2 = surface.loadImage("resources/frame2.png");
 		
 		//surface.image(brick, 0, 0, 4000, 4000);
 		//surface.image(brick, 0, 0, 50, 50);
@@ -190,21 +192,23 @@ public class FrogDungeon extends Screen {
 		surface.popMatrix();
 		
 		surface.fill(255);
-		surface.image(frame, -5, -10, 200, 150);
+		surface.image(frame1, -5, -10, 200, 150);
 		//surface.rect(20, 20, 150, 100);
 		surface.fill(0);
 		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 50, 45);
 		surface.fill(255);
-		surface.rect(200, 20, 200, 35);
+		surface.rect(200, 30, 200, 35);
 		surface.fill(228, 74, 74);
-		surface.rect(200, 20, (float)((player.getHealth()/100)*200), 35);
+		surface.rect(200, 30, (float)((player.getHealth()/100)*200), 35);
 		surface.fill(255);
-		surface.rect(425, 20, 100, 50);
+		//surface.rect(425, 20, 100, 50);
+		surface.image(frame2, 425, -10, 180, 150);
+		
 		if(player.getMelee() != null) {
-			player.getMelee().draw(surface, 425, 20, 50, 50);
+			player.getMelee().draw(surface, 450, 40, 50, 50);
 		}
 		if(player.getProjectile() != null) {
-			player.getProjectile().draw(surface, 475, 20, 50, 50);
+			player.getProjectile().draw(surface, 525, 40, 50, 50);
 		}
 		
 		//draws mini-map

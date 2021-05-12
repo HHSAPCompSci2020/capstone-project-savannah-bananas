@@ -55,6 +55,7 @@ public class InfoScreen extends Screen {
 		surface.text("Press E to Get Items as you Defeat Monsters", 240, 325);
 		surface.text("Use Coins to Buy New Weapons at the ShopKeeper", 220, 415);
 		surface.text("Once you are ready, take on the final boss!", 250, 450);
+		surface.textSize(13);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
