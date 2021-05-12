@@ -33,7 +33,7 @@ public class Fly extends Monster{
 		//marker.ellipse((float)x + (float)width/2, (float)y + (float)height/2, (float)width, (float)height);
 		
 		marker.noFill();
-		marker.stroke(255, 0, 0);
+		marker.stroke(228, 74, 74);
 		marker.rect((float) x, (float) y, (float) width, (float) height);
 		marker.popStyle();
 		
