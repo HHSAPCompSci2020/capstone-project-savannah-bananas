@@ -39,7 +39,7 @@ public class InfoScreen extends Screen {
 	
 	//Methods
 	public void draw() {
-		gorf = surface.loadImage("resources/gorf1.png");
+		gorf = surface.loadImage("resources/gorf.png");
 		potion1 = surface.loadImage("resources/healthpotion.png");
 		potion2 = surface.loadImage("resources/speedpotion.png");
 		potion3 = surface.loadImage("resources/strengthpotion.png");
@@ -59,7 +59,7 @@ public class InfoScreen extends Screen {
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
 		
-		surface.image(gorf, 335, 85);
+		surface.image(gorf, 325, 70, 150, 150);
 		surface.image(potion1, 280, 340, 50, 50);
 		surface.image(potion2, 370, 340, 50, 50);
 		surface.image(potion3, 460, 340, 50, 50);
