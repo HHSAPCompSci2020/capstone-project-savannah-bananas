@@ -13,7 +13,7 @@ public class MenuScreen extends Screen {
 	//Fields
 	private Button startButton;
 	private Button infoButton;
-	private PImage frog;
+	private PImage title;
 	
 	//Constructors
 	/**
@@ -25,12 +25,12 @@ public class MenuScreen extends Screen {
 		
 		//frog = new PImage();
 		
-		startButton = new Button(300, 250, 200, 150);
+		startButton = new Button(300, 375, 200, 50);
 		startButton.setText("Start");
 		startButton.setButtonListener(this);
 		buttons.add(startButton);
 		
-		infoButton = new Button(300, 400, 200, 150);
+		infoButton = new Button(300, 450, 200, 50);
 		infoButton.setText("How To Play");
 		infoButton.setButtonListener(this);
 		buttons.add(infoButton);
@@ -38,19 +38,19 @@ public class MenuScreen extends Screen {
 	}
 	
 	public void draw() {
-		if(frog == null)
-			frog = surface.loadImage("resources/frog.png");
+		if(title == null)
+			title = surface.loadImage("resources/title.png");
 
 		surface.background(0);
 		surface.pushStyle();
 		//surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 
-		surface.text("FROG DUNGEON", 350, 50);
+		//surface.text("FROG DUNGEON", 350, 50);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
 		
-		surface.image(frog, 335, 85);
+		surface.image(title, 100, 10);
 
 		surface.popStyle();
 	}
