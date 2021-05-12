@@ -196,7 +196,7 @@ public class FrogDungeon extends Screen {
 		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 50, 45);
 		surface.fill(255);
 		surface.rect(200, 20, 200, 35);
-		surface.fill(256, 0, 0);
+		surface.fill(228, 74, 74);
 		surface.rect(200, 20, (float)((player.getHealth()/100)*200), 35);
 		surface.fill(255);
 		surface.rect(425, 20, 100, 50);
