@@ -10,6 +10,11 @@ import frog.weapons.Pistol;
 import frog.weapons.Rifle;
 import frog.weapons.Sword;
 
+/**
+ * The GUI that shows up when you interact with the shopkeeper. Allows you to buy new items like different weapons or buffs.
+ * @author Jeremy Mills
+ *
+ */
 public class ShopkeeperGui extends Screen {
 	
 	private Button swordbutton;
