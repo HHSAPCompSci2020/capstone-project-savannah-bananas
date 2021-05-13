@@ -48,15 +48,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	private ArrayList<Screen> screens;
 	
-	
-	
-	
 	//Constructors
 	public DrawingSurface() {
 		
 	}
 	
 	public void setup() {
+		frameRate(60);
 		// adding all the screens, in order
 		screens = new ArrayList<Screen>();
 
@@ -81,20 +79,20 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(MENU_SCREEN);
 
 		keys = new ArrayList<Integer>();
+		
 	}
 	
 	
 	
 	//Methods
+	private long lastTime = 0;
 	public void draw() {
 		ratioX = (float) width / activeScreen.DRAWING_WIDTH;
 		ratioY = (float) height / activeScreen.DRAWING_HEIGHT;
-		
 		pushMatrix();
 		scale(ratioX, ratioY);
 		activeScreen.draw();
 		popMatrix();
-		
 		
 	}
 	
