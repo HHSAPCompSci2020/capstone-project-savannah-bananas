@@ -10,7 +10,7 @@ import frog.weapons.Pistol;
 import frog.weapons.Rifle;
 import frog.weapons.Sword;
 
-public class ShopkeeperGUI extends Screen {
+public class ShopkeeperGui extends Screen {
 	
 	private Button swordbutton;
 	private Button hammerbutton;
@@ -22,7 +22,7 @@ public class ShopkeeperGUI extends Screen {
 	private Button strengthbutton;
 
 
-	public ShopkeeperGUI(DrawingSurface surface) {
+	public ShopkeeperGui(DrawingSurface surface) {
 		super(surface);
 		
 		//SWORD BUTTON
