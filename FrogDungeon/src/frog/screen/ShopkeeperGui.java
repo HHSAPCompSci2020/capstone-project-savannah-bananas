@@ -73,6 +73,10 @@ public class ShopkeeperGui extends Screen {
 		
 	}
 
+	/**
+	 * Determines what actions to take if a button is pressed.
+	 * @param button, the button that is clicked.
+	 */
 	public void buttonPressed(Button button) {
 		if(button.equals(exit)) {
 			surface.switchScreen(surface.GAME_SCREEN);
@@ -125,6 +129,9 @@ public class ShopkeeperGui extends Screen {
 		
 	}
 
+	/**
+	 * Draws the GUI
+	 */
 	public void draw() {
 		surface.background(0);
 		surface.pushStyle();
