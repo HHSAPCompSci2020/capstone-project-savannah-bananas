@@ -8,7 +8,7 @@ import frog.DrawingSurface;
  * @author Mikaela Kwan
  *
  */
-public class BossGUI extends Screen {
+public class BossGui extends Screen {
 	
 	//Fields
 	private Button yesButton;
@@ -19,7 +19,7 @@ public class BossGUI extends Screen {
 	 * Constructs a new PauseScreen
 	 * @param surface The DrawingSurface that this PauseScreen exists inside of
 	 */
-	public BossGUI(DrawingSurface surface) {
+	public BossGui(DrawingSurface surface) {
 		super(surface);
 		
 		yesButton = new Button(300, 250, 200, 150);
