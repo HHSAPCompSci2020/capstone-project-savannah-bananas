@@ -64,6 +64,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 		FrogDungeon gameScreen = new FrogDungeon(this);
 		screens.add(gameScreen);
+		gameScreen.getFrog().setHealth(0);
 
 		PauseScreen pauseScreen = new PauseScreen(this);
 		screens.add(pauseScreen);
@@ -110,6 +111,15 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void keyReleased() {
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
+	}
+	
+	/**
+	 * This will replace the current instance of FrogDungeon (the Screen) with a new instance of FrogDungeon
+	 * @param screen
+	 */
+	public void resetGame() {
+		screens.set(GAME_SCREEN, new FrogDungeon(this));
+		
 	}
 	
 	/**
@@ -171,6 +181,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	@Override
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
+	}
+	
+	public Screen getScreen(int i) {
+		return screens.get(i);
 	}
 
 	public Frog getFrog() {

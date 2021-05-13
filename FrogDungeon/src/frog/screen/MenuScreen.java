@@ -2,6 +2,9 @@ package frog.screen;
 
 import frog.util.Button;
 import processing.core.PImage;
+
+import java.awt.Color;
+
 import frog.DrawingSurface;
 
 /**
@@ -13,7 +16,9 @@ public class MenuScreen extends Screen {
 	//Fields
 	private Button startButton;
 	private Button infoButton;
+	private Button resumeButton;
 	private PImage title;
+	boolean resumeIsValid;
 	
 	//Constructors
 	/**
@@ -22,6 +27,7 @@ public class MenuScreen extends Screen {
 	 */
 	public MenuScreen(DrawingSurface surface) {
 		super(surface);
+		resumeIsValid = false;
 		
 		//frog = new PImage();
 		
@@ -30,7 +36,12 @@ public class MenuScreen extends Screen {
 		startButton.setButtonListener(this);
 		buttons.add(startButton);
 		
-		infoButton = new Button(300, 450, 200, 50);
+		resumeButton = new Button(300, 450, 200, 50);
+		resumeButton.setText("Resume Game");
+		resumeButton.setButtonListener(this);
+		buttons.add(resumeButton);
+		
+		infoButton = new Button(300, 525, 200, 50);
 		infoButton.setText("How To Play");
 		infoButton.setButtonListener(this);
 		buttons.add(infoButton);
@@ -47,6 +58,17 @@ public class MenuScreen extends Screen {
 
 		//surface.text("FROG DUNGEON", 350, 50);
 		
+		resumeIsValid = ((FrogDungeon)surface.getScreen(DrawingSurface.GAME_SCREEN)).getFrog().getHealth() > 0;
+		if(!resumeIsValid) {
+			resumeButton.setMainColor(Color.LIGHT_GRAY);
+			resumeButton.setHoveredColor(Color.LIGHT_GRAY);
+			resumeButton.setPressedColor(Color.LIGHT_GRAY);
+		} else {
+			resumeButton.setMainColor(new Color(139, 182, 47));
+			resumeButton.setHoveredColor(new Color(72, 124, 56));
+			resumeButton.setPressedColor(new Color(247, 229, 215));
+		}
+		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
 		
@@ -58,10 +80,13 @@ public class MenuScreen extends Screen {
 	@Override
 	public void buttonPressed(Button button) {
 		if(button.equals(startButton)) {
+			surface.resetGame();
 			surface.switchScreen(surface.GAME_SCREEN);
 		}
 		else if(button.equals(infoButton)) {
 			surface.switchScreen(surface.INFO_SCREEN);
+		} else if(button.equals(resumeButton) && resumeIsValid) {
+			surface.switchScreen(surface.GAME_SCREEN);
 		}
 	}
 }
