@@ -85,7 +85,8 @@ PauseScreen
 FrogDungeon (DrawingSurface Equivalent)
 InfoScreen
 BossGui
-Shopkeepergui
+ShopkeeperGui
+GameOverScreen
 Wall (Wall that the Dungeon is generally made of) 
 BossTile
 Button
@@ -115,4 +116,4 @@ Images:
 Frog Sprite: https://opengameart.org/content/pixel-adventure-2
 Weapon & Item Sprites https://www.pinterest.co.uk/pin/538250592959169501/
 Title Screen, Frame, Weapon artwork - Mikaela
-
+Game Over: https://www.seekpng.com/ipng/u2w7r5o0o0q8i1e6_solarrion-game-over-sign-ups-game-over-sign
