@@ -6,7 +6,7 @@ import processing.core.PApplet;
 import frog.ScreenSwitcher;
 import frog.entities.Frog;
 import frog.entities.Shopkeeper;
-import frog.screen.BossGui;
+import frog.screen.BossGUI;
 import frog.screen.FrogDungeon;
 import frog.screen.InfoScreen;
 import frog.screen.MenuScreen;
@@ -72,7 +72,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		InfoScreen infoScreen = new InfoScreen(this);
 		screens.add(infoScreen);
 		
-		BossGui bossGui = new BossGui(this);
+		BossGUI bossGui = new BossGUI(this);
 		screens.add(bossGui);
 		
 		ShopkeeperGui shopkeepGUI = new ShopkeeperGui(this);
