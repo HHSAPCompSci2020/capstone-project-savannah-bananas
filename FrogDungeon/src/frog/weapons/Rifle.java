@@ -13,9 +13,9 @@ import processing.core.PImage;
 public class Rifle extends ProjectileWeapon{
 	
 	//Fields
-	public static final double RIFLE_DAMAGE = 0.0;
-	public static final double RIFLE_RANGE = 0.0;
-	public static final double RIFLE_SPEED = 0.0;
+	public static final double RIFLE_DAMAGE = 25.0;
+	public static final double RIFLE_RANGE = 500.0;
+	public static final double RIFLE_SPEED = 15.0;
 	
 	//Constructors
 	public Rifle() {

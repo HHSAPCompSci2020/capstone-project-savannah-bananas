@@ -19,7 +19,7 @@ public class Wall {
 	/**
 	 * Color of default walls.
 	 */
-	public static final Color WALL_COLOR = new Color(0, 96, 255);
+	public static final Color WALL_COLOR = new Color(133, 132, 141);
 	
 	/**
 	 * The type field denotes which type of wall this is.
@@ -233,5 +233,16 @@ public class Wall {
 	 */
 	public double getY() {
 		return this.y;
+	}
+	
+	/**
+	 * Gets width
+	 */
+	public double getWidth() {
+		return this.width;
+	}
+	
+	public double getHeight() {
+		return this.height;
 	}
 }

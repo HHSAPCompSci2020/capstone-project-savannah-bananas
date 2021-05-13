@@ -12,9 +12,9 @@ import processing.core.PImage;
 public class Pistol extends ProjectileWeapon{
 
 	//Fields
-	public static final double PISTOL_DAMAGE = 0.0;
-	public static final double PISTOL_RANGE = 0.0;
-	public static final double PISTOL_SPEED = 0.0;
+	public static final double PISTOL_DAMAGE = 15.0;
+	public static final double PISTOL_RANGE = 400.0;
+	public static final double PISTOL_SPEED = 6;
 	
 	//Constructors
 	public Pistol() {

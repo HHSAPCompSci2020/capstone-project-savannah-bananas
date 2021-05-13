@@ -72,11 +72,13 @@ public abstract class Monster extends Entity {
 
         if(hyp != 0 && hyp < range) {
             double refAngle = Math.asin(changeY/hyp);
-            double cosAngle = Math.acos(changeX/hyp);
+            //double cosAngle = Math.acos(changeX/hyp);
 
-            if(cosAngle > Math.PI/2) {
-                refAngle = Math.PI - refAngle;
-            }
+            //if(cosAngle > Math.PI/2) {
+            //    refAngle = Math.PI - refAngle;
+            //}
+            if(changeX < 0)
+            	refAngle = Math.PI - refAngle;
 
             vX = (1.5 * Math.cos(refAngle));
             vY = -(1.5 * Math.sin(refAngle));
@@ -158,7 +160,7 @@ public abstract class Monster extends Entity {
 	
 	public void draw(PApplet marker) {
 		marker.pushStyle();
-		marker.fill(255, 0, 0);
+		marker.fill(228, 74, 74);
 		int maxHealthBarWidth = 80;
 		int width = (int) ( maxHealthBarWidth * (health/maxHealth) );
 		marker.rect((float) (x + this.width/2 - maxHealthBarWidth/2), (int) (y + height), width, 10, 3);

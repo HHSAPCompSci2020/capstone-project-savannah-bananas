@@ -11,9 +11,9 @@ import processing.core.PImage;
 public class Bow extends ProjectileWeapon {
 	
 	//Fields
-	public static final double BOW_DAMAGE = 10.0;
+	public static final double BOW_DAMAGE = 7.0;
 	public static final double BOW_RANGE = 300.0;
-	public static final double BOW_SPEED = 6;
+	public static final double BOW_SPEED = 3;
 	
 	//Constructors
 	public Bow() {

@@ -20,8 +20,9 @@ public class SpeedPotion extends Item{
 
 	//Methods
 	public void draw(PApplet marker) {
-		if(image == null)
+		if(image == null) {
 			image = marker.loadImage("resources/speedpotion.png");
+		}
 		marker.image(image, (float)x, (float)y, (float)width, (float)height);
 	}
 
