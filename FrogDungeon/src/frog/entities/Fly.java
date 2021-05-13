@@ -15,18 +15,19 @@ public class Fly extends Monster{
 	public static final double FLY_RANGE = 500.0;
 	public static final double FLY_SPEED = 10.0;
 	public static final int FLY_COIN_VALUE = 5;
+	private PImage flyImage;
 	
 	//Constructors
-	public Fly(double x, double y, double width, double height, double health) {
+	public Fly(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health, FLY_DAMAGE, FLY_RANGE, FLY_SPEED, FLY_COIN_VALUE);
+		flyImage = marker.loadImage("resources/fly.png");
 	}
 	
 	//Methods
 	public void draw(PApplet marker) {
 		marker.pushStyle();
 		
-		PImage image = marker.loadImage("resources/fly.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(flyImage, (float)x, (float)y, (float)width, (float)height);
 		
 		
 		//marker.fill(0, 0, 256);

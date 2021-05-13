@@ -13,7 +13,7 @@ import processing.core.PImage;
 
 /**
  * Represents a frog that extends Entity. Contains one melee and one projectile weapon.
- * @author Jeremy Mills
+ * @author Jeremy Mills, Justin Hwang
  *
  */
 
@@ -36,12 +36,12 @@ public class Frog extends Entity{
 	private static final int DAMAGE = 2;
 	
 	//Constructors
-	public Frog(double x, double y, double width, double height, double health) {
+	public Frog(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health);
 		speedMultiplyer = 1;
 		strengthMultiplyer = 1;
-		melee = new Knife();
-	    ranged = new Bow();
+		melee = new Knife(marker);
+	    ranged = new Bow(marker);
 	    
 	    runningRightImages = new ArrayList<PImage>();
 	    runningLeftImages = new ArrayList<PImage>();

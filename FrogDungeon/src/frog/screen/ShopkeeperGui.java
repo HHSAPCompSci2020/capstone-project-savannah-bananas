@@ -10,6 +10,11 @@ import frog.weapons.Pistol;
 import frog.weapons.Rifle;
 import frog.weapons.Sword;
 
+/**
+ * The GUI that shows up when you interact with the shopkeeper. Allows you to buy new items like different weapons or buffs.
+ * @author Jeremy Mills
+ *
+ */
 public class ShopkeeperGui extends Screen {
 	
 	private Button swordbutton;
@@ -68,31 +73,35 @@ public class ShopkeeperGui extends Screen {
 		
 	}
 
+	/**
+	 * Determines what actions to take if a button is pressed.
+	 * @param button, the button that is clicked.
+	 */
 	public void buttonPressed(Button button) {
 		if(button.equals(exit)) {
 			surface.switchScreen(surface.GAME_SCREEN);
 		} else if(button.equals(swordbutton)) {
 			//PURCHASE SWORD
 			if(surface.getFrog().getCoins() >= 50) {
-				surface.getFrog().setMelee(new Sword());
+				surface.getFrog().setMelee(new Sword(surface));
 				surface.getFrog().incrementCoins(-50);
 			}
 		} else if(button.equals(hammerbutton)) {
 			//PURCHASE HAMMER
 			if(surface.getFrog().getCoins() >= 75) {
-				surface.getFrog().setMelee(new Hammer());
+				surface.getFrog().setMelee(new Hammer(surface));
 				surface.getFrog().incrementCoins(-75);
 			}
 		} else if(button.equals(pistolbutton)) {
 			//PURCHASE PISTOL
 			if(surface.getFrog().getCoins() >= 75) {
-				surface.getFrog().setProjectile(new Pistol());
+				surface.getFrog().setProjectile(new Pistol(surface));
 				surface.getFrog().incrementCoins(-75);
 			}
 		} else if(button.equals(riflebutton)) {
 			//PURCHASE RIFLE
 			if(surface.getFrog().getCoins() >= 100) {
-				surface.getFrog().setProjectile(new Rifle());
+				surface.getFrog().setProjectile(new Rifle(surface));
 				surface.getFrog().incrementCoins(-100);
 			}
 		} else if(button.equals(healthbutton)) {
@@ -120,6 +129,9 @@ public class ShopkeeperGui extends Screen {
 		
 	}
 
+	/**
+	 * Draws the GUI
+	 */
 	public void draw() {
 		surface.background(0);
 		surface.pushStyle();

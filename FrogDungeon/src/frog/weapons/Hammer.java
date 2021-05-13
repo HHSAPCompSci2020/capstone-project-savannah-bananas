@@ -12,10 +12,12 @@ public class Hammer extends MeleeWeapon{
 
 	//Fields
 	public static final double HAMMER_DAMAGE = 0.0;
+	private PImage hammerImage;
 	
 	//Constructors
-	public Hammer() {
+	public Hammer(PApplet marker) {
 		super(HAMMER_DAMAGE);
+		hammerImage = marker.loadImage("resources/hammer.png");
 	}
 	
 	//Methods
@@ -24,7 +26,6 @@ public class Hammer extends MeleeWeapon{
 	 * @param marker, the PApplet to draw the Hammer on. 
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		PImage image = marker.loadImage("resources/hammer.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(hammerImage, (float)x, (float)y, (float)width, (float)height);
 	}
 }

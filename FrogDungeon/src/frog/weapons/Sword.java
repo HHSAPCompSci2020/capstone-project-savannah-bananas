@@ -12,10 +12,12 @@ public class Sword extends MeleeWeapon{
 
 	//Fields
 	public static final double SWORD_DAMAGE = 0.0;
+	private PImage swordImage;
 	
 	//Constructors
-	public Sword() {
+	public Sword(PApplet marker) {
 		super(SWORD_DAMAGE);
+		swordImage = marker.loadImage("resources/sword.png");
 	}
 	
 	//Methods
@@ -24,7 +26,6 @@ public class Sword extends MeleeWeapon{
 	 * @param marker, the PApplet to draw the Sword on. 
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		PImage image = marker.loadImage("resources/sword.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(swordImage, (float)x, (float)y, (float)width, (float)height);
 	}
 }
