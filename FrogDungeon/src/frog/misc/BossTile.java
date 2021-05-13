@@ -3,6 +3,11 @@ package frog.misc;
 import frog.DrawingSurface;
 import processing.core.PApplet;
 
+/**
+ * Represents the Boss Tile, where if you interact with it, it asks you if you want to go to the boss room.
+ * @author Jeremy Mills
+ *
+ */
 public class BossTile {
 
 	//Fields

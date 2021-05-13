@@ -13,7 +13,7 @@ import processing.core.PImage;
 
 /**
  * Represents a frog that extends Entity. Contains one melee and one projectile weapon.
- * @author Jeremy Mills
+ * @author Jeremy Mills, Justin Hwang
  *
  */
 
