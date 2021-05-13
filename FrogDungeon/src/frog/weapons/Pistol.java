@@ -15,10 +15,12 @@ public class Pistol extends ProjectileWeapon{
 	public static final double PISTOL_DAMAGE = 15.0;
 	public static final double PISTOL_RANGE = 400.0;
 	public static final double PISTOL_SPEED = 6;
+	private PImage pistolImage;
 	
 	//Constructors
-	public Pistol() {
+	public Pistol(PApplet marker) {
 		super(PISTOL_DAMAGE, PISTOL_RANGE, PISTOL_SPEED);
+		pistolImage = marker.loadImage("resources/pistol.png");
 	}
 	
 	//Methods
@@ -27,8 +29,7 @@ public class Pistol extends ProjectileWeapon{
 	 * @param draw, the PApplet to draw the pistol on.
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		PImage image = marker.loadImage("resources/pistol.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(pistolImage, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	/**

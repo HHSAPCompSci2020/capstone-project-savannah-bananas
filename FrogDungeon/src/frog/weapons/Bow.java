@@ -14,10 +14,12 @@ public class Bow extends ProjectileWeapon {
 	public static final double BOW_DAMAGE = 7.0;
 	public static final double BOW_RANGE = 300.0;
 	public static final double BOW_SPEED = 3;
+	private PImage bowImage;
 	
 	//Constructors
-	public Bow() {
+	public Bow(PApplet marker) {
 		super(BOW_DAMAGE, BOW_RANGE, BOW_SPEED);
+		bowImage = marker.loadImage("resources/bow.png");
 	}
 		
 	//Methods
@@ -26,8 +28,7 @@ public class Bow extends ProjectileWeapon {
 	 * @param draw, the PApplet to draw the bow on.
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		PImage image = marker.loadImage("resources/bow.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(bowImage, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	/**

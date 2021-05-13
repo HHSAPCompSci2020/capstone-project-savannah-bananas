@@ -16,10 +16,12 @@ public class Rifle extends ProjectileWeapon{
 	public static final double RIFLE_DAMAGE = 25.0;
 	public static final double RIFLE_RANGE = 500.0;
 	public static final double RIFLE_SPEED = 15.0;
+	private PImage rifleImage;
 	
 	//Constructors
-	public Rifle() {
+	public Rifle(PApplet marker) {
 		super(RIFLE_DAMAGE, RIFLE_RANGE, RIFLE_SPEED);
+		rifleImage = marker.loadImage("resources/rifle.png");
 	}
 	
 	//Methods
@@ -28,8 +30,7 @@ public class Rifle extends ProjectileWeapon{
 	 * @param draw, the PApplet to draw the rifle on.
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		PImage image = marker.loadImage("resources/rifle.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(rifleImage, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	/**

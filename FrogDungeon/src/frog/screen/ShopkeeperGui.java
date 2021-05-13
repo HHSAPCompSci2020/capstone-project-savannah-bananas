@@ -83,25 +83,25 @@ public class ShopkeeperGui extends Screen {
 		} else if(button.equals(swordbutton)) {
 			//PURCHASE SWORD
 			if(surface.getFrog().getCoins() >= 50) {
-				surface.getFrog().setMelee(new Sword());
+				surface.getFrog().setMelee(new Sword(surface));
 				surface.getFrog().incrementCoins(-50);
 			}
 		} else if(button.equals(hammerbutton)) {
 			//PURCHASE HAMMER
 			if(surface.getFrog().getCoins() >= 75) {
-				surface.getFrog().setMelee(new Hammer());
+				surface.getFrog().setMelee(new Hammer(surface));
 				surface.getFrog().incrementCoins(-75);
 			}
 		} else if(button.equals(pistolbutton)) {
 			//PURCHASE PISTOL
 			if(surface.getFrog().getCoins() >= 75) {
-				surface.getFrog().setProjectile(new Pistol());
+				surface.getFrog().setProjectile(new Pistol(surface));
 				surface.getFrog().incrementCoins(-75);
 			}
 		} else if(button.equals(riflebutton)) {
 			//PURCHASE RIFLE
 			if(surface.getFrog().getCoins() >= 100) {
-				surface.getFrog().setProjectile(new Rifle());
+				surface.getFrog().setProjectile(new Rifle(surface));
 				surface.getFrog().incrementCoins(-100);
 			}
 		} else if(button.equals(healthbutton)) {

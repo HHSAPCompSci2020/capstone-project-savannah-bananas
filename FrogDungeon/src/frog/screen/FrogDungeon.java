@@ -50,7 +50,7 @@ public class FrogDungeon extends Screen {
 		
 		generateMaze(); //adds all the walls
 		
-		player = new Frog(300, 300, 50, 50, 100);
+		player = new Frog(300, 300, 50, 50, 100, surface);
 		player.loadImages(surface);
 		
 		shopKeep = new Shopkeeper(50, 50, 50, 50, 100);
@@ -64,14 +64,14 @@ public class FrogDungeon extends Screen {
 		items.add(new StrengthPotion(500, 350, 50, 50));
 		
 		monsters = new ArrayList<Monster>();
-		monsters.add(new Fly(100, 300, 50, 50, 50));
+		monsters.add(new Fly(100, 300, 50, 50, 50, surface));
 		
 		pauseButton = new Button(620, 20, 150, 100);
 		pauseButton.setText("Pause Game");
 		pauseButton.setButtonListener(this);
 		buttons.add(pauseButton);
 		
-		brick = surface.loadImage("resources/brick.png");
+		//brick = surface.loadImage("resources/brick.png");
 		frame1 = surface.loadImage("resources/frame1.png");
 		frame2 = surface.loadImage("resources/frame2.png");
 		

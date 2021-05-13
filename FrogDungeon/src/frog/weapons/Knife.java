@@ -12,10 +12,12 @@ public class Knife extends MeleeWeapon{
 
 	//Fields
 	public static final double KNIFE_DAMAGE = 25;
+	private PImage knifeImage;
 	
 	//Constructors
-	public Knife() {
+	public Knife(PApplet marker) {
 		super(KNIFE_DAMAGE);
+		knifeImage = marker.loadImage("resources/knife.png");
 	}
 	
 	//Methods
@@ -24,8 +26,7 @@ public class Knife extends MeleeWeapon{
 	 * @param marker, the PApplet to draw the Knife on. 
 	 */
 	public void draw(PApplet marker, double x, double y, double width, double height) {
-		PImage image = marker.loadImage("resources/knife.png");
-		marker.image(image, (float)x, (float)y, (float)width, (float)height);
+		marker.image(knifeImage, (float)x, (float)y, (float)width, (float)height);
 	}
 	
 	
