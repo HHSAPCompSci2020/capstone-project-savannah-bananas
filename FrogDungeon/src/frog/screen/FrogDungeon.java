@@ -224,7 +224,8 @@ public class FrogDungeon extends Screen {
 		drawButtons(surface);
 		
 	
-		
+		if(player.getHealth() <= 0)
+			surface.switchScreen(DrawingSurface.GAME_OVER_SCREEN);
 		ticks++;
 	}
 	
