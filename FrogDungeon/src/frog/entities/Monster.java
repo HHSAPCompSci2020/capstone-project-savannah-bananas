@@ -31,7 +31,7 @@ public abstract class Monster extends Entity {
 		this.coinValue = coinValue;
 		
 		int i = (int)(Math.random()*10);
-		
+		//System.out.println(i);
 		if(i == 1) {
 			dropItem = new HealthPotion(this.x, this.y, 50, 50);
 		}
@@ -44,6 +44,7 @@ public abstract class Monster extends Entity {
 		else {
 			dropItem = null;
 		}
+		//System.out.println(dropItem);
 		
 	}
 		
@@ -57,7 +58,7 @@ public abstract class Monster extends Entity {
 	}
 	
 	//Moves towards the player
-	public void move(ArrayList<Wall> walls, FrogDungeon game) {
+	public void move(ArrayList<Wall> walls, ArrayList<Rectangle> rectangles, FrogDungeon game) {
 	   int targetX = (int)game.getFrog().getX();
        int targetY = (int)game.getFrog().getY();
 
@@ -82,10 +83,6 @@ public abstract class Monster extends Entity {
 
             vX = (1.5 * Math.cos(refAngle));
             vY = -(1.5 * Math.sin(refAngle));
-            if(dropItem != null) {
-            	dropItem.setX(dropItem.getX() + (speed * Math.cos(refAngle)));
-            	dropItem.setY(dropItem.getY() - (speed * Math.sin(refAngle)));
-            }
         }
 
         
@@ -96,6 +93,7 @@ public abstract class Monster extends Entity {
 		for(Wall wall : walls)
 			wallRectangles.addAll(wall.getRectangles());
 		
+		wallRectangles.addAll(rectangles);
 		super.move();
 		
 		//saves some values for later use
@@ -144,7 +142,10 @@ public abstract class Monster extends Entity {
 			super.moveBy(0, 0 - shiftY);
 			vY = 0.0;
 		}
-		
+		if(dropItem != null) {
+        	dropItem.setX(this.x);
+        	dropItem.setY(this.y);
+        }
 		//System.out.println(vX + " " + vY);
 	}
 	
