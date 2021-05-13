@@ -16,7 +16,8 @@ echo d | xcopy /E /y processing ..\processing
 cd ..
 rmdir .\libs /s /q
 
-jar cvfe ..\dist\%fileName% %mainClass% %package% processing %resources%
+rem jar cvfe ..\dist\%fileName% %mainClass% %package% processing %resources%
+jar cvfe ..\%fileName% %mainClass% %package% processing %resources%
 
 rmdir processing /s /q
 

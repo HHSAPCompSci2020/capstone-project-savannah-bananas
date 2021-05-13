@@ -8,6 +8,7 @@ import frog.entities.Frog;
 import frog.entities.Shopkeeper;
 import frog.screen.BossGui;
 import frog.screen.FrogDungeon;
+import frog.screen.GameOverScreen;
 import frog.screen.InfoScreen;
 import frog.screen.MenuScreen;
 import frog.screen.PauseScreen;
@@ -48,15 +49,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	private ArrayList<Screen> screens;
 	
-	
-	
-	
 	//Constructors
 	public DrawingSurface() {
 		
 	}
 	
 	public void setup() {
+		frameRate(60);
 		// adding all the screens, in order
 		screens = new ArrayList<Screen>();
 
@@ -65,6 +64,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 		FrogDungeon gameScreen = new FrogDungeon(this);
 		screens.add(gameScreen);
+		gameScreen.getFrog().setHealth(0);
 
 		PauseScreen pauseScreen = new PauseScreen(this);
 		screens.add(pauseScreen);
@@ -77,24 +77,30 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		ShopkeeperGui shopkeepGUI = new ShopkeeperGui(this);
 		screens.add(shopkeepGUI);
+		
+		GameOverScreen gameOverScreen = new GameOverScreen(this);
+		screens.add(gameOverScreen);
 		//setting current active screen to be the Main Men
 		activeScreen = screens.get(MENU_SCREEN);
 
 		keys = new ArrayList<Integer>();
+		
+
+		surface.setResizable(false);
+		
 	}
 	
 	
 	
 	//Methods
+	private long lastTime = 0;
 	public void draw() {
 		ratioX = (float) width / activeScreen.DRAWING_WIDTH;
 		ratioY = (float) height / activeScreen.DRAWING_HEIGHT;
-		
 		pushMatrix();
 		scale(ratioX, ratioY);
 		activeScreen.draw();
 		popMatrix();
-		
 		
 	}
 	
@@ -105,6 +111,15 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void keyReleased() {
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
+	}
+	
+	/**
+	 * This will replace the current instance of FrogDungeon (the Screen) with a new instance of FrogDungeon
+	 * @param screen
+	 */
+	public void resetGame() {
+		screens.set(GAME_SCREEN, new FrogDungeon(this));
+		
 	}
 	
 	/**
@@ -166,6 +181,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	@Override
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
+	}
+	
+	public Screen getScreen(int i) {
+		return screens.get(i);
 	}
 
 	public Frog getFrog() {

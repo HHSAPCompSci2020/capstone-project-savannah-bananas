@@ -81,27 +81,27 @@ public class Frog extends Entity{
 		
 		if (surface.isPressed(KeyEvent.VK_W)) {
 			if(vY > (0-maxSpeed/2))
-				vY -= maxSpeed/6;
+				vY -= maxSpeed/24;
 			else
-				vY -= (maxSpeed + vY)/6;
+				vY -= (maxSpeed + vY)/24;
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
 			if(vX > (0-maxSpeed/2))
-				vX -= maxSpeed/6;
+				vX -= maxSpeed/24;
 			else
-				vX -= (maxSpeed + vX)/6;
+				vX -= (maxSpeed + vX)/24;
 		}
 		if (surface.isPressed(KeyEvent.VK_S)) {
 			if(vY < (maxSpeed/2))
-				vY += maxSpeed/6;
+				vY += maxSpeed/24;
 			else
-				vY += (maxSpeed - vY)/6;
+				vY += (maxSpeed - vY)/24;
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
 			if(vX < (maxSpeed/2))
-				vX += maxSpeed/6;
+				vX += maxSpeed/24;
 			else
-				vX += (maxSpeed - vX)/6;
+				vX += (maxSpeed - vX)/24;
 		}
 		
 

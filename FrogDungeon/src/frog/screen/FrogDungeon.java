@@ -39,6 +39,7 @@ public class FrogDungeon extends Screen {
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
+	private long lastTimeInMillis = 0;
 	
 	//Constructors
 	/**
@@ -104,12 +105,6 @@ public class FrogDungeon extends Screen {
 		surface.background(0);
 		surface.translate(0 - (float) player.getX() - (float) player.getWidth()/2 + 400, 0 - (float) player.getY() - (float) player.getHeight()/2 + 300); 
 		
-		surface.pushStyle();
-		surface.textAlign(PApplet.CENTER, PApplet.CENTER);
-		surface.fill(256, 256, 256);
-		surface.text("Game screen", 400, 300);
-		
-		surface.popStyle();
 		
 		
 		//for(int i = 0; i < surface.width; i+=1200) {
@@ -128,16 +123,19 @@ public class FrogDungeon extends Screen {
 		drawWalls();
 		
 		//ITEMS DRAWING
-		
+
+		int screenLeft = (int) (player.getX() - 400 + player.getWidth()/2);
+		int screenTop = (int) (player.getY() - 300 + player.getHeight()/2);
+		int screenRight = (int) (player.getX() + 400 + player.getWidth());
+		int screenBottom = (int) (player.getY() + 300 + player.getHeight());
 		for(int i = 0; i < items.size(); i++) {
 			Rectangle hb = new Rectangle((int)(items.get(i).getX()), (int)(items.get(i).getY()), (int)(items.get(i).getWidth()), (int)(items.get(i).getHeight()));
 			if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(hb)) {
 				items.get(i).doAction(this);
 				items.remove(i);
 				i--;
-			}
-			else {
-				items.get(i).draw(surface);
+			} else if(hb.x > screenLeft - hb.width && hb.x < screenRight && hb.y > screenTop - hb.height && hb.y < screenBottom){
+					items.get(i).draw(surface);
 			}
 				
 		}
@@ -212,16 +210,22 @@ public class FrogDungeon extends Screen {
 		//draws mini-map
 		surface.fill(100);
 		surface.stroke(255);
-		surface.rect(10, 490, 100, 100, 5);
+		surface.rect(5, 485, 110, 110, 5);
 		surface.fill(255);
 		surface.noStroke();
 		surface.ellipse((float) (10 + 100*player.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)), (float) (490 + 100*player.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)), 5, 5);
+		
+		//FPS
+		surface.fill(255);
+		surface.text("FPS: " + 1000/(System.currentTimeMillis() - lastTimeInMillis) + "", 750, 580);
+		lastTimeInMillis = System.currentTimeMillis();
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
 		
 	
-		
+		if(player.getHealth() <= 0)
+			surface.switchScreen(DrawingSurface.GAME_OVER_SCREEN);
 		ticks++;
 	}
 	
