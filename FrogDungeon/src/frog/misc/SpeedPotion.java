@@ -28,7 +28,9 @@ public class SpeedPotion extends Item{
 
 	public void doAction(FrogDungeon x) {
 		x.getFrog().increaseSpeed(SPEED_BUFF);
-		
+		if(x.getFrog().getSpeed() > 1.5) {
+			x.getFrog().increaseSpeed(1.5-x.getFrog().getSpeed());
+		}
 	}
 
 }

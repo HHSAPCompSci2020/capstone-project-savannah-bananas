@@ -27,6 +27,9 @@ public class StrengthPotion extends Item{
 	
 	public void doAction(FrogDungeon x) {
 		x.getFrog().increaseStrength(STRENGTH_BUFF);
+		if(x.getFrog().getStrength() > 2) {
+			x.getFrog().increaseStrength(2-x.getFrog().getStrength());
+		}
 	}
 
 }

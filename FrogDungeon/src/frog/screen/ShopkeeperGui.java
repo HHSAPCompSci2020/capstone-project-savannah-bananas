@@ -106,7 +106,7 @@ public class ShopkeeperGui extends Screen {
 			}
 		} else if(button.equals(healthbutton)) {
 			//PURCHASE HEALTHPOTION
-			if(surface.getFrog().getCoins() >= 25) {
+			if(surface.getFrog().getCoins() >= 25 && surface.getFrog().getHealth() < 100) {
 				surface.getFrog().setHealth(surface.getFrog().getHealth()+HealthPotion.POTION_HEALTH);
 				if(surface.getFrog().getHealth() > 100) {
 					surface.getFrog().setHealth(100);
@@ -115,14 +115,20 @@ public class ShopkeeperGui extends Screen {
 			}
 		} else if(button.equals(speedbutton)) {
 			//PURCHASE SPEEDPOTION
-			if(surface.getFrog().getCoins() >= 25) {
+			if(surface.getFrog().getCoins() >= 25 && surface.getFrog().getSpeed() < 1.5) {
 				surface.getFrog().increaseSpeed(SpeedPotion.SPEED_BUFF);
+				if(surface.getFrog().getSpeed() > 1.5) {
+					surface.getFrog().increaseSpeed(1.5-surface.getFrog().getSpeed());
+				}
 				surface.getFrog().incrementCoins(-25);
 			}
 		} else if(button.equals(strengthbutton)) {
 			//PURCHASE STRENGTHPOTION
-			if(surface.getFrog().getCoins() >= 50) {
+			if(surface.getFrog().getCoins() >= 50 && surface.getFrog().getStrength() < 2) {
 				surface.getFrog().increaseStrength(StrengthPotion.STRENGTH_BUFF);
+				if(surface.getFrog().getStrength() > 2) {
+					surface.getFrog().increaseStrength(2-surface.getFrog().getStrength());
+				}
 				surface.getFrog().incrementCoins(-50);
 			}
 		}

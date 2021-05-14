@@ -78,6 +78,31 @@ public class FrogDungeon extends Screen {
 		frame2 = surface.loadImage("resources/frame2.png");
 		floor = surface.loadImage("resources/floor.png"); //MAKE SURE THAT FLOOR TILE IS 400x400, I DO NOT RESCALE IT
 		
+		
+		for(int i = 0; i < MAZE_SIZE; i++) {
+			for(int j = 0; j < MAZE_SIZE; j++) {
+				
+				boolean isInCorner = (i>=0 && i<=2 && j>=0 && j<=2);
+				
+				if(!isInCorner) {
+					boolean willHaveMonsters = ((int)(Math.random()*2) == 0);
+					
+					if(willHaveMonsters) {
+						int numMonsters = (int)(Math.random()*5+3);
+						for(int k = 0; k < numMonsters; k++) {
+							int topLeftX = i*400;
+							int topLeftY = j*400;
+							
+							int randomX = (int)(Math.random()*300 + 50);
+							int randomY = (int)(Math.random()*300 + 50);
+							
+							monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
+						}
+					}
+				}
+			}
+		}
+		
 		//surface.image(brick, 0, 0, 4000, 4000);
 		//surface.image(brick, 0, 0, 50, 50);
 		
@@ -149,7 +174,13 @@ public class FrogDungeon extends Screen {
 		//MONSTER DRAWINGS
 		for(int i = 0; i < monsters.size(); i++) {
 			if(monsters.get(i).getHealth() > 0) {
-				monsters.get(i).move(walls, this);
+				ArrayList<Rectangle> hitBoxes = new ArrayList<Rectangle>();
+				for(int j = 0; j < monsters.size(); j++) {
+					hitBoxes.add(new Rectangle((int)(monsters.get(j).getX()), (int)(monsters.get(j).getY()), (int)(monsters.get(j).getWidth()), (int)(monsters.get(j).getHeight())));
+				}
+				
+				
+				monsters.get(i).move(walls, hitBoxes, this);
 				monsters.get(i).draw(surface);
 				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
 				if(player.isTouching(hb)) {
@@ -164,6 +195,7 @@ public class FrogDungeon extends Screen {
 			}
 			else {
 				if(monsters.get(i).getItem() != null) {
+					//System.out.println(monsters.get(i).getItem().getX() + " " + monsters.get(i).getItem().getY());
 					items.add(monsters.get(i).getItem());
 				}
 				player.incrementCoins(monsters.remove(i).getCoinValue());
