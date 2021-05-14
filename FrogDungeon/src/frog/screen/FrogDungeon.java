@@ -36,6 +36,7 @@ public class FrogDungeon extends Screen {
 	private PImage brick;
 	private PImage frame1;
 	private PImage frame2;
+	private PImage floor;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -75,6 +76,7 @@ public class FrogDungeon extends Screen {
 		//brick = surface.loadImage("resources/brick.png");
 		frame1 = surface.loadImage("resources/frame1.png");
 		frame2 = surface.loadImage("resources/frame2.png");
+		floor = surface.loadImage("resources/floor.png"); //MAKE SURE THAT FLOOR TILE IS 400x400, I DO NOT RESCALE IT
 		
 		//surface.image(brick, 0, 0, 4000, 4000);
 		//surface.image(brick, 0, 0, 50, 50);
@@ -100,11 +102,14 @@ public class FrogDungeon extends Screen {
 			player.moveTo(player.getX() + 50, player.getY() + 50);
 		}	
 		
-		
-		surface.pushMatrix();
 		surface.background(0);
+		drawFloor();
+
+		surface.pushMatrix();
+		//surface.background(0);
 		surface.translate(0 - (float) player.getX() - (float) player.getWidth()/2 + 400, 0 - (float) player.getY() - (float) player.getHeight()/2 + 300); 
-		
+
+		//drawFloor();
 		
 		
 		//for(int i = 0; i < surface.width; i+=1200) {
@@ -395,6 +400,30 @@ public class FrogDungeon extends Screen {
 
 		}
 		
+	}
+	
+	private void drawFloor() {
+		long start = System.currentTimeMillis();
+		int screenLeft = (int) (player.getX() - 400 + player.getWidth()/2);
+		int screenTop = (int) (player.getY() - 300 + player.getHeight()/2);
+		int screenRight = (int) (player.getX() + 400 + player.getWidth());
+		int screenBottom = (int) (player.getY() + 300 + player.getHeight());
+		
+		
+		
+		//surface.image(floor, 0, 0);
+		for(int x = 0; x < MAZE_SIZE * 400; x += 400) {
+			for(int y = 0; y < MAZE_SIZE * 400; y += 400) {
+				if(x > screenLeft - 400 && x < screenRight && y > screenTop - 400 && y < screenBottom) {
+					//surface.scale(0.1f, 0.1f);
+					//surface.image(floor, x - screenLeft, y - screenTop);
+					
+
+					//surface.image(floor, x, y);
+				}
+			}
+		}
+		surface.text("" + (System.currentTimeMillis() - start), (float) player.getX(), (float) player.getY() - 20);
 	}
 	
 }
