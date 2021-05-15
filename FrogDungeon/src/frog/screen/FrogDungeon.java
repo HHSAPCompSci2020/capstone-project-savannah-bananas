@@ -14,6 +14,7 @@ import frog.entities.Fly;
 import frog.entities.Frog;
 import frog.entities.Monster;
 import frog.entities.Shopkeeper;
+import frog.entities.Snake;
 import frog.misc.*;
 
 /**
@@ -67,6 +68,8 @@ public class FrogDungeon extends Screen {
 		
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50, surface));
+		monsters.add(new Snake(100, 200, 100, 50, 50, surface));
+
 		
 		pauseButton = new Button(620, 20, 150, 100);
 		pauseButton.setText("Pause Game");
@@ -97,6 +100,9 @@ public class FrogDungeon extends Screen {
 							int randomY = (int)(Math.random()*300 + 50);
 							
 							monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
+							if (k%2 == 0) {
+								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 100, 50, 50, surface));
+							}
 						}
 					}
 				}
