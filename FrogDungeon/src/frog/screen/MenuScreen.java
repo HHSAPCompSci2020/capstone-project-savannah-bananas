@@ -31,17 +31,17 @@ public class MenuScreen extends Screen {
 		
 		//frog = new PImage();
 		
-		startButton = new Button(300, 375, 200, 50);
+		startButton = new Button(300, 350, 200, 50);
 		startButton.setText("Start");
 		startButton.setButtonListener(this);
 		buttons.add(startButton);
 		
-		resumeButton = new Button(300, 450, 200, 50);
+		resumeButton = new Button(300, 425, 200, 50);
 		resumeButton.setText("Resume Game");
 		resumeButton.setButtonListener(this);
 		buttons.add(resumeButton);
 		
-		infoButton = new Button(300, 525, 200, 50);
+		infoButton = new Button(300, 500, 200, 50);
 		infoButton.setText("How To Play");
 		infoButton.setButtonListener(this);
 		buttons.add(infoButton);
@@ -52,7 +52,7 @@ public class MenuScreen extends Screen {
 		if(title == null)
 			title = surface.loadImage("resources/title.png");
 
-		surface.background(0);
+		surface.background(28, 29, 30);
 		surface.pushStyle();
 		//surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 

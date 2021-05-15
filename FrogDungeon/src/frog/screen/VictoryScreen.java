@@ -23,7 +23,7 @@ public class VictoryScreen extends Screen {
 	
 	public void draw() {
 
-		surface.background(0);
+		surface.background(28, 29, 30);
 		surface.pushStyle();
 		//surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 

@@ -11,7 +11,7 @@ import processing.core.PImage;
 public class Hammer extends MeleeWeapon{
 
 	//Fields
-	public static final double HAMMER_DAMAGE = 0.0;
+	public static final double HAMMER_DAMAGE = 15.0;
 	private PImage hammerImage;
 	
 	//Constructors

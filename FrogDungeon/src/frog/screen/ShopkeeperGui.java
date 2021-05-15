@@ -139,7 +139,7 @@ public class ShopkeeperGui extends Screen {
 	 * Draws the GUI
 	 */
 	public void draw() {
-		surface.background(0);
+		surface.background(28, 29, 30);
 		surface.pushStyle();
 		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 		surface.textSize(15);

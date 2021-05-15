@@ -11,7 +11,7 @@ import processing.core.PImage;
 public class Knife extends MeleeWeapon{
 
 	//Fields
-	public static final double KNIFE_DAMAGE = 25;
+	public static final double KNIFE_DAMAGE = 9;
 	private PImage knifeImage;
 	
 	//Constructors

@@ -121,9 +121,9 @@ public class Button {
 		this.hoveredColor = new Color(72, 124, 56); // darker green
 		this.pressedColor = new Color(247, 229, 215); // beige	
 		
-		this.mainBorderColor = new Color(0, 0, 0); // black
-		this.hoveredBorderColor = new Color(0, 0, 0); // black
-		this.pressedBorderColor = new Color(0, 0, 0); // black
+		this.mainBorderColor = new Color(28, 29, 30); // black --> dark gray
+		this.hoveredBorderColor = new Color(28, 29, 30); // black
+		this.pressedBorderColor = new Color(28, 29, 30); // black
 		this.strokeWeight = 5;
 		this.textSize = 15;
 		this.text = "Button";

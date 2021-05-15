@@ -11,7 +11,7 @@ import processing.core.PImage;
 public class Sword extends MeleeWeapon{
 
 	//Fields
-	public static final double SWORD_DAMAGE = 0.0;
+	public static final double SWORD_DAMAGE = 25.0;
 	private PImage swordImage;
 	
 	//Constructors

@@ -37,7 +37,7 @@ public class BossGui extends Screen {
 	}
 	
 	public void draw() {
-		surface.background(0);
+		surface.background(28, 29, 30);
 		surface.pushStyle();
 	//	surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 		surface.text("YOU HAVE FOUND THE SORCERER'S CHAMBER", 265, 150);
