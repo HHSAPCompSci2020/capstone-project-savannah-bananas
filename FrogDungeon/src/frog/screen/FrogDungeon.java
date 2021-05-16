@@ -34,7 +34,8 @@ public class FrogDungeon extends Screen {
 	private ArrayList<Wall> walls;
 	private ArrayList<Item> items;
 	private int ticks;
-	private PImage brick;
+	private ArrayList<String> currentMessages;
+	private ArrayList<Integer> currentMessageTimes;
 	private PImage frame1;
 	private PImage frame2;
 	private PImage floor;
@@ -60,7 +61,8 @@ public class FrogDungeon extends Screen {
 		//shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
 		//boss = new BossTile(0, 0);
 		
-		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
+		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
+		boss = new BossTile(400,400);
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new SpeedPotion(350, 500, 50, 50));
@@ -75,6 +77,9 @@ public class FrogDungeon extends Screen {
 		pauseButton.setText("Pause Game");
 		pauseButton.setButtonListener(this);
 		buttons.add(pauseButton);
+		
+		currentMessages = new ArrayList<String>();
+		currentMessageTimes = new ArrayList<Integer>();
 		
 		//brick = surface.loadImage("resources/brick.png");
 		frame1 = surface.loadImage("resources/frame1.png");
@@ -92,6 +97,7 @@ public class FrogDungeon extends Screen {
 					
 					if(willHaveMonsters) {
 						int numMonsters = (int)(Math.random()*5+3);
+						boolean isFly = ((((int)(Math.random()*10) >= 3)));
 						for(int k = 0; k < numMonsters; k++) {
 							int topLeftX = i*400;
 							int topLeftY = j*400;
@@ -99,10 +105,11 @@ public class FrogDungeon extends Screen {
 							int randomX = (int)(Math.random()*300 + 50);
 							int randomY = (int)(Math.random()*300 + 50);
 							
-							monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
-							if (k%2 == 0) {
+							if(isFly) 
+								monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
+							else
 								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 100, 50, 50, surface));
-							}
+							
 						}
 					}
 				}
@@ -240,7 +247,27 @@ public class FrogDungeon extends Screen {
 		surface.fill(228, 74, 74);
 		surface.rect(200, 30, (float)((player.getHealth()/100)*200), 35);
 		surface.fill(255);
-		//surface.rect(425, 20, 100, 50);
+		
+		//System.out.println(currentMessages.size());
+		for(int i = 0; i < currentMessages.size(); i++) {
+				
+			//if(ticks > currentMessageTimes.get(i) && ticks < currentMessageTimes.get(i) + 180) {
+					
+			surface.text(currentMessages.get(i), 25, 175 + (i*20));
+				
+			if(currentMessageTimes.get(i) + 180 < ticks) {
+				currentMessageTimes.remove(i);
+				currentMessages.remove(i);
+				i--;
+			}
+			//}
+			//else {
+				//currentMessageTimes.remove(i);
+				//currentMessages.remove(i);
+			//}
+			}
+			
+		
 		surface.image(frame2, 425, -10, 180, 150);
 		
 		if(player.getMelee() != null) {
@@ -396,6 +423,12 @@ public class FrogDungeon extends Screen {
 	public Frog getFrog() {
 		return player;
 	}
+	
+	public void setMessage(String msg) {
+		currentMessages.add(msg);
+		currentMessageTimes.add(ticks);
+	}
+	
 	
 	/**
 	 * Draws monsters onto Maze.

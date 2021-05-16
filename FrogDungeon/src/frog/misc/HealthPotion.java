@@ -37,6 +37,7 @@ public class HealthPotion extends Item {
 		if(x.getFrog().getHealth() > 100) {
 			x.getFrog().setHealth(100);
 		}
+		x.setMessage("+" + (int)(HealthPotion.POTION_HEALTH) + " Health!");
 	}
 
 }

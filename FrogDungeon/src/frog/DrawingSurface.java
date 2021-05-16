@@ -7,6 +7,7 @@ import frog.ScreenSwitcher;
 import frog.entities.Frog;
 import frog.entities.Shopkeeper;
 import frog.screen.BossGui;
+import frog.screen.BossRoom;
 import frog.screen.FrogDungeon;
 import frog.screen.GameOverScreen;
 import frog.screen.InfoScreen;
@@ -80,6 +81,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		GameOverScreen gameOverScreen = new GameOverScreen(this);
 		screens.add(gameOverScreen);
+		
+		BossRoom bossScreen = new BossRoom(this);
+		screens.add(bossScreen);
 		//setting current active screen to be the Main Men
 		activeScreen = screens.get(MENU_SCREEN);
 
@@ -190,5 +194,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public Frog getFrog() {
 		Screen dungeon = screens.get(1);
 		return ((FrogDungeon) dungeon).getFrog();
+	}
+	
+	public void setMessage(String msg) {
+		Screen dungeon = screens.get(1);
+		((FrogDungeon) dungeon).setMessage(msg);
 	}
 }

@@ -85,24 +85,28 @@ public class ShopkeeperGui extends Screen {
 			if(surface.getFrog().getCoins() >= 50) {
 				surface.getFrog().setMelee(new Sword(surface));
 				surface.getFrog().incrementCoins(-50);
+				surface.setMessage("Purchased Sword for $50!");
 			}
 		} else if(button.equals(hammerbutton)) {
 			//PURCHASE HAMMER
 			if(surface.getFrog().getCoins() >= 75) {
 				surface.getFrog().setMelee(new Hammer(surface));
 				surface.getFrog().incrementCoins(-75);
+				surface.setMessage("Purchased Hammer for $75!");
 			}
 		} else if(button.equals(pistolbutton)) {
 			//PURCHASE PISTOL
 			if(surface.getFrog().getCoins() >= 75) {
 				surface.getFrog().setProjectile(new Pistol(surface));
 				surface.getFrog().incrementCoins(-75);
+				surface.setMessage("Purchased Pistol for $75!");
 			}
 		} else if(button.equals(riflebutton)) {
 			//PURCHASE RIFLE
 			if(surface.getFrog().getCoins() >= 100) {
 				surface.getFrog().setProjectile(new Rifle(surface));
 				surface.getFrog().incrementCoins(-100);
+				surface.setMessage("Purchased Sword for $100!");
 			}
 		} else if(button.equals(healthbutton)) {
 			//PURCHASE HEALTHPOTION
@@ -112,6 +116,7 @@ public class ShopkeeperGui extends Screen {
 					surface.getFrog().setHealth(100);
 				}
 				surface.getFrog().incrementCoins(-25);
+				surface.setMessage("+" + (int)(HealthPotion.POTION_HEALTH) + " Health!");
 			}
 		} else if(button.equals(speedbutton)) {
 			//PURCHASE SPEEDPOTION
@@ -121,6 +126,7 @@ public class ShopkeeperGui extends Screen {
 					surface.getFrog().increaseSpeed(1.5-surface.getFrog().getSpeed());
 				}
 				surface.getFrog().incrementCoins(-25);
+				surface.setMessage("+" + (int)(SpeedPotion.SPEED_BUFF*100) + "% Speed!");
 			}
 		} else if(button.equals(strengthbutton)) {
 			//PURCHASE STRENGTHPOTION
@@ -130,6 +136,7 @@ public class ShopkeeperGui extends Screen {
 					surface.getFrog().increaseStrength(2-surface.getFrog().getStrength());
 				}
 				surface.getFrog().incrementCoins(-50);
+				surface.setMessage("+" + (int)(StrengthPotion.STRENGTH_BUFF*100) + "% Strength!");
 			}
 		}
 		

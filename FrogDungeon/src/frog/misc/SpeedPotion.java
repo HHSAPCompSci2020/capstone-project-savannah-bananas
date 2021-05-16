@@ -31,6 +31,7 @@ public class SpeedPotion extends Item{
 		if(x.getFrog().getSpeed() > 1.5) {
 			x.getFrog().increaseSpeed(1.5-x.getFrog().getSpeed());
 		}
+		x.setMessage("+" + (int)(SpeedPotion.SPEED_BUFF*100) + "% Speed!");
 	}
 
 }

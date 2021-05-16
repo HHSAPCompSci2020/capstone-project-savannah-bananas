@@ -54,7 +54,7 @@ public class BossGui extends Screen {
 	@Override
 	public void buttonPressed(Button button) {
 		if(button.equals(yesButton)) {
-			surface.switchScreen(surface.GAME_SCREEN);
+			surface.switchScreen(surface.BOSS_SCREEN);
 		} else if(button.equals(noButton)) {
 			surface.switchScreen(surface.GAME_SCREEN);
 		}
