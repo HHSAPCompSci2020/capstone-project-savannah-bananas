@@ -9,12 +9,13 @@ import java.io.File;
 import frog.DrawingSurface;
 
 /**
- * Default screen that appears when the program is run. Displays a start button and a how to play button.
+ * Screen that appears, that loads a list of save files.
  * @author Justin Hwang
  *
  */
 public class LoadGameScreen extends Screen {
 	//Fields
+	Button backButton;
 	
 	//Constructors
 	/**
@@ -23,6 +24,10 @@ public class LoadGameScreen extends Screen {
 	 */
 	public LoadGameScreen(DrawingSurface surface) {
 		super(surface);
+		backButton = new Button(5, 5, 150, 50);
+		backButton.setText("Back");
+		backButton.setButtonListener(this);
+		buttons.add(backButton);
 		
 		File saveDirectory = new File("saves");
 		File[] contents = saveDirectory.listFiles();
@@ -45,7 +50,7 @@ public class LoadGameScreen extends Screen {
 		surface.textSize(50);
 		surface.fill(255);
 		surface.text("Select Save File...", 400, 100);
-		surface.textSize(25);
+		surface.textSize(20);
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
 		drawButtons(surface);
@@ -55,7 +60,10 @@ public class LoadGameScreen extends Screen {
 
 	@Override
 	public void buttonPressed(Button button) {
-
+		if(button.equals(backButton)) {
+			surface.switchScreen(surface.MENU_SCREEN);
+			return;
+		}
 		surface.loadGameFromFile("saves/" + button.getText() + ".yml");
 		surface.switchScreen(surface.GAME_SCREEN);
 	}
