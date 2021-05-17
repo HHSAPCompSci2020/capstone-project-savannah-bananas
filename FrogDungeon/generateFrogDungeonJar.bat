@@ -13,12 +13,18 @@ copy ..\lib\processing_core.jar .\libs\processing_core.jar
 cd libs
 tar xf processing_core.jar
 echo d | xcopy /E /y processing ..\processing
+
+copy ..\..\lib\snakeyaml-1.23.jar snakeyaml-1.23.jar
+tar xf snakeyaml-1.23.jar
+echo d | xcopy /E /y .\org ..\org
+
 cd ..
 rmdir .\libs /s /q
 
-rem jar cvfe ..\dist\%fileName% %mainClass% %package% processing %resources%
-jar cvfe ..\%fileName% %mainClass% %package% processing %resources%
+rem jar cvfe ..\dist\%fileName% %mainClass% %package% processing org %resources%
+jar cvfe ..\%fileName% %mainClass% %package% processing org %resources%
 
-rmdir processing /s /q
+echo rmdir processing /s /q
+echo rmdir snakeyaml /s /q
 
 cd ..
