@@ -67,6 +67,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	public void setup() {
 		frameRate(60);
+		
+		this.ensureDirExists("saves");
 		// adding all the screens, in order
 		screens = new ArrayList<Screen>();
 

@@ -42,7 +42,7 @@ public class Snake extends Monster{
 		
 		marker.noFill();
 		marker.stroke(228, 74, 74);
-		marker.rect((float) x, (float) y, (float) width, (float) height);
+		//marker.rect((float) x, (float) y, (float) width, (float) height);
 		marker.popStyle();
 		
 		super.draw(marker);
