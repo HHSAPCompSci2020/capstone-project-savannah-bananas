@@ -17,6 +17,7 @@ public interface ScreenSwitcher {
 	public final int SHOPKEEPER_GUI = 5;
 	public final int GAME_OVER_SCREEN = 6;
 	public final int BOSS_SCREEN = 7;
+	public final int LOAD_GAME_SCREEN = 8;
 	
 	//Methods
 	/**

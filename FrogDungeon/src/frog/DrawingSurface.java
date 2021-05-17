@@ -20,6 +20,7 @@ import frog.screen.BossRoom;
 import frog.screen.FrogDungeon;
 import frog.screen.GameOverScreen;
 import frog.screen.InfoScreen;
+import frog.screen.LoadGameScreen;
 import frog.screen.MenuScreen;
 import frog.screen.PauseScreen;
 import frog.screen.Screen;
@@ -93,6 +94,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		BossRoom bossScreen = new BossRoom(this);
 		screens.add(bossScreen);
+		
+		LoadGameScreen loadScreen = new LoadGameScreen(this);
+		screens.add(loadScreen);
 		//setting current active screen to be the Main Men
 		activeScreen = screens.get(MENU_SCREEN);
 
@@ -212,6 +216,13 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void setMessage(String msg) {
 		Screen dungeon = screens.get(1);
 		((FrogDungeon) dungeon).setMessage(msg);
+	}
+	
+	/**
+	 * Sets the LoadGameScreen to be a new one, that contains all the files currently in the directory
+	 */
+	public void reloadSaveFiles() {
+		screens.set(LOAD_GAME_SCREEN, new LoadGameScreen(this));
 	}
 	
 	
