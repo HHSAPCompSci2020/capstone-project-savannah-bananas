@@ -37,7 +37,7 @@ public class MenuScreen extends Screen {
 		buttons.add(startButton);
 		
 		resumeButton = new Button(300, 425, 200, 50);
-		resumeButton.setText("Resume Game");
+		resumeButton.setText("Load Game");
 		resumeButton.setButtonListener(this);
 		buttons.add(resumeButton);
 		
@@ -88,8 +88,10 @@ public class MenuScreen extends Screen {
 			surface.switchScreen(surface.INFO_SCREEN);
 		} else if(button.equals(resumeButton) && resumeIsValid) {
 			//surface.switchScreen(surface.GAME_SCREEN);
-			surface.loadGameFromFile("saves/untitled.yml");
-			surface.switchScreen(surface.GAME_SCREEN);
+			//surface.loadGameFromFile("saves/untitled.yml");
+			//surface.switchScreen(surface.GAME_SCREEN);
+			surface.reloadSaveFiles();
+			surface.switchScreen(surface.LOAD_GAME_SCREEN);
 		}
 	}
 }
