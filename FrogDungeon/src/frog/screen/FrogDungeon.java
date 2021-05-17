@@ -340,7 +340,7 @@ public class FrogDungeon extends Screen {
 		surface.image(frame1, -5, -10, 200, 150);
 		//surface.rect(20, 20, 150, 100);
 		surface.fill(0);
-		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 50, 45);
+		surface.text("Health: " + player.getHealth() + "\nSpeed: " +  ((int)(player.getSpeed() * 100))/100.0 + "\nStrength: " + ((int)(player.getStrength() * 100))/100.0 + "\nCoins: " + player.getCoins(), 50, 45);
 		surface.fill(255);
 		surface.rect(200, 30, 200, 35);
 		surface.fill(228, 74, 74);
