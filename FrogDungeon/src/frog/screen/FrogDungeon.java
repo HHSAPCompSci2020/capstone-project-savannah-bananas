@@ -57,7 +57,7 @@ public class FrogDungeon extends Screen {
 		player = new Frog(300, 300, 50, 50, 100, surface);
 		player.loadImages(surface);
 		
-		shopKeep = new Shopkeeper(50, 50, 50, 50, 100);
+		shopKeep = new Shopkeeper(50, 50, 75, 75, 100, surface);
 		//shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
 		//boss = new BossTile(0, 0);
 		
@@ -158,8 +158,8 @@ public class FrogDungeon extends Screen {
 			//}
 		//}
 		
-		player.draw(surface);
 		shopKeep.draw(surface);
+		player.draw(surface);
 		boss.draw(surface);
 		
 		//WALLS DRAWING

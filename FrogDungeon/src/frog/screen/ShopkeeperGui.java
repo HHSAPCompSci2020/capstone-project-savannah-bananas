@@ -9,6 +9,7 @@ import frog.weapons.Hammer;
 import frog.weapons.Pistol;
 import frog.weapons.Rifle;
 import frog.weapons.Sword;
+import processing.core.PImage;
 
 /**
  * The GUI that shows up when you interact with the shopkeeper. Allows you to buy new items like different weapons or buffs.
@@ -25,48 +26,60 @@ public class ShopkeeperGui extends Screen {
 	private Button healthbutton;
 	private Button speedbutton;
 	private Button strengthbutton;
+	private PImage shopkeeper;
+	private PImage sword, hammer, pistol, rifle, health, speed, strength;
 
 
 	public ShopkeeperGui(DrawingSurface surface) {
 		super(surface);
 		
+		shopkeeper = surface.loadImage("resources/shopkeeper.png");
+		sword = surface.loadImage("resources/sword.png");
+		hammer = surface.loadImage("resources/hammer.png");
+		pistol = surface.loadImage("resources/pistol.png");
+		rifle = surface.loadImage("resources/rifle.png");
+		health = surface.loadImage("resources/healthpotion.png");
+		speed = surface.loadImage("resources/speedpotion.png");
+		strength = surface.loadImage("resources/strengthpotion.png");
+
+		
 		//SWORD BUTTON
-		swordbutton = new Button(25, 150, 150, 100);
+		swordbutton = new Button(25, 225, 150, 50);
 		swordbutton.setText("Sword: $50");
 		swordbutton.setButtonListener(this);
 		buttons.add(swordbutton);
 		
-		hammerbutton = new Button(225, 150, 150, 100);
+		hammerbutton = new Button(225, 225, 150, 50);
 		hammerbutton.setText("Hammer: $75");
 		hammerbutton.setButtonListener(this);
 		buttons.add(hammerbutton);
 		
-		pistolbutton = new Button(425, 150, 150, 100);
+		pistolbutton = new Button(425, 225, 150, 50);
 		pistolbutton.setText("Pistol: $75");
 		pistolbutton.setButtonListener(this);
 		buttons.add(pistolbutton);
 		
-		riflebutton = new Button(625, 150, 150, 100);
+		riflebutton = new Button(625, 225, 150, 50);
 		riflebutton.setText("Rifle: $100");
 		riflebutton.setButtonListener(this);
 		buttons.add(riflebutton);
 		
-		healthbutton = new Button(25, 300, 150, 100);
+		healthbutton = new Button(25, 400, 150, 50);
 		healthbutton.setText("Health: $25");
 		healthbutton.setButtonListener(this);
 		buttons.add(healthbutton);
 		
-		speedbutton = new Button(225, 300, 150, 100);
+		speedbutton = new Button(225, 400, 150, 50);
 		speedbutton.setText("Speed: $25");
 		speedbutton.setButtonListener(this);
 		buttons.add(speedbutton);
 		
-		strengthbutton = new Button(425, 300, 150, 100);
+		strengthbutton = new Button(425, 400, 150, 50);
 		strengthbutton.setText("Strength: $50");
 		strengthbutton.setButtonListener(this);
 		buttons.add(strengthbutton);
 		
-		exit = new Button(625, 300, 150, 100);
+		exit = new Button(625, 400, 150, 50);
 		exit.setText("Exit");
 		exit.setButtonListener(this);
 		buttons.add(exit);
@@ -150,8 +163,18 @@ public class ShopkeeperGui extends Screen {
 		surface.pushStyle();
 		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
 		surface.textSize(15);
-		surface.text("Welcome to the Shop!", 400, 40);
-		surface.text("You can buy weapons here.", 400, 60);
+		surface.text("Welcome to the shop!", 400, 40);
+		surface.text("Feel free to browse.", 400, 60);
+		surface.text("Coins: " + surface.getFrog().getCoins(), 400, 80);
+
+		surface.image(shopkeeper, 350, 100, 100, 100);
+		surface.image(sword, 70, 300, 75, 75);
+		surface.image(hammer, 270, 300, 75, 75);
+		surface.image(pistol, 470, 300, 75, 75);
+		surface.image(rifle, 670, 300, 75, 75);
+		surface.image(health, 70, 475, 75, 75);
+		surface.image(speed, 270, 475, 75, 75);
+		surface.image(strength, 470, 475, 75, 75);
 
 			
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
