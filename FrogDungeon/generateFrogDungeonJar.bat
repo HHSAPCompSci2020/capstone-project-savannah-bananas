@@ -24,7 +24,8 @@ rmdir .\libs /s /q
 rem jar cvfe ..\dist\%fileName% %mainClass% %package% processing org %resources%
 jar cvfe ..\%fileName% %mainClass% %package% processing org %resources%
 
-echo rmdir processing /s /q
-echo rmdir snakeyaml /s /q
+rmdir processing /s /q
+rmdir org /s /q
+rmdir -p /s /q
 
 cd ..
