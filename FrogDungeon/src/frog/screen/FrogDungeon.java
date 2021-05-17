@@ -141,7 +141,7 @@ public class FrogDungeon extends Screen {
 		}	
 		
 		surface.background(28, 29, 30);
-		drawFloor();
+		//drawFloor();
 
 		surface.pushMatrix();
 		//surface.background(0);
