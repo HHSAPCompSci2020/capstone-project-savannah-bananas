@@ -92,4 +92,8 @@ public abstract class Screen implements ButtonListener {
 	public void mouseReleased() {
 		
 	}
+	
+	public void keyPressed() {
+		
+	}
 }

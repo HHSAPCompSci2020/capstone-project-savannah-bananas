@@ -119,6 +119,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	public void keyPressed() {
 		keys.add(keyCode);
+		activeScreen.keyPressed();
 	}
 	
 	public void keyReleased() {

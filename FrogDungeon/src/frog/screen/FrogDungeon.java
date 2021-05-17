@@ -348,11 +348,13 @@ public class FrogDungeon extends Screen {
 		surface.fill(255);
 		
 		//System.out.println(currentMessages.size());
+		surface.pushStyle();
+		surface.textSize(25);
 		for(int i = 0; i < currentMessages.size(); i++) {
 				
 			//if(ticks > currentMessageTimes.get(i) && ticks < currentMessageTimes.get(i) + 180) {
-					
-			surface.text(currentMessages.get(i), 25, 175 + (i*20));
+			
+			surface.text(currentMessages.get(i), 25, 175 + (i*40));
 				
 			if(currentMessageTimes.get(i) + 180 < ticks) {
 				currentMessageTimes.remove(i);
@@ -364,7 +366,8 @@ public class FrogDungeon extends Screen {
 				//currentMessageTimes.remove(i);
 				//currentMessages.remove(i);
 			//}
-			}
+		}
+		surface.popStyle();
 			
 		
 		surface.image(frame2, 425, -10, 180, 150);
@@ -595,6 +598,10 @@ public class FrogDungeon extends Screen {
 			}
 		}
 		surface.text("" + (System.currentTimeMillis() - start), (float) player.getX(), (float) player.getY() - 20);
+	}
+	
+	public int getTicks() {
+		return ticks;
 	}
 	
 	public Map<String, Object> asMap() {
