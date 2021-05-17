@@ -1,5 +1,7 @@
 package frog.entities;
 
+import java.util.Map;
+
 import frog.DrawingSurface;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -16,6 +18,11 @@ public class Shopkeeper extends Entity{
 
 	public Shopkeeper(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health);
+		shopkeeper = marker.loadImage("resources/shopkeeper.png");
+	}
+	
+	public Shopkeeper(Map<String, Object> map, PApplet marker) {
+		super(map);
 		shopkeeper = marker.loadImage("resources/shopkeeper.png");
 	}
 	

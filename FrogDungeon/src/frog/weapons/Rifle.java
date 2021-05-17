@@ -1,5 +1,7 @@
 package frog.weapons;
 
+import java.util.Map;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -40,5 +42,11 @@ public class Rifle extends ProjectileWeapon{
 	 */
 	public void shoot(int x, int y) {
 		
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "Rifle");
+		return data;
 	}
 }

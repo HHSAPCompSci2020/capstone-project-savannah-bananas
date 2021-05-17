@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import frog.DrawingSurface;
 import frog.misc.Wall;
@@ -53,6 +55,39 @@ public class Frog extends Entity{
 	    idleImages = idleRightImages;
 	    timeInState = 0;
 	    state = IDLE;
+	}
+	
+	public Frog(Map<String, Object> map, PApplet marker) {
+		super(map);
+		Map<String, Object> mMap = (Map<String, Object>) map.get("melee");
+		String mType = (String) mMap.get("type");
+		if(mType.equals("Sword"))
+			melee = new Sword(marker);
+		else if(mType.equals("Knife"))
+			melee = new Knife(marker);
+		else if(mType.equals("Hammer"))
+			melee = new Hammer(marker);
+
+		Map<String, Object> rMap = (Map<String, Object>) map.get("ranged");
+		String rType = (String) rMap.get("type");
+		if(rType.equals("Rifle"))
+			ranged = new Rifle(marker);
+		else if(rType.equals("Pistol"))
+			ranged = new Pistol(marker);
+		else if(rType.equals("Bow"))
+			ranged = new Bow(marker);
+		
+	    coins = (int) map.get("coins");
+	    
+	    runningRightImages = new ArrayList<PImage>();
+	    runningLeftImages = new ArrayList<PImage>();
+	    idleRightImages = new ArrayList<PImage>();
+	    idleLeftImages = new ArrayList<PImage>();
+	    damageImages = new ArrayList<PImage>();
+	    runningImages = runningRightImages;
+	    idleImages = idleRightImages;
+	    timeInState = (int) map.get("timeInState");
+	    state = (int) map.get("state");
 	}
 
 	//Methods
@@ -319,6 +354,18 @@ public class Frog extends Entity{
 	
 	public void incrementCoins(int amount) {
 		coins += amount;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("melee", melee.asMap());
+		data.put("ranged", ranged.asMap());
+		data.put("coins", coins);
+		data.put("state", state);
+		data.put("timeInState", timeInState);
+		data.putAll(super.asMap());
+		return data;
 	}
 	
 }

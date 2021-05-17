@@ -1,5 +1,8 @@
 package frog.entities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -23,6 +26,11 @@ public class Fly extends Monster{
 		flyImage = marker.loadImage("resources/fly.png");
 	}
 	
+	public Fly(Map<String, Object> map, PApplet marker) {
+		super(map, FLY_DAMAGE, FLY_RANGE, FLY_SPEED, FLY_COIN_VALUE);
+		flyImage = marker.loadImage("resources/fly.png");
+	}
+	
 	//Methods
 	public void draw(PApplet marker) {
 		marker.pushStyle();
@@ -39,5 +47,11 @@ public class Fly extends Monster{
 		marker.popStyle();
 		
 		super.draw(marker);
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "Fly");
+		return data;
 	}
 }

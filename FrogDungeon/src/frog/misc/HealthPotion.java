@@ -1,5 +1,7 @@
 package frog.misc;
 
+import java.util.Map;
+
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
@@ -14,6 +16,10 @@ public class HealthPotion extends Item {
 	
 	public HealthPotion(double x, double y, double width, double height) {
 		super(x, y, width, height);
+	}
+	
+	public HealthPotion(Map<String, Object> map) {
+		super(map);
 	}
 	
 	/**
@@ -38,6 +44,12 @@ public class HealthPotion extends Item {
 			x.getFrog().setHealth(100);
 		}
 		x.setMessage("+" + (int)(HealthPotion.POTION_HEALTH) + " Health!");
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "HealthPotion");
+		return data;
 	}
 
 }

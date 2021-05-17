@@ -1,5 +1,8 @@
 package frog.weapons;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import processing.core.PApplet;
 
 /**
@@ -26,5 +29,11 @@ public abstract class MeleeWeapon {
 	
 	public double getDamage() {
 		return damage;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("damage", damage);
+		return data;
 	}
 }

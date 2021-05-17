@@ -1,5 +1,7 @@
 package frog.misc;
 
+import java.util.Map;
+
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
@@ -18,6 +20,10 @@ public class StrengthPotion extends Item{
 		super(x, y, width, height);
 	}
 	
+	public StrengthPotion(Map<String, Object> map) {
+		super(map);
+	}
+	
 	//Methods
 	public void draw(PApplet marker) {
 		if(image == null)
@@ -31,6 +37,12 @@ public class StrengthPotion extends Item{
 			x.getFrog().increaseStrength(2-x.getFrog().getStrength());
 		}
 		x.setMessage("+" + (int)(StrengthPotion.STRENGTH_BUFF*100) + "% Strength!");
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "StrengthPotion");
+		return data;
 	}
 
 }

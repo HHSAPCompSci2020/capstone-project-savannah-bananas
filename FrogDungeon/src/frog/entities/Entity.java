@@ -2,6 +2,8 @@ package frog.entities;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.HashMap;
+import java.util.Map;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -30,6 +32,19 @@ public abstract class Entity {
 		this.maxHealth = health;
 		vX = 0;
 		vY = 0;
+	}
+	
+	public Entity(Map<String, Object> map) {
+		this.x = (double) map.get("x");
+		this.y = (double) map.get("y");
+		this.width = (double) map.get("width");
+		this.height = (double) map.get("height");
+		this.vX = (double) map.get("vX");
+		this.vY = (double) map.get("vY");
+		this.health = (double) map.get("health");
+		this.speedMultiplyer = (double) map.get("speedMultiplyer");
+		this.strengthMultiplyer = (double) map.get("strengthMultiplyer");
+		this.maxHealth = (double) map.get("maxHealth");
 	}
 	
 	//Methods
@@ -155,5 +170,20 @@ public abstract class Entity {
 	}
 	public void increaseStrength(double amount) {
 		strengthMultiplyer += amount;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("x", x);
+		data.put("y", y);
+		data.put("width", width);
+		data.put("height", height);
+		data.put("vX", vX);
+		data.put("vY", vY);
+		data.put("health", health);
+		data.put("speedMultiplyer", speedMultiplyer);
+		data.put("strengthMultiplyer", strengthMultiplyer);
+		data.put("maxHealth", maxHealth);
+		return data;
 	}
 }

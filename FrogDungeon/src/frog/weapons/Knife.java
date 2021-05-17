@@ -1,5 +1,7 @@
 package frog.weapons;
 
+import java.util.Map;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -29,5 +31,10 @@ public class Knife extends MeleeWeapon{
 		marker.image(knifeImage, (float)x, (float)y, (float)width, (float)height);
 	}
 	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "Knife");
+		return data;
+	}
 	
 }

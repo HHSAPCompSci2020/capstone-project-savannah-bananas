@@ -1,5 +1,8 @@
 package frog.misc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -21,6 +24,13 @@ public abstract class Item {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+	}
+	
+	public Item(Map<String, Object> map) {
+		this.x = (double) map.get("x");
+		this.y = (double) map.get("y");
+		this.width = (double) map.get("width");
+		this.height = (double) map.get("height");
 	}
 	
 	//Methods
@@ -54,5 +64,14 @@ public abstract class Item {
 	}
 	public void setY(double amount) {
 		y = amount;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("x", x);
+		data.put("y", y);
+		data.put("width", width);
+		data.put("height", height);
+		return data;
 	}
 }

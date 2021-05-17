@@ -62,6 +62,8 @@ public class PauseScreen extends Screen {
 			surface.switchScreen(surface.GAME_SCREEN);
 		} else if(button.equals(exitButton)) {
 			surface.switchScreen(surface.MENU_SCREEN);
+		} else if(button.equals(saveButton)) {
+			surface.saveToFile("untitled");
 		}
 	}
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import processing.core.PApplet;
 
@@ -67,6 +69,15 @@ public class Wall {
 			this.width = WALL_HEIGHT;
 			this.height = WALL_WIDTH;
 		}
+	}
+	
+	public Wall(Map<String, Object> map) {
+		this.x = (double) map.get("x");
+		this.y = (double) map.get("y");
+		this.type = (int) map.get("type");
+
+		this.width = (int) map.get("width");
+		this.height = (int) map.get("height");
 	}
 	
 	//Methods
@@ -244,5 +255,17 @@ public class Wall {
 	
 	public double getHeight() {
 		return this.height;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("type", type);
+		data.put("x", x);
+		data.put("y", y);
+		data.put("width", width);
+		data.put("height", height);
+		
+		return data;
 	}
 }

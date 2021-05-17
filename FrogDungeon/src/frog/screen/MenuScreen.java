@@ -58,7 +58,8 @@ public class MenuScreen extends Screen {
 
 		//surface.text("FROG DUNGEON", 350, 50);
 		
-		resumeIsValid = ((FrogDungeon)surface.getScreen(DrawingSurface.GAME_SCREEN)).getFrog().getHealth() > 0;
+		//resumeIsValid = ((FrogDungeon)surface.getScreen(DrawingSurface.GAME_SCREEN)).getFrog().getHealth() > 0;
+		resumeIsValid = true;
 		if(!resumeIsValid) {
 			resumeButton.setMainColor(Color.LIGHT_GRAY);
 			resumeButton.setHoveredColor(Color.LIGHT_GRAY);
@@ -86,6 +87,8 @@ public class MenuScreen extends Screen {
 		else if(button.equals(infoButton)) {
 			surface.switchScreen(surface.INFO_SCREEN);
 		} else if(button.equals(resumeButton) && resumeIsValid) {
+			//surface.switchScreen(surface.GAME_SCREEN);
+			surface.loadGameFromFile("saves/untitled.yml");
 			surface.switchScreen(surface.GAME_SCREEN);
 		}
 	}

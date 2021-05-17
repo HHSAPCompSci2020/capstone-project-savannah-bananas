@@ -1,6 +1,8 @@
 package frog.weapons;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import processing.core.PApplet;
 
@@ -46,5 +48,19 @@ public abstract class ProjectileWeapon {
 	
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("damage", damage);
+		data.put("range", range);
+		data.put("shootingSpeed", shootingSpeed);
+		
+		ArrayList<Map<String, Object>> projectileMaps = new ArrayList<Map<String, Object>>();
+		for(Projectile p : projectiles) {
+			projectileMaps.add(p.asMap());
+		}
+		data.put("projectiles", projectileMaps);
+		return data;
 	}
 }

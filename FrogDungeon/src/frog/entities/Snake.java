@@ -1,5 +1,7 @@
 package frog.entities;
 
+import java.util.Map;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -23,6 +25,11 @@ public class Snake extends Monster{
 		snakeImage = marker.loadImage("resources/knife.png");
 	}
 	
+	public Snake(Map<String, Object> map, PApplet marker) {
+		super(map, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
+		snakeImage = marker.loadImage("resources/knife.png");
+	}
+	
 	//Methods
 	public void draw(PApplet marker) {
 		marker.pushStyle();
@@ -39,5 +46,11 @@ public class Snake extends Monster{
 		marker.popStyle();
 		
 		super.draw(marker);
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "Snake");
+		return data;
 	}
 }

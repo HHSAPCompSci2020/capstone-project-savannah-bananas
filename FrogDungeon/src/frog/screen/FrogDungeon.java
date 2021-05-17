@@ -3,7 +3,17 @@ package frog.screen;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
 
 import frog.util.Button;
 import frog.weapons.Projectile;
@@ -120,6 +130,95 @@ public class FrogDungeon extends Screen {
 		//surface.image(brick, 0, 0, 50, 50);
 		
 		ticks = 0;
+		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
+	}
+	
+	/**
+	 * Creates new FrogDungeon from a file
+	 * @param surface DrawingSurface used to create this FrogDungeon
+	 * @param saveFile File to read from
+	 */
+	public FrogDungeon (DrawingSurface surface, File saveFile) {
+		super(surface);
+		
+		InputStream inputStream;
+		try {
+			inputStream = new FileInputStream(saveFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		Yaml yaml = new Yaml();
+		Map<String, Object> data = yaml.load(inputStream);
+		
+		walls = new ArrayList<Wall>();
+		ArrayList<Map<String, Object>> wallMaps = (ArrayList<Map<String, Object>>) data.get("walls");
+		//System.out.println(wallMaps);
+		for(Map<String, Object> map : wallMaps) {
+			walls.add(new Wall(map));
+		}
+		
+		Map<String, Object> playerMap = (Map<String, Object>) data.get("player");
+		player = new Frog(playerMap, surface);
+		player.loadImages(surface);
+		
+
+		Map<String, Object> shopKeepMap = (Map<String, Object>) data.get("shopKeep");
+		shopKeep = new Shopkeeper(shopKeepMap, surface);
+		//shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
+		//boss = new BossTile(0, 0);
+		
+		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
+
+		Map<String, Object> bossTileMap = (Map<String, Object>) data.get("boss");
+		boss = new BossTile(bossTileMap);
+		
+		items = new ArrayList<Item>();
+		ArrayList<Map<String, Object>> itemMaps = (ArrayList<Map<String, Object>>) data.get("items");
+		//System.out.println(itemMaps);
+		for(Map<String, Object> map : itemMaps) {
+			if(map.get("type").equals("HealthPotion"))
+				items.add(new HealthPotion(map));
+			else if(map.get("type").equals("SpeedPotion"))
+				items.add(new SpeedPotion(map));
+			else if(map.get("type").equals("StrengthPotion"))
+				items.add(new StrengthPotion(map));
+		}
+		
+		monsters = new ArrayList<Monster>();
+		ArrayList<Map<String, Object>> monsterMaps = (ArrayList<Map<String, Object>>) data.get("monsters");
+		//System.out.println(monsterMaps);
+		for(Map<String, Object> map : monsterMaps) {
+			if(map.get("type").equals("Fly"))
+				monsters.add(new Fly(map, surface));
+			else if(map.get("type").equals("Snake"))
+				monsters.add(new Snake(map, surface));
+		}
+		
+		
+		//monsters.add(new Fly(100, 300, 50, 50, 50, surface));
+		//monsters.add(new Snake(100, 200, 100, 50, 50, surface));
+
+		Map<String, Object> pauseButtonMap = (Map<String, Object>) data.get("pauseButton");
+		pauseButton = new Button(pauseButtonMap);
+		pauseButton.setButtonListener(this);
+		buttons.add(pauseButton);
+		
+		//currentMessages = new ArrayList<String>();
+		//currentMessageTimes = new ArrayList<Integer>();
+		currentMessages = (ArrayList<String>) data.get("currentMessages");
+		currentMessageTimes = (ArrayList<Integer>) data.get("currentMessageTimes");
+		
+		//brick = surface.loadImage("resources/brick.png");
+		frame1 = surface.loadImage("resources/frame1.png");
+		frame2 = surface.loadImage("resources/frame2.png");
+		floor = surface.loadImage("resources/floor.png"); //MAKE SURE THAT FLOOR TILE IS 400x400, I DO NOT RESCALE IT
+		
+		//surface.image(brick, 0, 0, 4000, 4000);
+		//surface.image(brick, 0, 0, 50, 50);
+		
+		ticks = (int) data.get("ticks");
 		//TODO: Create pauseButton and add to "buttons" arraylist inherited from Screen superclass
 	}
 	
@@ -498,4 +597,49 @@ public class FrogDungeon extends Screen {
 		surface.text("" + (System.currentTimeMillis() - start), (float) player.getX(), (float) player.getY() - 20);
 	}
 	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("player", player.asMap());
+		data.put("shopKeep", shopKeep.asMap());
+		data.put("boss", boss.asMap());
+		
+		ArrayList<Map<String, Object>> monsterMaps = new ArrayList<Map<String, Object>>();
+		for(Monster m : monsters) {
+			monsterMaps.add(m.asMap());
+		}
+		data.put("monsters", monsterMaps);
+		
+		data.put("pauseButton", pauseButton.asMap());
+		data.put("gamePaused", gamePaused);
+		
+		ArrayList<Map<String, Object>> wallMaps = new ArrayList<Map<String, Object>>();
+		for(Wall w : walls) {
+			wallMaps.add(w.asMap());
+		}
+		data.put("walls", wallMaps);
+		
+		ArrayList<Map<String, Object>> itemMaps = new ArrayList<Map<String, Object>>();
+		for(Item i : items) {
+			itemMaps.add(i.asMap());
+		}
+		data.put("items", itemMaps);
+		
+		data.put("ticks", ticks);
+		data.put("currentMessages", currentMessages);
+		data.put("currentMessageTimes", currentMessageTimes);
+		//data.put("frame1", frame1);
+		//data.put("frame2", frame2);
+		//data.put("floor", floor);
+		data.put("lastTimeInMillis", lastTimeInMillis);
+		//data.put("surface", surface);
+		
+		/*ArrayList<Map<String, Object>> buttonMaps = new ArrayList<Map<String, Object>>();
+		for(Button b : buttons) {
+			//buttonMaps.add(b.asMap());
+		}
+		data.put("buttons", buttonMaps);*/
+		
+		return data;
+	}
 }

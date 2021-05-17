@@ -1,7 +1,16 @@
 package frog;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.introspector.BeanAccess;
+
 import processing.core.PApplet;
 import frog.ScreenSwitcher;
 import frog.entities.Frog;
@@ -123,7 +132,10 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public void resetGame() {
 		screens.set(GAME_SCREEN, new FrogDungeon(this));
-		
+	}
+	
+	public void loadGameFromFile(String filePath) {
+		screens.set(GAME_SCREEN, new FrogDungeon(this, new File(filePath)));
 	}
 	
 	/**
@@ -199,5 +211,77 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	public void setMessage(String msg) {
 		Screen dungeon = screens.get(1);
 		((FrogDungeon) dungeon).setMessage(msg);
+	}
+	
+	
+	//Funky file stuff
+	
+	/**
+	 * Saves the current FrogDungeon to file called <saveName>.yml inside folder "saves".
+	 * If "saves" does not exist, this method will create it.
+	 * If a file exists at saves/<saveName>.yml, this will overwrite.
+	 * @param saveName Destination, without ".yml" at the end. For instance, "mySave" is valid, while "mySave.yml" is not.
+	 * @return true is write was successful, false if not.
+	 */
+	public boolean saveToFile(String saveName) {
+		ensureDirExists("saves");
+		FrogDungeon gameScreen = (FrogDungeon) getScreen(GAME_SCREEN);
+		
+		/*
+		File saveDir = new File("saves/" + saveName);
+		if(saveDir.exists())
+			removeDir(saveDir);
+		ensureDirExists(saveDir);
+		*/
+		
+		//deletes the current file at the destination if it exists, and creates a new empty file.
+		File outputFile = new File("saves/" + saveName + ".yml");
+		if(outputFile.exists()) {
+			outputFile.delete();
+		}
+		
+		try {
+			outputFile.createNewFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//writes this object to the output file
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(outputFile);
+			Yaml yaml = new Yaml();
+			//yaml.setBeanAccess(BeanAccess.FIELD);
+			yaml.dump(gameScreen.asMap(), writer);
+			//yaml.dump(gameScreen.getFrog(), writer);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private boolean ensureDirExists(String path) {
+		File file = new File(path);
+		return ensureDirExists(file);
+	}
+	
+	private boolean ensureDirExists(File file) {
+		if(!file.exists())
+			return file.mkdir();
+		else
+			return false;
+	}
+	
+	private boolean removeDir(File directory) {
+		File[] contents = directory.listFiles();
+		if(contents != null) {
+			for(File file : contents) {
+				removeDir(file);
+			}
+		}
+		return directory.delete();
 	}
 }

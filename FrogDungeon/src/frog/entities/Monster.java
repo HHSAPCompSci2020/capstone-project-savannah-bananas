@@ -2,6 +2,8 @@ package frog.entities;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import frog.misc.*;
 import frog.screen.FrogDungeon;
@@ -39,6 +41,36 @@ public abstract class Monster extends Entity {
 			dropItem = new StrengthPotion(this.x, this.y, 50, 50);
 		}
 		else if(i == 3) {
+			dropItem = new SpeedPotion(this.x, this.y, 50, 50);
+		}
+		else {
+			dropItem = null;
+		}
+		//System.out.println(dropItem);
+		
+	}
+	
+	public Monster(Map<String, Object> map, double damage, double range, double speed, int coinValue) {
+		super(map);
+		this.damage = damage;
+		this.range = range;
+		this.speed = speed;
+		this.coinValue = coinValue;
+		
+		//int i = (int)(Math.random()*10);
+		//Item item = new Item(map.get("dropItem."));
+		Object rawItemType = map.get("dropItem.type");
+		if(rawItemType == null || rawItemType.equals(""))
+			return;
+		String itemType = (String) map.get("dropItem.type");
+		//System.out.println(i);
+		if(itemType.equals("HealthPotion")) {
+			dropItem = new HealthPotion(this.x, this.y, 50, 50);
+		}
+		else if(itemType.equals("StrengthPotion")) {
+			dropItem = new StrengthPotion(this.x, this.y, 50, 50);
+		}
+		else if(itemType.equals("SpeedPotion")) {
 			dropItem = new SpeedPotion(this.x, this.y, 50, 50);
 		}
 		else {
@@ -166,5 +198,13 @@ public abstract class Monster extends Entity {
 		int width = (int) ( maxHealthBarWidth * (health/maxHealth) );
 		marker.rect((float) (x + this.width/2 - maxHealthBarWidth/2), (int) (y + height), width, 10, 3);
 		marker.popStyle();
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+
+		if(dropItem != null)
+			data.put("dropItem", dropItem.asMap());
+		return data;
 	}
 }

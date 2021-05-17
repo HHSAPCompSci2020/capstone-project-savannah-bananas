@@ -1,5 +1,7 @@
 package frog.misc;
 
+import java.util.Map;
+
 import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
@@ -18,6 +20,10 @@ public class SpeedPotion extends Item{
 		super(x, y, width, height);
 	}
 
+	public SpeedPotion(Map<String, Object> map) {
+		super(map);
+	}
+
 	//Methods
 	public void draw(PApplet marker) {
 		if(image == null) {
@@ -32,6 +38,12 @@ public class SpeedPotion extends Item{
 			x.getFrog().increaseSpeed(1.5-x.getFrog().getSpeed());
 		}
 		x.setMessage("+" + (int)(SpeedPotion.SPEED_BUFF*100) + "% Speed!");
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = super.asMap();
+		data.put("type", "SpeedPotion");
+		return data;
 	}
 
 }

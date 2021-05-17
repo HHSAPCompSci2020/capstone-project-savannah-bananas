@@ -3,6 +3,8 @@ package frog.weapons;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import frog.entities.Monster;
 import frog.misc.Wall;
@@ -134,5 +136,19 @@ public class Projectile {
 			}
 		}
 		return false;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("x", x);
+		data.put("y", y);
+		data.put("deltaX", deltaX);
+		data.put("deltaY", deltaY);
+		data.put("range", range);
+		data.put("damage", damage);
+		data.put("shootingSpeed", shootingSpeed);
+		data.put("dir", dir);
+		data.put("distanceTraveled", distanceTraveled);
+		return data;
 	}
 }

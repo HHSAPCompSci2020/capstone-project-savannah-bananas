@@ -2,6 +2,8 @@ package frog.util;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 import processing.core.PApplet;
 
@@ -87,6 +89,31 @@ public class Button {
 	 */
 	public Button(int x, int y, int width, int height) {
 		this(x, y, width, height, 12);
+	}
+	
+	public Button(Map<String, Object> map) {
+		this.state = 0;
+		this.x = (int) map.get("x");
+		this.y = (int) map.get("y");
+		this.width = (int) map.get("width");
+		this.height = (int) map.get("height");
+		this.radius = (int) map.get("radius");
+		/*
+		this.mainColor = new Color(0, 255, 0); // neon green
+		this.hoveredColor = new Color(0, 180, 0); // darker green
+		this.pressedColor = new Color(255, 255, 255); // white
+		*/
+		
+		this.mainColor = colorFromMap((Map<String, Object>) map.get("mainColor"));
+		this.hoveredColor = colorFromMap((Map<String, Object>) map.get("hoveredColor"));
+		this.pressedColor =  colorFromMap((Map<String, Object>) map.get("pressedColor"));
+		
+		this.mainBorderColor = colorFromMap((Map<String, Object>) map.get("mainBorderColor"));
+		this.hoveredBorderColor = colorFromMap((Map<String, Object>) map.get("hoveredBorderColor"));
+		this.pressedBorderColor = colorFromMap((Map<String, Object>) map.get("pressedBorderColor"));
+		this.strokeWeight = (int) map.get("strokeWeight");
+		this.textSize = (int) map.get("textSize");
+		this.text = (String) map.get("text");
 	}
 	
 	/**
@@ -341,5 +368,38 @@ public class Button {
 	
 	public void setPressedBorderColor(Color c) {
 		this.pressedBorderColor = c;
+	}
+	
+	public Map<String, Object> asMap() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("x", x);
+		data.put("y", y);
+		data.put("width", width);
+		data.put("height", height);
+		data.put("radius", radius);
+		data.put("text", text);
+		data.put("mainColor", mapFromColor(mainColor));
+		data.put("hoveredColor",  mapFromColor(hoveredColor));
+		data.put("pressedColor",  mapFromColor(pressedColor));
+		data.put("mainBorderColor",  mapFromColor(mainBorderColor));
+		data.put("hoveredBorderColor",  mapFromColor(hoveredBorderColor));
+		data.put("pressedBorderColor",  mapFromColor(pressedBorderColor));
+		data.put("textSize", textSize);
+		data.put("strokeWeight", strokeWeight);
+		
+		return data;
+	}
+	
+	private Map<String, Object> mapFromColor(Color c) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("r", c.getRed());
+		data.put("g", c.getGreen());
+		data.put("b", c.getBlue());
+		return data;
+	}
+	
+	private Color colorFromMap( Map<String, Object> map) {
+		return new Color((int) map.get("r"), (int) map.get("g"), (int) map.get("b"));
 	}
 }

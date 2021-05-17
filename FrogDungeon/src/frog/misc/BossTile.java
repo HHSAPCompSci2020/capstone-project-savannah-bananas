@@ -1,5 +1,8 @@
 package frog.misc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import frog.DrawingSurface;
 import processing.core.PApplet;
 
@@ -17,6 +20,11 @@ public class BossTile {
 	public BossTile(double x, double y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public BossTile(Map<String, Object> map) {
+		this.x = (double) map.get("x");
+		this.y = (double) map.get("y");
 	}
 	
 	//Methods
@@ -55,6 +63,13 @@ public class BossTile {
 			return true;
 		
 		return false;
+	}
+	
+	public Map<String, Object> asMap() {
+		 Map<String, Object> data = new HashMap<String, Object>();
+		 data.put("x", x);
+		 data.put("y", y);
+		 return data;
 	}
 	
 	
