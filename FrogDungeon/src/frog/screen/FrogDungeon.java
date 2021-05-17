@@ -286,13 +286,13 @@ public class FrogDungeon extends Screen {
 		//MONSTER DRAWINGS
 		for(int i = 0; i < monsters.size(); i++) {
 			if(monsters.get(i).getHealth() > 0) {
-				ArrayList<Rectangle> hitBoxes = new ArrayList<Rectangle>();
-				for(int j = 0; j < monsters.size(); j++) {
-					hitBoxes.add(new Rectangle((int)(monsters.get(j).getX()), (int)(monsters.get(j).getY()), (int)(monsters.get(j).getWidth()), (int)(monsters.get(j).getHeight())));
-				}
+				//ArrayList<Rectangle> hitBoxes = new ArrayList<Rectangle>();
+				//for(int j = 0; j < monsters.size(); j++) {
+					//hitBoxes.add(new Rectangle((int)(monsters.get(j).getX()), (int)(monsters.get(j).getY()), (int)(monsters.get(j).getWidth()), (int)(monsters.get(j).getHeight())));
+				//}
 				
 				
-				monsters.get(i).move(walls, hitBoxes, this);
+				monsters.get(i).move(walls, player.getX(), player.getY());
 				monsters.get(i).draw(surface);
 				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
 				if(player.isTouching(hb)) {

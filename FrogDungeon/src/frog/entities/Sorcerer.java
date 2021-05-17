@@ -1,5 +1,6 @@
 package frog.entities;
 
+import processing.core.PApplet;
 
 /**
  * Represents the Sorcerer final boss. Extends Monster.
@@ -10,8 +11,8 @@ public class Sorcerer extends Monster {
 
 	//Fields
 	public static final double SORCERER_DAMAGE = 0.0;
-	public static final double SORCERER_RANGE = 0.0;
-	public static final double SORCERER_SPEED = 0.0;
+	public static final double SORCERER_RANGE = 500.0;
+	public static final double SORCERER_SPEED = 10.0;
 	public static final int SORCERER_COIN_VALUE = 15;
 	
 	//Constructors
@@ -20,4 +21,8 @@ public class Sorcerer extends Monster {
 	}
 	
 	//Methods
+	public void draw(PApplet marker) {
+		marker.fill(255);
+		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+	}
 }
