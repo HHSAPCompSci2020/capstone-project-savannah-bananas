@@ -49,6 +49,7 @@ public class FrogDungeon extends Screen {
 	private PImage frame1;
 	private PImage frame2;
 	private PImage floor;
+	private String largeMessage;
 	public static final int MAZE_SIZE = 10; //Maze will be MAZE_SIZE by MAZE_SIZE tiles
 	
 	//private ArrayList<Interactable> interactables //chests, shopkeepers, signs, etc
@@ -63,6 +64,7 @@ public class FrogDungeon extends Screen {
 		super(surface);
 		
 		generateMaze(); //adds all the walls
+		largeMessage = "";
 		
 		player = new Frog(300, 300, 50, 50, 100, surface);
 		player.loadImages(surface);
@@ -80,7 +82,7 @@ public class FrogDungeon extends Screen {
 		
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50, surface));
-		monsters.add(new Snake(100, 200, 100, 50, 50, surface));
+		monsters.add(new Snake(100, 200, 50, 50, 50, surface));
 
 		
 		pauseButton = new Button(620, 20, 150, 100);
@@ -118,7 +120,7 @@ public class FrogDungeon extends Screen {
 							if(isFly) 
 								monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
 							else
-								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 100, 50, 50, surface));
+								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
 							
 						}
 					}
@@ -140,7 +142,7 @@ public class FrogDungeon extends Screen {
 	 */
 	public FrogDungeon (DrawingSurface surface, File saveFile) {
 		super(surface);
-		
+		largeMessage = "";
 		InputStream inputStream;
 		try {
 			inputStream = new FileInputStream(saveFile);
@@ -229,7 +231,7 @@ public class FrogDungeon extends Screen {
 	 */
 	public void draw() {
 		
-		
+		boolean hasLargeMessage = false;
 
 		player.move(walls, surface);
 		//surface.image(brick, 0, 0);
@@ -272,6 +274,10 @@ public class FrogDungeon extends Screen {
 		int screenBottom = (int) (player.getY() + 300 + player.getHeight());
 		for(int i = 0; i < items.size(); i++) {
 			Rectangle hb = new Rectangle((int)(items.get(i).getX()), (int)(items.get(i).getY()), (int)(items.get(i).getWidth()), (int)(items.get(i).getHeight()));
+			if(player.isTouching(hb)) {
+				largeMessage = "E to pick up item";
+				hasLargeMessage = true;
+			}
 			if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(hb)) {
 				items.get(i).doAction(this);
 				items.remove(i);
@@ -316,7 +322,10 @@ public class FrogDungeon extends Screen {
 		}
 		
 		//SHOPKEEPER
-		
+		if(player.isTouching(new Rectangle((int)(shopKeep.getX() - shopKeep.getWidth()/2), (int)(shopKeep.getY() - shopKeep.getHeight()/2), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+			largeMessage = "E to open Shop Keeper";
+			hasLargeMessage = true;
+		}
 		if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int)(shopKeep.getX()), (int)(shopKeep.getY()), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
 			shopKeep.changeScreen(surface);
 		}
@@ -367,6 +376,10 @@ public class FrogDungeon extends Screen {
 				//currentMessages.remove(i);
 			//}
 		}
+		
+		surface.textAlign(surface.CENTER);
+		if(hasLargeMessage)
+			surface.text(largeMessage, 400, 575);
 		surface.popStyle();
 			
 		

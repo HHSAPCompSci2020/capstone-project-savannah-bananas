@@ -22,12 +22,12 @@ public class Snake extends Monster{
 	//Constructors
 	public Snake(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
-		snakeImage = marker.loadImage("resources/knife.png");
+		snakeImage = marker.loadImage("resources/snake.png");
 	}
 	
 	public Snake(Map<String, Object> map, PApplet marker) {
 		super(map, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
-		snakeImage = marker.loadImage("resources/knife.png");
+		snakeImage = marker.loadImage("resources/snake.png");
 	}
 	
 	//Methods
