@@ -80,7 +80,7 @@ public class FrogDungeon extends Screen {
 		
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50, surface));
-		monsters.add(new Snake(100, 200, 100, 50, 50, surface));
+		monsters.add(new Snake(100, 200, 50, 50, 50, surface));
 
 		
 		pauseButton = new Button(620, 20, 150, 100);
@@ -118,7 +118,7 @@ public class FrogDungeon extends Screen {
 							if(isFly) 
 								monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
 							else
-								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 100, 50, 50, surface));
+								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
 							
 						}
 					}
