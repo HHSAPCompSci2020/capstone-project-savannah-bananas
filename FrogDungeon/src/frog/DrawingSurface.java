@@ -213,6 +213,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 
 	public Frog getFrog() {
 		Screen dungeon = screens.get(1);
+		//System.out.println(((FrogDungeon)dungeon).getFrog().getHealth());
 		return ((FrogDungeon) dungeon).getFrog();
 	}
 	

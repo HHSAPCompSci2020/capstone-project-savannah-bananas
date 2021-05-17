@@ -10,7 +10,7 @@ import processing.core.PApplet;
 public class Sorcerer extends Monster {
 
 	//Fields
-	public static final double SORCERER_DAMAGE = 0.0;
+	public static final double SORCERER_DAMAGE = 20.0;
 	public static final double SORCERER_RANGE = 500.0;
 	public static final double SORCERER_SPEED = 10.0;
 	public static final int SORCERER_COIN_VALUE = 15;
@@ -24,5 +24,6 @@ public class Sorcerer extends Monster {
 	public void draw(PApplet marker) {
 		marker.fill(255);
 		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		
 	}
 }
