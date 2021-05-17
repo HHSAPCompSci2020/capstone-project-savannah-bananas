@@ -2,6 +2,7 @@ package frog.entities;
 
 import frog.DrawingSurface;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Represents a shopkeeper which you can interact with to bring up a shop GUI.
@@ -9,9 +10,13 @@ import processing.core.PApplet;
  *
  */
 public class Shopkeeper extends Entity{
+	
+	private PImage shopkeeper;
 
-	public Shopkeeper(double x, double y, double width, double height, double health) {
+
+	public Shopkeeper(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health);
+		shopkeeper = marker.loadImage("resources/shopkeeper.png");
 	}
 	
 	/**
@@ -19,7 +24,8 @@ public class Shopkeeper extends Entity{
 	 */
 	public void draw(PApplet marker) {
 		marker.fill(255);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		marker.image(shopkeeper, (float)(x-width/2), (float)(y-height/2), (float)width, (float)height);
+		//marker.ellipse((float)x, (float)y, (float)width, (float)height);
 		
 	}
 
