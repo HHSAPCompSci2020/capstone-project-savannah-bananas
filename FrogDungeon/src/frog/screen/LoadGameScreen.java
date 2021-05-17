@@ -26,6 +26,7 @@ public class LoadGameScreen extends Screen {
 		
 		File saveDirectory = new File("saves");
 		File[] contents = saveDirectory.listFiles();
+		//if (contents != null)
 		for(int i = 0; i < contents.length; i++) {
 			Button button = new Button(100, 150 + 50 * i, 600, 45);
 			String fileName = contents[i].getName();

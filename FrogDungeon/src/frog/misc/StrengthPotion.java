@@ -36,7 +36,11 @@ public class StrengthPotion extends Item{
 		if(x.getFrog().getStrength() > 2) {
 			x.getFrog().increaseStrength(2-x.getFrog().getStrength());
 		}
-		x.setMessage("+" + (int)(StrengthPotion.STRENGTH_BUFF*100) + "% Strength!");
+		if(x.getFrog().getStrength() < 2) {
+			x.setMessage("+" + (int)(StrengthPotion.STRENGTH_BUFF*100) + "% Strength!");
+		} else {
+			x.setMessage("Max strength reached!");
+		}
 	}
 	
 	public Map<String, Object> asMap() {

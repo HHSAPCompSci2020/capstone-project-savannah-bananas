@@ -82,7 +82,7 @@ public class FrogDungeon extends Screen {
 		
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50, surface));
-		monsters.add(new Snake(100, 200, 100, 50, 50, surface));
+		monsters.add(new Snake(100, 200, 50, 50, 50, surface));
 
 		
 		pauseButton = new Button(620, 20, 150, 100);
@@ -120,7 +120,7 @@ public class FrogDungeon extends Screen {
 							if(isFly) 
 								monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
 							else
-								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 100, 50, 50, surface));
+								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
 							
 						}
 					}
@@ -292,13 +292,13 @@ public class FrogDungeon extends Screen {
 		//MONSTER DRAWINGS
 		for(int i = 0; i < monsters.size(); i++) {
 			if(monsters.get(i).getHealth() > 0) {
-				ArrayList<Rectangle> hitBoxes = new ArrayList<Rectangle>();
-				for(int j = 0; j < monsters.size(); j++) {
-					hitBoxes.add(new Rectangle((int)(monsters.get(j).getX()), (int)(monsters.get(j).getY()), (int)(monsters.get(j).getWidth()), (int)(monsters.get(j).getHeight())));
-				}
+				//ArrayList<Rectangle> hitBoxes = new ArrayList<Rectangle>();
+				//for(int j = 0; j < monsters.size(); j++) {
+					//hitBoxes.add(new Rectangle((int)(monsters.get(j).getX()), (int)(monsters.get(j).getY()), (int)(monsters.get(j).getWidth()), (int)(monsters.get(j).getHeight())));
+				//}
 				
 				
-				monsters.get(i).move(walls, hitBoxes, this);
+				monsters.get(i).move(walls, player.getX(), player.getY());
 				monsters.get(i).draw(surface);
 				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
 				if(player.isTouching(hb)) {
@@ -349,7 +349,7 @@ public class FrogDungeon extends Screen {
 		surface.image(frame1, -5, -10, 200, 150);
 		//surface.rect(20, 20, 150, 100);
 		surface.fill(0);
-		surface.text("Health: " + player.getHealth() + "\nSpeed: " + player.getSpeed() + "\nStrength: " + player.getStrength() + "\nCoins: " + player.getCoins(), 50, 45);
+		surface.text("Health: " + player.getHealth() + "\nSpeed: " +  ((int)(player.getSpeed() * 100))/100.0 + "\nStrength: " + ((int)(player.getStrength() * 100))/100.0 + "\nCoins: " + player.getCoins(), 50, 45);
 		surface.fill(255);
 		surface.rect(200, 30, 200, 35);
 		surface.fill(228, 74, 74);
