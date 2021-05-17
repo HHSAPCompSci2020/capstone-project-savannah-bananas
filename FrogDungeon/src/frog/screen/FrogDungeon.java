@@ -287,7 +287,8 @@ public class FrogDungeon extends Screen {
 		
 		//FPS
 		surface.fill(255);
-		surface.text("FPS: " + 1000/(System.currentTimeMillis() - lastTimeInMillis) + "", 750, 580);
+		if(System.currentTimeMillis() != 0)
+			surface.text("FPS: " + 1000/(System.currentTimeMillis() - lastTimeInMillis) + "", 750, 580);
 		lastTimeInMillis = System.currentTimeMillis();
 		
 		updateButtons(surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY), surface.mousePressed);
