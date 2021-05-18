@@ -32,7 +32,7 @@ public class MenuScreen extends Screen {
 		//frog = new PImage();
 		
 		startButton = new Button(300, 350, 200, 50);
-		startButton.setText("Start");
+		startButton.setText("New Game");
 		startButton.setButtonListener(this);
 		buttons.add(startButton);
 		

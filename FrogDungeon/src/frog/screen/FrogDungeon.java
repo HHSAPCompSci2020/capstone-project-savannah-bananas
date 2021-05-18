@@ -316,6 +316,7 @@ public class FrogDungeon extends Screen {
 					//System.out.println(monsters.get(i).getItem().getX() + " " + monsters.get(i).getItem().getY());
 					items.add(monsters.get(i).getItem());
 				}
+				setMessage("+" + monsters.get(i).getCoinValue() + " Coins!");
 				player.incrementCoins(monsters.remove(i).getCoinValue());
 				
 			}
