@@ -9,6 +9,8 @@ import java.util.Map;
 
 import frog.DrawingSurface;
 import frog.misc.Wall;
+import frog.screen.FrogDungeon;
+import frog.screen.Screen;
 import frog.weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -274,11 +276,16 @@ public class Frog extends Entity{
 	 * Shoots the ranged weapon that this frog has.
 	 * @param x, the x coordinate of where the frog is shooting.
 	 * @param y, the y coordinate of where the frog is shooting.
-	 * @param surface, the DrawingSurface that the Projectile will exist inside of
+	 * @param screen, the Screen that the Projectile will exist inside of
 	 */
-	public void shootRangedWeapon(int x, int y, DrawingSurface surface) {
-		int offsetX = (int) ((float) this.getX() + (float) this.getWidth()/2 - 400); //this is the X amount the screen is shifted
-		int offsetY = (int) ((float) this.getY() + (float) this.getHeight()/2 - 300); //this is the Y amount the screen is shifted
+	public void shootRangedWeapon(int x, int y, Screen screen) {
+		DrawingSurface surface = screen.getSurface();
+		int offsetX = 0;
+		int offsetY = 0;
+		if(screen instanceof FrogDungeon) {
+			offsetX = (int) ((float) this.getX() + (float) this.getWidth()/2 - 400); //this is the X amount the screen is shifted
+			offsetY = (int) ((float) this.getY() + (float) this.getHeight()/2 - 300); //this is the Y amount the screen is shifted
+		}
 		
 		offsetY += 20; //idk why but mouseY includes the height of the window
 		Point actualMousePoint = surface.assumedCoordinatesToActual(x, y);
@@ -299,11 +306,11 @@ public class Frog extends Entity{
 		marker.ellipse((float)(x+width/2), (float)(y+height/2), (float)width, (float)height);
 		marker.fill(0);
 		marker.textAlign(PApplet.CENTER);
-		marker.text("Frog", (float)x+(float)width/2, (float)y+(float)height/2);
+		marker.text("Frog", (float)x+(float)width/2, (float)y+(float)height/2);*/
 		
 		marker.noFill();
 		marker.stroke(255, 0, 0);
-		marker.rect((float) this.x, (float) this.y, (float) this.width, (float) this.height);*/
+		//marker.rect((float) this.x, (float) this.y, (float) this.width, (float) this.height);
 		
 		PImage image = idleImages.get(0);
 		int frame = this.timeInState / 2;
@@ -316,8 +323,8 @@ public class Frog extends Entity{
 		timeInState++;
 		
 		marker.pushMatrix();
-		marker.translate((float) (x) - (float)(width/6), (float) (y - width/6 - 8));
-		marker.scale((float) ((width*4)/(3*image.width)), (float) ((height*4)/(3*image.height)));
+		marker.translate((float) (x) - (float)(width/4), (float) (y - width/4 - 10));
+		marker.scale((float) ((width*3)/(2*image.width)), (float) ((height*3)/(2*image.height)));
 		marker.image(image, 0, 0);
 		marker.popMatrix();
 		

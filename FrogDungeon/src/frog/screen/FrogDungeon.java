@@ -66,7 +66,7 @@ public class FrogDungeon extends Screen {
 		generateMaze(); //adds all the walls
 		largeMessage = "";
 		
-		player = new Frog(300, 300, 50, 50, 100, surface);
+		player = new Frog(300, 300, 40, 40, 100, surface);
 		player.loadImages(surface);
 		
 		shopKeep = new Shopkeeper(50, 50, 75, 75, 100, surface);
@@ -583,7 +583,7 @@ public class FrogDungeon extends Screen {
 			}
 		} else if (surface.mouseButton == surface.RIGHT) {
 				//System.out.println("Click X = " + surface.mouseX + ", Click Y = " + surface.mouseY);
-				player.shootRangedWeapon(surface.mouseX, surface.mouseY, surface);
+				player.shootRangedWeapon(surface.mouseX, surface.mouseY, this);
 
 		}
 		

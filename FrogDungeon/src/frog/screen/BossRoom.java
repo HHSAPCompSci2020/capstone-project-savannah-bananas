@@ -107,8 +107,10 @@ public class BossRoom extends Screen {
 		}
 		else if (surface.mouseButton == surface.RIGHT) {
 				//System.out.println("Click X = " + surface.mouseX + ", Click Y = " + surface.mouseY);
-				Point p = surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY);
-				surface.getFrog().shootRangedWeapon(p.x,  p.y, surface);
+			
+				//Point p = surface.assumedCoordinatesToActual(surface.mouseX, surface.mouseY);
+				//surface.getFrog().shootRangedWeapon(p.x,  p.y, surface);
+			surface.getFrog().shootRangedWeapon(surface.mouseX, surface.mouseY, this);
 
 		}
 		

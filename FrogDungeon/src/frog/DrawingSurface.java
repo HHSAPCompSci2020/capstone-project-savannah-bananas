@@ -79,11 +79,17 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		frameRate(60);
 
 		//System.out.println("started setup()");
-		gameMusic = new SoundFile(this, "resources/music/Memoraphile_Spooky-Dungeon.mp3");
-		//System.out.println("loaded gameMusic");
-		menuMusic = new SoundFile(this, "resources/music/Dungeon-King.mp3");
-		bossMusic = new SoundFile(this, "resources/music/Strange-Dungeon.mp3");
-		deathMusic = new SoundFile(this, "resources/music/sad_recorder.mp3");
+		
+		//gameMusic = new SoundFile(this, "resources/music/Memoraphile_Spooky-Dungeon.mp3");
+		//menuMusic = new SoundFile(this, "resources/music/Dungeon-King.mp3");
+		//bossMusic = new SoundFile(this, "resources/music/Strange-Dungeon.mp3");
+		//deathMusic = new SoundFile(this, "resources/music/sad_recorder.mp3");
+		
+		gameMusic = new SoundFile(this, "resources/music/Memoraphile_Spooky-Dungeon.wav");
+		menuMusic = new SoundFile(this, "resources/music/Dungeon-King.wav");
+		bossMusic = new SoundFile(this, "resources/music/Strange-Dungeon.wav");
+		deathMusic = new SoundFile(this, "resources/music/sad_recorder.wav");
+		
 		//System.out.println("loaded files");
 		this.ensureDirExists("saves");
 		// adding all the screens, in order
