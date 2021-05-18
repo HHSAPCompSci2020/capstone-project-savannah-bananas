@@ -236,7 +236,7 @@ public class FrogDungeon extends Screen {
 		player.move(walls, surface);
 		//surface.image(brick, 0, 0);
 		
-		if (boss.isInsideTile(player.getX(), player.getY())) {
+		if (boss.isInsideTile(player.getX() + player.getWidth()/2, player.getY() + player.getHeight()/2)) {
 			boss.changeScreen(surface);
 			player.moveTo(player.getX() + 50, player.getY() + 50);
 		}	
