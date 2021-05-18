@@ -74,7 +74,7 @@ public class FrogDungeon extends Screen {
 		//boss = new BossTile(0, 0);
 		
 		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
-		boss = new BossTile(400,400);
+		boss = new BossTile(400,400, surface);
 		items = new ArrayList<Item>();
 		items.add(new HealthPotion(100, 100, 50, 50));
 		items.add(new SpeedPotion(350, 500, 50, 50));
@@ -260,8 +260,8 @@ public class FrogDungeon extends Screen {
 		//}
 		
 		shopKeep.draw(surface);
-		player.draw(surface);
 		boss.draw(surface);
+		player.draw(surface);
 		
 		//WALLS DRAWING
 		drawWalls();
