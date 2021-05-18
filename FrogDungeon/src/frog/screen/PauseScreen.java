@@ -106,8 +106,10 @@ public class PauseScreen extends Screen {
 	public void buttonPressed(Button button) {
 		if(button.equals(resumeButton)) {
 			surface.switchScreen(surface.GAME_SCREEN);
+			messageTimer = 0;
 		} else if(button.equals(exitButton)) {
 			surface.switchScreen(surface.MENU_SCREEN);
+			messageTimer = 0;
 		} else if(button.equals(saveButton)) {
 			isInputtingText = true;
 		}
