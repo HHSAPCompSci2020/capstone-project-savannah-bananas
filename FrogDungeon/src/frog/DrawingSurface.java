@@ -12,6 +12,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.BeanAccess;
 
 import processing.core.PApplet;
+import processing.sound.*;
 import frog.ScreenSwitcher;
 import frog.entities.Frog;
 import frog.entities.Shopkeeper;
@@ -60,6 +61,15 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	private ArrayList<Screen> screens;
 	
+	/**
+	 * Music files for all the primary music clips.
+	 * Dungeon-King.mp3 plays in the menu screens
+	 * Memoraphile_Spooky-Dungeon.mp3 plays in the main game screen
+	 * Strange-Dungeon.mp3 plays in the boss screen
+	 * sad_recorder.mp3 plays when the player dies
+	 */
+	private SoundFile menuMusic, gameMusic, bossMusic, deathMusic;
+	
 	//Constructors
 	public DrawingSurface() {
 		
@@ -67,7 +77,14 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	
 	public void setup() {
 		frameRate(60);
-		
+
+		//System.out.println("started setup()");
+		gameMusic = new SoundFile(this, "resources/music/Memoraphile_Spooky-Dungeon.mp3");
+		//System.out.println("loaded gameMusic");
+		menuMusic = new SoundFile(this, "resources/music/Dungeon-King.mp3");
+		bossMusic = new SoundFile(this, "resources/music/Strange-Dungeon.mp3");
+		deathMusic = new SoundFile(this, "resources/music/sad_recorder.mp3");
+		//System.out.println("loaded files");
 		this.ensureDirExists("saves");
 		// adding all the screens, in order
 		screens = new ArrayList<Screen>();
@@ -100,8 +117,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		LoadGameScreen loadScreen = new LoadGameScreen(this);
 		screens.add(loadScreen);
 		//setting current active screen to be the Main Men
-		activeScreen = screens.get(MENU_SCREEN);
-
+		//activeScreen = screens.get(MENU_SCREEN);
+		switchScreen(MENU_SCREEN);
+		
 		keys = new ArrayList<Integer>();
 		
 
@@ -204,7 +222,31 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	@Override
 	public void switchScreen(int i) {
 		//System.out.println(i);
+
+		//System.out.println("started switchScreen method");
 		activeScreen = screens.get(i);
+		int index = screens.indexOf(activeScreen);
+		if(index == BOSS_SCREEN)
+			playFile(bossMusic);
+		else if(index == GAME_SCREEN)
+			playFile(gameMusic);
+		else if(index == GAME_OVER_SCREEN)
+			playFile(deathMusic);
+		else if(!menuMusic.isPlaying())
+			playFile(menuMusic);
+	}
+	
+	private void playFile(SoundFile file) {
+		menuMusic.jump(0);
+		menuMusic.stop();
+		gameMusic.jump(0);
+		gameMusic.stop();
+		bossMusic.jump(0);
+		bossMusic.stop();
+		deathMusic.jump(0);
+		deathMusic.stop();
+		
+		file.loop();
 	}
 	
 	public Screen getScreen(int i) {

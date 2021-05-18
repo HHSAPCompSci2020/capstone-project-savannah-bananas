@@ -119,7 +119,7 @@ public class ShopkeeperGui extends Screen {
 			if(surface.getFrog().getCoins() >= 100) {
 				surface.getFrog().setProjectile(new Rifle(surface));
 				surface.getFrog().incrementCoins(-100);
-				surface.setMessage("Purchased Sword for $100!");
+				surface.setMessage("Purchased Rifle for $100!");
 			}
 		} else if(button.equals(healthbutton)) {
 			//PURCHASE HEALTHPOTION

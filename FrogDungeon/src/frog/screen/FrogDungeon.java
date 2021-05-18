@@ -326,7 +326,7 @@ public class FrogDungeon extends Screen {
 			largeMessage = "E to open Shop Keeper";
 			hasLargeMessage = true;
 		}
-		if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int)(shopKeep.getX()), (int)(shopKeep.getY()), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+		if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int)(shopKeep.getX() - shopKeep.getWidth()/2), (int)(shopKeep.getY() - shopKeep.getHeight()/2), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
 			shopKeep.changeScreen(surface);
 		}
 		
