@@ -5,6 +5,7 @@ import java.util.Map;
 
 import frog.DrawingSurface;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Represents the Boss Tile, where if you interact with it, it asks you if you want to go to the boss room.
@@ -15,11 +16,13 @@ public class BossTile {
 
 	//Fields
 	private double x, y;
+	private PImage trapdoor;
 	
 	//Constructor
-	public BossTile(double x, double y) {
+	public BossTile(double x, double y, PApplet marker) {
 		this.x = x;
 		this.y = y;
+		trapdoor = marker.loadImage("resources/trapdoor.png");
 	}
 	
 	public BossTile(Map<String, Object> map) {
@@ -34,7 +37,8 @@ public class BossTile {
 	 */
 	public void draw(PApplet marker) {
 		marker.fill(256, 0, 0);
-		marker.rect((float)x, (float)y, 50f, 50f);
+		marker.image(trapdoor, (float)x, (float)y, 50f, 50f);
+		//marker.rect((float)x, (float)y, 50f, 50f);
 	}
 	
 	/**
