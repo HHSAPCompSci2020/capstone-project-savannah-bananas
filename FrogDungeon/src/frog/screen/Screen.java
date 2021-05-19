@@ -46,6 +46,14 @@ public abstract class Screen implements ButtonListener {
 	}
 	
 	/**
+	 * Returns the DrawingSurface that this Screen exists inside of
+	 * @return DrawingSurface object
+	 */
+	public DrawingSurface getSurface() {
+		return this.surface;
+	}
+	
+	/**
 	 * Updates the Buttons
 	 * @param mouseX x-coordinate of the mouse, using actual coords, not assumed
 	 * @param mouseY y-coordinate of the mouse, using actual coords, not assumed
