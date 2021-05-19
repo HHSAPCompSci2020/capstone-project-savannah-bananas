@@ -130,9 +130,9 @@ public abstract class Monster extends Entity {
 			for(Wall wall : walls)
 				wallRectangles.addAll(wall.getRectangles());
 		}
-			super.move();
+		super.move();
 			
-		if(walls!= null) {
+		/*if(walls!= null) {
 			//saves some values for later use
 			double oldX = x;
 			double oldY = y;
@@ -183,6 +183,56 @@ public abstract class Monster extends Entity {
 	        	dropItem.setX(this.x);
 	        	dropItem.setY(this.y);
 	        }
+		}*/
+		
+		if (walls != null) {
+
+			Rectangle rectTouched = null;
+
+			double shiftX = Integer.MAX_VALUE;
+			double shiftY = Integer.MAX_VALUE;
+
+			for (Rectangle r : wallRectangles) {
+				if (isTouching(r)) {
+					rectTouched = r;
+					double thisLeft = this.x;
+					double thisRight = this.x + this.width;
+					double rectLeft = r.x;
+					double rectRight = r.x + r.width;
+
+					if (Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX) {
+						shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
+					}
+
+					double thisTop = this.y;
+					double thisBottom = this.y + this.height;
+					double rectTop = r.y;
+					double rectBottom = r.y + r.height;
+
+					if (Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY) {
+						shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
+					}
+					
+					
+					if (shiftX < shiftY) {
+						shiftX(shiftX);
+						if (isTouching(rectTouched)) {
+							shiftY(shiftY);
+						}
+					} else if (shiftY < shiftX) {
+						shiftY(shiftY);
+						if (isTouching(rectTouched)) {
+							shiftX(shiftX);
+						}
+					}
+				}
+			}
+
+			if(dropItem != null) {
+	        	dropItem.setX(this.x);
+	        	dropItem.setY(this.y);
+	        }
+			
 		}
     }
 		//System.out.println(vX + " " + vY);

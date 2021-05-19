@@ -140,6 +140,34 @@ public abstract class Entity {
 		
 	}
 	
+	/**
+	 * Shifts X by the given amount
+	 * @param shiftX Amount to shift X by
+	 */
+	protected void shiftX(double shiftX) {
+		//if(shiftX == Integer.MAX_VALUE)
+		//	return;
+		
+		shiftX += 1.0;
+		if(vX > 0)
+			shiftX = -shiftX;
+		moveBy(shiftX, 0);
+		vX = 0.0;
+	}
+	
+	/**
+	 * Shifts Y by the given amount
+	 * @param shiftY Amount to shift by
+	 */
+	protected void shiftY(double shiftY) {
+		
+		shiftY += 1.0;
+		if(vY > 0)
+			shiftY = -shiftY;
+		moveBy(0, shiftY);
+		vY = 0.0;
+	}
+	
 	//Getters
 	public double getX() {
 		return x;

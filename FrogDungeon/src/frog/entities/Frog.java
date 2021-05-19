@@ -100,7 +100,7 @@ public class Frog extends Entity{
 	 */
 	public void move(ArrayList<Wall> walls, DrawingSurface surface) {
 		
-		double baseSpeed = 5.0;
+		double baseSpeed = 3.0;
 		double maxSpeed = baseSpeed * getSpeed();
 		
 		/*if (surface.isPressed(KeyEvent.VK_W))
@@ -117,33 +117,34 @@ public class Frog extends Entity{
 		if(!surface.isPressed(KeyEvent.VK_A) && !surface.isPressed(KeyEvent.VK_D))
 			vX = 0;*/
 		
+		int accelFrames = 18;
 		if (surface.isPressed(KeyEvent.VK_W)) {
 			if(vY > (0-maxSpeed/2))
-				vY -= maxSpeed/24;
+				vY -= maxSpeed/accelFrames;
 			else
-				vY -= (maxSpeed + vY)/24;
+				vY -= (maxSpeed + vY)/accelFrames;
 		}
 		if (surface.isPressed(KeyEvent.VK_A)) {
 			if(vX > (0-maxSpeed/2))
-				vX -= maxSpeed/24;
+				vX -= maxSpeed/accelFrames;
 			else
-				vX -= (maxSpeed + vX)/24;
+				vX -= (maxSpeed + vX)/accelFrames;
 		}
 		if (surface.isPressed(KeyEvent.VK_S)) {
 			if(vY < (maxSpeed/2))
-				vY += maxSpeed/24;
+				vY += maxSpeed/accelFrames;
 			else
-				vY += (maxSpeed - vY)/24;
+				vY += (maxSpeed - vY)/accelFrames;
 		}
 		if (surface.isPressed(KeyEvent.VK_D)) {
 			if(vX < (maxSpeed/2))
-				vX += maxSpeed/24;
+				vX += maxSpeed/accelFrames;
 			else
-				vX += (maxSpeed - vX)/24;
+				vX += (maxSpeed - vX)/accelFrames;
 		}
 		
 		//System.out.println(vX + " " + vY);
-		double deceleration = 0.8;
+		double deceleration = 0.3;
 		if(!surface.isPressed(KeyEvent.VK_W) && !surface.isPressed(KeyEvent.VK_S)) {
 			if(vY > deceleration)
 				vY -= deceleration;
@@ -169,25 +170,29 @@ public class Frog extends Entity{
 			for(Wall wall : walls)
 				wallRectangles.addAll(wall.getRectangles());
 		}
-			//moves by the new vX and vY. This will be undone if a collision happens.
-			super.move();
+		
+		//moves by the new vX and vY. This will be undone if a collision happens.
+		super.move();
+
+		boolean hitWall = false;
 		if(walls!=null) {
-			//saves some values for later use
-			double oldX = x;
-			double oldY = y;
+
+
+			Rectangle rectTouched = null;
+			
 			double shiftX = Integer.MAX_VALUE;
 			double shiftY = Integer.MAX_VALUE;
 			
 			for(Rectangle r : wallRectangles) {
 				if(isTouching(r)) {
+					rectTouched = r;
 					double thisLeft = this.x;
 					double thisRight = this.x + this.width;
 					double rectLeft = r.x;
 					double rectRight = r.x + r.width;
 					
-					if((rectLeft - thisRight > 0) != (rectRight - thisLeft > 0)) {
-						if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX && vX != 0)
-							shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
+					if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX) {
+						shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
 					}
 					
 					double thisTop = this.y;
@@ -195,46 +200,29 @@ public class Frog extends Entity{
 					double rectTop = r.y;
 					double rectBottom = r.y + r.height;
 					
-					if((rectTop - thisBottom > 0) != (rectBottom - thisTop > 0)) {
-						if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY && vY != 0)
-							shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
+					if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY) {
+						shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
+					}
+					
+					if(shiftX < shiftY) {
+						hitWall = true;
+						shiftX(shiftX);
+						if(isTouching(rectTouched)) {
+							shiftY(shiftY);
+						}
+					} else if(shiftY < shiftX) {
+						hitWall = true;
+						shiftY(shiftY);
+						if(isTouching(rectTouched)) {
+							shiftX(shiftX);
+						}
 					}
 				}
 			}
 			
-			if(shiftX != Integer.MAX_VALUE && shiftX < 1.1*(baseSpeed*this.getSpeed())) {
-				shiftX++;
-				if(vX < 0)
-					shiftX = 0 - shiftX;
-				super.moveBy(0 - shiftX, 0);
-				vX = 0.0;
-			}
-			
-			if(shiftY != Integer.MAX_VALUE && shiftY < 1.1*(baseSpeed*this.getSpeed())) {
-				shiftY++;
-				if(vY < 0)
-					shiftY = 0 - shiftY;
-				super.moveBy(0, 0 - shiftY);
-				vY = 0.0;
-			}
-			
-			/*if(shiftX != Integer.MAX_VALUE || shiftY != Integer.MAX_VALUE) {
-				if(shiftX < shiftY) {
-					shiftX++;
-					if(vX < 0)
-						shiftX = 0 - shiftX;
-					super.moveBy(0 - shiftX, 0);
-					vX = 0.0;
-				} else {
-					shiftY++;
-					if(vY < 0)
-						shiftY = 0 - shiftY;
-					super.moveBy(0, 0 - shiftY);
-					vY = 0.0;
-				}
-			}*/
 			
 		}
+		
 		if(vX > 0) {
 			runningImages = runningRightImages;
 			idleImages = idleRightImages;
@@ -243,7 +231,7 @@ public class Frog extends Entity{
 			idleImages = idleLeftImages;
 		}
 		
-		if(vX != 0 || vY != 0) {
+		if(vX != 0 || vY != 0 || hitWall) {
 			if(state != RUNNING) {
 				state = RUNNING;
 				timeInState = 0;
