@@ -25,9 +25,10 @@ public class BossTile {
 		trapdoor = marker.loadImage("resources/trapdoor.png");
 	}
 	
-	public BossTile(Map<String, Object> map) {
+	public BossTile(Map<String, Object> map, PApplet marker) {
 		this.x = (double) map.get("x");
 		this.y = (double) map.get("y");
+		trapdoor = marker.loadImage("resources/trapdoor.png");
 	}
 	
 	//Methods

@@ -174,7 +174,7 @@ public class FrogDungeon extends Screen {
 		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
 
 		Map<String, Object> bossTileMap = (Map<String, Object>) data.get("boss");
-		boss = new BossTile(bossTileMap);
+		boss = new BossTile(bossTileMap, surface);
 		
 		items = new ArrayList<Item>();
 		ArrayList<Map<String, Object>> itemMaps = (ArrayList<Map<String, Object>>) data.get("items");
