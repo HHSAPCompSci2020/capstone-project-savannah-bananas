@@ -69,20 +69,20 @@ public class FrogDungeon extends Screen {
 		player = new Frog(300, 300, 40, 40, 100, surface);
 		player.loadImages(surface);
 		
-		shopKeep = new Shopkeeper(50, 50, 75, 75, 100, surface);
-		//shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d);
+		//shopKeep = new Shopkeeper(50, 50, 75, 75, 100, surface);
+		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 50d, 50d, 100d, surface);
 		//boss = new BossTile(0, 0);
 		
-		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950);
-		boss = new BossTile(400,400, surface);
+		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950, surface);
+		//boss = new BossTile(400,400, surface);
 		items = new ArrayList<Item>();
-		items.add(new HealthPotion(100, 100, 50, 50));
-		items.add(new SpeedPotion(350, 500, 50, 50));
-		items.add(new StrengthPotion(500, 350, 50, 50));
+		//items.add(new HealthPotion(100, 100, 50, 50));
+		//items.add(new SpeedPotion(350, 500, 50, 50));
+		//items.add(new StrengthPotion(500, 350, 50, 50));
 		
 		monsters = new ArrayList<Monster>();
 		monsters.add(new Fly(100, 300, 50, 50, 50, surface));
-		monsters.add(new Snake(100, 200, 50, 50, 50, surface));
+		//monsters.add(new Snake(100, 200, 50, 50, 50, surface));
 
 		
 		pauseButton = new Button(620, 20, 150, 100);
