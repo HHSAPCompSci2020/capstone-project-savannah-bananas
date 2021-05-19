@@ -21,7 +21,9 @@ public class Bow extends ProjectileWeapon {
 	//Constructors
 	public Bow(PApplet marker) {
 		super(BOW_DAMAGE, BOW_RANGE, BOW_SPEED);
-		bowImage = marker.loadImage("resources/bow.png");
+		if(marker != null) {
+			bowImage = marker.loadImage("resources/bow.png");
+		}
 	}
 		
 	//Methods
