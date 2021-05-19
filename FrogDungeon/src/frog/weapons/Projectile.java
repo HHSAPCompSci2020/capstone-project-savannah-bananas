@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import frog.entities.Frog;
 import frog.entities.Monster;
 import frog.misc.Wall;
 import processing.core.PApplet;
@@ -135,6 +136,18 @@ public class Projectile {
 				return true;
 			}
 		}
+		return false;
+	}
+	
+	public boolean hitPlayer(Frog player) {
+		Point thisPoint = new Point((int) x, (int) y);
+		
+		Rectangle monsterRect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
+		if(monsterRect.contains(thisPoint)) {
+			player.setHealth(player.getHealth() - this.damage);
+			return true;
+		}
+		
 		return false;
 	}
 	

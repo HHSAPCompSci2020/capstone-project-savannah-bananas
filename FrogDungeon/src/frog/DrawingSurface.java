@@ -26,6 +26,7 @@ import frog.screen.MenuScreen;
 import frog.screen.PauseScreen;
 import frog.screen.Screen;
 import frog.screen.ShopkeeperGui;
+import frog.screen.VictoryScreen;
 
 /**
  * Drawing surface that contains screens, and passes along mouse events to the active screen.
@@ -122,6 +123,9 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		
 		LoadGameScreen loadScreen = new LoadGameScreen(this);
 		screens.add(loadScreen);
+		
+		VictoryScreen victoryScreen = new VictoryScreen(this);
+		screens.add(victoryScreen);
 		//setting current active screen to be the Main Men
 		//activeScreen = screens.get(MENU_SCREEN);
 		switchScreen(MENU_SCREEN);
