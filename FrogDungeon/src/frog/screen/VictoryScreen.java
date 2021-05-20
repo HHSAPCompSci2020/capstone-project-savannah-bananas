@@ -7,11 +7,12 @@ import processing.core.PImage;
 public class VictoryScreen extends Screen {
 	//Fields
 	private Button menuButton;
+	private PImage title;
 
 	public VictoryScreen(DrawingSurface surface) {
 		super(surface);
 		
-		//frog = new PImage();
+		title = surface.loadImage("resources/victory.png");
 		
 		menuButton = new Button(300, 375, 200, 50);
 		menuButton.setText("Exit");
@@ -25,7 +26,8 @@ public class VictoryScreen extends Screen {
 
 		surface.background(28, 29, 30);
 		surface.pushStyle();
-		//surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
+		surface.textAlign(DrawingSurface.CENTER, DrawingSurface.CENTER);
+		surface.image(title, 100, 10);
 
 		//surface.text("FROG DUNGEON", 350, 50);
 		

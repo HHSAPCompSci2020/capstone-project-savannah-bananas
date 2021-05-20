@@ -46,7 +46,7 @@ public class Frog extends Entity{
 		strengthMultiplyer = 1;
 		melee = new Knife(marker);
 	    ranged = new Bow(marker);
-	    coins = 50;
+	    coins = 0;
 	    
 	    runningRightImages = new ArrayList<PImage>();
 	    runningLeftImages = new ArrayList<PImage>();
