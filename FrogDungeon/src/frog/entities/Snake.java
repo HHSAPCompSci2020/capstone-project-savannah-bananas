@@ -15,7 +15,7 @@ public class Snake extends Monster{
 	//Fields
 	public static final double SNAKE_DAMAGE = 15.0;
 	public static final double SNAKE_RANGE = 500.0;
-	public static final double SNAKE_SPEED = 15.0;
+	public static final double SNAKE_SPEED = 1.5;
 	public static final int SNAKE_COIN_VALUE = 10;
 	private PImage snakeImage;
 	

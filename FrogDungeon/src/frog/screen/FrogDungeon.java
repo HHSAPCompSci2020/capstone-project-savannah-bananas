@@ -114,8 +114,23 @@ public class FrogDungeon extends Screen {
 							int topLeftX = i*400;
 							int topLeftY = j*400;
 							
-							int randomX = (int)(Math.random()*300 + 50);
-							int randomY = (int)(Math.random()*300 + 50);
+							int randomX = (int)(Math.random()*250 + 75);
+							int randomY = (int)(Math.random()*250 + 75);
+							boolean foundValidSpot = false;
+							while(foundValidSpot == false) {
+								randomX = (int)(Math.random()*250 + 75);
+								randomY = (int)(Math.random()*250 + 75);
+								
+								Rectangle rect = new Rectangle(randomX, randomY, 50, 50);
+								boolean touchedOneMonster = false;
+								for(Monster m : monsters) {
+									if(m.isTouching(rect))
+										touchedOneMonster = true;
+								}
+								if(touchedOneMonster == false)
+									foundValidSpot = true;
+							}
+							
 							
 							if(isFly) 
 								monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
@@ -299,7 +314,7 @@ public class FrogDungeon extends Screen {
 				//}
 				
 				
-				monsters.get(i).move(walls, player.getX(), player.getY());
+				monsters.get(i).move(walls, monsters, player.getX(), player.getY());
 				monsters.get(i).draw(surface);
 				Rectangle hb = new Rectangle((int)(monsters.get(i).getX()), (int)(monsters.get(i).getY()), (int)(monsters.get(i).getWidth()), (int)(monsters.get(i).getHeight()));
 				if(player.isTouching(hb)) {

@@ -16,7 +16,7 @@ public class Fly extends Monster{
 	//Fields
 	public static final double FLY_DAMAGE = 10.0;
 	public static final double FLY_RANGE = 500.0;
-	public static final double FLY_SPEED = 10.0;
+	public static final double FLY_SPEED = 2.0;
 	public static final int FLY_COIN_VALUE = 5;
 	private PImage flyImage;
 	

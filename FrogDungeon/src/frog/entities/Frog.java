@@ -191,18 +191,21 @@ public class Frog extends Entity{
 					double rectLeft = r.x;
 					double rectRight = r.x + r.width;
 					
-					if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX) {
+					/*if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX) {
 						shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
-					}
+					}*/
+					shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
 					
 					double thisTop = this.y;
 					double thisBottom = this.y + this.height;
 					double rectTop = r.y;
 					double rectBottom = r.y + r.height;
 					
-					if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY) {
+					/*if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY) {
 						shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
-					}
+					}*/
+
+					shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
 					
 					if(shiftX < shiftY) {
 						hitWall = true;
@@ -219,8 +222,6 @@ public class Frog extends Entity{
 					}
 				}
 			}
-			
-			
 		}
 		
 		if(vX > 0) {

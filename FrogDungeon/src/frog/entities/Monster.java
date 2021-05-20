@@ -90,9 +90,9 @@ public abstract class Monster extends Entity {
 	}
 	
 	//Moves towards the player
-	public void move(ArrayList<Wall> walls, double frogX, double frogY) {
-	   int targetX = (int)frogX;
-       int targetY = (int)frogY;
+	public void move(ArrayList<Wall> walls, ArrayList<Monster> monsters, double frogX, double frogY) {
+		int targetX = (int)frogX;
+		int targetY = (int)frogY;
 
         //calculating the angle
         double changeX = targetX - x;
@@ -114,8 +114,8 @@ public abstract class Monster extends Entity {
             if(changeX < 0)
             	refAngle = Math.PI - refAngle;
 
-            vX = (1.5 * Math.cos(refAngle));
-            vY = -(1.5 * Math.sin(refAngle));
+            vX = (speed * Math.cos(refAngle));
+            vY = -(speed * Math.sin(refAngle));
         }
 
         
@@ -130,96 +130,54 @@ public abstract class Monster extends Entity {
 			for(Wall wall : walls)
 				wallRectangles.addAll(wall.getRectangles());
 		}
-		super.move();
+		/*if(monsters != null) {
+			for(Monster m : monsters)
+				if(!m.equals(this))
+					wallRectangles.add(new Rectangle((int) m.getX(), (int) m.getY(), (int) m.getWidth(), (int) m.getHeight()));
 			
-		/*if(walls!= null) {
-			//saves some values for later use
-			double oldX = x;
-			double oldY = y;
-			double shiftX = Integer.MAX_VALUE;
-			double shiftY = Integer.MAX_VALUE;
-			
-			for(Rectangle r : wallRectangles) {
-				if(isTouching(r)) {
-					//System.out.println("YES");
-					double thisLeft = this.x;
-					double thisRight = this.x + this.width;
-					double rectLeft = r.x;
-					double rectRight = r.x + r.width;
-					
-					if((rectLeft - thisRight > 0) != (rectRight - thisLeft > 0)) {
-						if(Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX && vX != 0)
-							shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
-					}
-					
-					double thisTop = this.y;
-					double thisBottom = this.y + this.height;
-					double rectTop = r.y;
-					double rectBottom = r.y + r.height;
-					
-					if((rectTop - thisBottom > 0) != (rectBottom - thisTop > 0)) {
-						if(Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY && vY != 0)
-							shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
-					}
-				}
-			}
-			
-			if(shiftX != Integer.MAX_VALUE && Math.abs(shiftX) < Math.abs(vX)) {
-				shiftX++;
-				if(vX < 0)
-					shiftX = 0 - shiftX;
-				super.moveBy(0 - shiftX, 0);
-				vX = 0.0;
-			}
-			
-			if(shiftY != Integer.MAX_VALUE && Math.abs(shiftY) < Math.abs(vY)) {
-				shiftY++;
-				if(vY < 0)
-					shiftY = 0 - shiftY;
-				super.moveBy(0, 0 - shiftY);
-				vY = 0.0;
-			}
-			if(dropItem != null) {
-	        	dropItem.setX(this.x);
-	        	dropItem.setY(this.y);
-	        }
 		}*/
+		super.move();
 		
-		if (walls != null) {
+		
+		if (walls != null || monsters != null) {
 
 			Rectangle rectTouched = null;
 
 			double shiftX = Integer.MAX_VALUE;
 			double shiftY = Integer.MAX_VALUE;
-
 			for (Rectangle r : wallRectangles) {
 				if (isTouching(r)) {
 					rectTouched = r;
+					//System.out.println("object at " + this.getX() + ", " + this.getY() + " touched rectangle (" + r.getX() + ", " + r.getY() + ", " + r.getWidth() + ", " + r.getHeight());
 					double thisLeft = this.x;
 					double thisRight = this.x + this.width;
 					double rectLeft = r.x;
 					double rectRight = r.x + r.width;
 
-					if (Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX) {
+					/*if (Math.min(thisRight - rectLeft, rectRight - thisLeft) < shiftX) {
 						shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
-					}
+					}*/
+					shiftX = Math.min(thisRight - rectLeft, rectRight - thisLeft);
 
 					double thisTop = this.y;
 					double thisBottom = this.y + this.height;
 					double rectTop = r.y;
 					double rectBottom = r.y + r.height;
 
-					if (Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY) {
+					/*if (Math.min(thisBottom - rectTop, rectBottom - thisTop) < shiftY) {
 						shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
-					}
+					}*/
+
+					shiftY = Math.min(thisBottom - rectTop, rectBottom - thisTop);
 					
 					
-					if (shiftX < shiftY) {
+					//System.out.println("shiftX = " + shiftX + ", shiftY = " + shiftY);
+					if (shiftX < shiftY && vX != 0) {
 						shiftX(shiftX);
 						if (isTouching(rectTouched)) {
 							shiftY(shiftY);
 						}
-					} else if (shiftY < shiftX) {
+					} else if (shiftY < shiftX && vY != 0) {
 						shiftY(shiftY);
 						if (isTouching(rectTouched)) {
 							shiftX(shiftX);
@@ -228,6 +186,7 @@ public abstract class Monster extends Entity {
 				}
 			}
 
+			
 			if(dropItem != null) {
 	        	dropItem.setX(this.x);
 	        	dropItem.setY(this.y);

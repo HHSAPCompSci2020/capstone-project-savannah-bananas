@@ -82,7 +82,7 @@ public class BossRoom extends Screen {
 		}
 		
 		for(int i = 0; i < monsters.size(); i++) {
-			monsters.get(i).move(null, surface.getFrog().getX(), surface.getFrog().getY());
+			monsters.get(i).move(null, monsters, surface.getFrog().getX(), surface.getFrog().getY());
 			Rectangle hb = new Rectangle((int)monsters.get(i).getX(), (int)monsters.get(i).getY(), (int)monsters.get(i).getWidth(), (int)monsters.get(i).getHeight());
 			if(surface.getFrog().isTouching(hb) && ticks%60 == 0) {
 				surface.getFrog().setHealth(surface.getFrog().getHealth()-boss.getDamage());
