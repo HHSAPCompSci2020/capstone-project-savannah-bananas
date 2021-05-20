@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 
 /**
@@ -180,6 +181,9 @@ public class Wall {
 	 * @return ArrayList of Rectangles that represent this wall. Either nothing, one solid rectangle, or two partial rectangles.
 	 */
 	public ArrayList<Rectangle> getRectangles() {
+		if(this.x > FrogDungeon.MAZE_SIZE || this.x < 0 || this.y > FrogDungeon.MAZE_SIZE || this.y < 0)
+			return getRectanglesWithoutConversion();
+		
 		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
 
 		Point centerPoint = wallCoordsToPixelCoords(this.x, this.y);
@@ -203,6 +207,17 @@ public class Wall {
 			}
 		}
 		
+		return rectangles;
+	}
+	
+	/**
+	 * Returns the rectangles of this wall, without converting the points to pixel coords
+	 * @pre Assumes that wall is solid
+	 */
+	public ArrayList<Rectangle> getRectanglesWithoutConversion() {
+		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+		if(type == WALL)
+			rectangles.add(new Rectangle((int) x, (int) y, (int) width, (int) height));
 		return rectangles;
 	}
 	

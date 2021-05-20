@@ -8,6 +8,7 @@ import frog.DrawingSurface;
 import frog.entities.Fly;
 import frog.entities.Frog;
 import frog.entities.Monster;
+import frog.entities.Snake;
 import frog.entities.Sorcerer;
 import frog.misc.Wall;
 import frog.util.Button;
@@ -30,13 +31,13 @@ public class BossRoom extends Screen {
 		//double health = surface.getFrog().getHealth();
 		walls = new ArrayList<Wall>();
 		walls.add(new Wall(-20.0, -20.0, 840.0, 20.0, true));
-		walls.add(new Wall(-20.0, -20.0, 20.0, 840.0, false));
-		walls.add(new Wall(800.0, -20.0, 20.0, 840.0, false));
-		walls.add(new Wall(-20.0, 800.0, 840.0, 20.0, true));
+		walls.add(new Wall(-20.0, -20.0, 840.0, 20.0, false));
+		walls.add(new Wall(800.0, -20.0, 840.0, 20.0, false));
+		walls.add(new Wall(-20.0, 600.0, 840.0, 20.0, true));
 		//surface.getFrog().moveTo(50, 50);
 		//((FrogDungeon)(surface.getScreen(DrawingSurface.GAME_SCREEN))).getFrog().moveTo(50, 50);
 		//player.setHealth(health);
-		boss = new Sorcerer(600, 600, 100, 100, 1000);
+		boss = new Sorcerer(650, 450, 140, 140, 5000);
 		bossMaxHealth = boss.getHealth();
 		
 		monsters = new ArrayList<Monster>();
@@ -78,12 +79,24 @@ public class BossRoom extends Screen {
 		ArrayList<Projectile> pBoss = boss.getBow().getProjectiles();
 		if (pBoss.size() > 0) {
 			for (int i = 0; i < pBoss.size(); i++) {
-				if(pBoss.get(i).shouldDie()) {
-					monsters.add(new Fly(pBoss.get(i).getX(), pBoss.get(i).getY(), 50, 50, 50, surface));
-				}
-				if(pBoss.get(i).shouldDie() || pBoss.get(i).hitPlayer(surface.getFrog())) {
+				if(pBoss.get(i).shouldDie() || pBoss.get(i).isTouchingWall(walls)) {
+					int monster = (int) (Math.random() * 2);
+					double x = pBoss.get(i).getX();
+					double y = pBoss.get(i).getY();
+					if(x > 750)
+						x = 750;
+					if(y > 550)
+						y = 550;
+					if(monster == 0) {
+						monsters.add(new Fly(x, y, 50, 50, 50, surface));
+					} else {
+						monsters.add(new Snake(x, y, 50, 50, 50, surface));
+					}
 					pBoss.remove(i);
+					i--;
+				} else if (pBoss.get(i).hitPlayer(surface.getFrog())) {
 					surface.getFrog().setHealth(surface.getFrog().getHealth()-10);
+					pBoss.remove(i);
 					i--;
 				} else {
 					pBoss.get(i).move();
@@ -109,11 +122,13 @@ public class BossRoom extends Screen {
 			surface.switchScreen(surface.VICTORY_SCREEN);
 		}
 		
-		if(ticks % 300 == 0) {
+		if(ticks % 240 == 0) {
+			boss.shootRangedWeapon((int)surface.getFrog().getX(), (int)surface.getFrog().getY(), this);
+		} else if(ticks % 120 == 0 && boss.getHealth() < bossMaxHealth/2) {
+			boss.shootRangedWeapon((int)surface.getFrog().getX(), (int)surface.getFrog().getY(), this);
+		} else if(ticks % 60 == 0 && boss.getHealth() < bossMaxHealth/4) {
 			boss.shootRangedWeapon((int)surface.getFrog().getX(), (int)surface.getFrog().getY(), this);
 		}
-		
-		
 		
 		
 		surface.fill(255);
@@ -122,11 +137,11 @@ public class BossRoom extends Screen {
 		surface.fill(0);
 		surface.text("Health: " + surface.getFrog().getHealth() + "\nSpeed: " + surface.getFrog().getSpeed() + "\nStrength: " + surface.getFrog().getStrength() + "\nCoins: " + surface.getFrog().getCoins(), 50, 45);
 		surface.fill(255);
-		surface.rect(200, 30, 200, 35);
+		surface.rect(200, 30, 200, 35, 8);
+		surface.rect(250,  500, 300, 45, 8);
 		surface.fill(228, 74, 74);
-		surface.rect(200, 30, (float)((surface.getFrog().getHealth()/100)*200), 35);
-		surface.fill(228, 74, 74);
-		surface.rect(250,  500,  (float)(boss.getHealth()/bossMaxHealth*300), 45);
+		surface.rect(200, 30, (float)((surface.getFrog().getHealth()/100)*200), 35, 8);
+		surface.rect(250,  500,  (float)(boss.getHealth()/bossMaxHealth*300), 45, 8);
 		
 		surface.fill(255);
 		

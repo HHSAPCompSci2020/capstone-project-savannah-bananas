@@ -7,6 +7,7 @@ import frog.screen.FrogDungeon;
 import frog.screen.Screen;
 import frog.weapons.Bow;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * Represents the Sorcerer final boss. Extends Monster.
@@ -17,9 +18,10 @@ public class Sorcerer extends Monster {
 
 	//Fields
 	public static final double SORCERER_DAMAGE = 20.0;
-	public static final double SORCERER_RANGE = 500.0;
-	public static final double SORCERER_SPEED = 8.0;
+	public static final double SORCERER_RANGE = 1000.0;
+	public static final double SORCERER_SPEED = 0.5;
 	public static final int SORCERER_COIN_VALUE = 15;
+	private PImage sorcerer;
 	
 	private Bow bow;
 	
@@ -31,9 +33,12 @@ public class Sorcerer extends Monster {
 	
 	//Methods
 	public void draw(PApplet marker) {
-		marker.fill(255);
-		marker.ellipseMode(marker.CORNER);
-		marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		if(sorcerer == null)
+			sorcerer = marker.loadImage("resources/sorcerer.png");
+		//marker.fill(255);
+		//marker.ellipseMode(marker.CORNER);
+		//marker.ellipse((float)x, (float)y, (float)width, (float)height);
+		marker.image(sorcerer, (float) x, (float) y, (float) width, (float) height);
 	}
 	
 	/**

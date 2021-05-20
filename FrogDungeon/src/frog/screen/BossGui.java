@@ -60,6 +60,7 @@ public class BossGui extends Screen {
 	public void buttonPressed(Button button) {
 		if(button.equals(yesButton)) {
 			surface.resetBossRoom();
+			((BossRoom) surface.getScreen(surface.BOSS_SCREEN)).resetPlayerPosition();
 			surface.switchScreen(surface.BOSS_SCREEN);
 		} else if(button.equals(noButton)) {
 			surface.switchScreen(surface.GAME_SCREEN);
