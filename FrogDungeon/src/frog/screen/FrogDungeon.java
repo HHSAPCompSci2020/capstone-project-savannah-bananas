@@ -70,10 +70,35 @@ public class FrogDungeon extends Screen {
 		player.loadImages(surface);
 		
 		//shopKeep = new Shopkeeper(50, 50, 75, 75, 100, surface);
-		shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 75d, 75d, 100d, surface);
+		Point shopTile = new Point((int) (Math.random() * MAZE_SIZE), (int) (Math.random() * MAZE_SIZE));
+		int corner = (int) (Math.random() * 4);
+		Point coordsInTile = new Point(200, 200);
+		if(corner == 0)
+			coordsInTile = new Point(10, 10);
+		else if(corner == 1)
+			coordsInTile = new Point(315, 10);
+		else if(corner == 2)
+			coordsInTile = new Point(315, 315);
+		else if(corner == 3)
+			coordsInTile = new Point(10, 315);
+		//shopKeep = new Shopkeeper(Math.random()*3950, Math.random()*3950, 75d, 75d, 100d, surface);
+		shopKeep = new Shopkeeper(shopTile.x * 400 + coordsInTile.x, shopTile.y * 400 + coordsInTile.y, 75.0, 75.0, 100.0, surface);
+		
 		//boss = new BossTile(0, 0);
 		
-		boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950, surface);
+		Point bossTile = new Point(5 + (int) (Math.random() * 5), 5 + (int) (Math.random() * 5));
+		corner = (int) (Math.random() * 4);
+		coordsInTile = new Point(200, 200);
+		if(corner == 0)
+			coordsInTile = new Point(10, 10);
+		else if(corner == 1)
+			coordsInTile = new Point(340, 10);
+		else if(corner == 2)
+			coordsInTile = new Point(340, 340);
+		else if(corner == 3)
+			coordsInTile = new Point(10, 340);
+		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950, surface);
+		boss = new BossTile(2000 + bossTile.x * 400 + coordsInTile.x, 2000 + bossTile.y * 400 + coordsInTile.y, surface);
 		//boss = new BossTile(400,400, surface);
 		items = new ArrayList<Item>();
 		//items.add(new HealthPotion(100, 100, 50, 50));
@@ -114,8 +139,8 @@ public class FrogDungeon extends Screen {
 							int topLeftX = i*400;
 							int topLeftY = j*400;
 							
-							int randomX = (int)(Math.random()*250 + 75);
-							int randomY = (int)(Math.random()*250 + 75);
+							int randomX = (int)(Math.random()*200 + 75);
+							int randomY = (int)(Math.random()*200 + 75);
 							boolean foundValidSpot = false;
 							while(foundValidSpot == false) {
 								randomX = (int)(Math.random()*250 + 75);
@@ -251,8 +276,8 @@ public class FrogDungeon extends Screen {
 		player.move(walls, surface);
 		//surface.image(brick, 0, 0);
 		
-		//if (boss.isInsideTile(player.getX() + player.getWidth()/2, player.getY() + player.getHeight()/2)) {
-		if (boss.isInsideTile(player.getX(), player.getY())) {
+		if (boss.isInsideTile(player.getX() + player.getWidth()/2, player.getY() + player.getHeight()/2)) {
+		//if (boss.isInsideTile(player.getX(), player.getY())) {
 			boss.changeScreen(surface);
 			player.moveTo(player.getX() + 50, player.getY() + 50);
 		}	
@@ -339,11 +364,14 @@ public class FrogDungeon extends Screen {
 		}
 		
 		//SHOPKEEPER
-		if(player.isTouching(new Rectangle((int)(shopKeep.getX() - shopKeep.getWidth()/2), (int)(shopKeep.getY() - shopKeep.getHeight()/2), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+		//if(player.isTouching(new Rectangle((int)(shopKeep.getX() - shopKeep.getWidth()/2), (int)(shopKeep.getY() - shopKeep.getHeight()/2), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+		if(player.isTouching(new Rectangle((int) shopKeep.getX(), (int) shopKeep.getY(), (int) shopKeep.getWidth(), (int) shopKeep.getHeight()))) {	
 			largeMessage = "E to open Shop Keeper";
+			
 			hasLargeMessage = true;
 		}
-		if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int)(shopKeep.getX() - shopKeep.getWidth()/2), (int)(shopKeep.getY() - shopKeep.getHeight()/2), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+		//if (surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int)(shopKeep.getX() - shopKeep.getWidth()/2), (int)(shopKeep.getY() - shopKeep.getHeight()/2), (int)(shopKeep.getWidth()), (int)(shopKeep.getHeight())))) {
+		if(surface.isPressed(KeyEvent.VK_E) && player.isTouching(new Rectangle((int) shopKeep.getX(), (int) shopKeep.getY(), (int) shopKeep.getWidth(), (int) shopKeep.getHeight()))) {	
 			shopKeep.changeScreen(surface);
 		}
 		

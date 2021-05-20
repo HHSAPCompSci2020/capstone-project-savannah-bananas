@@ -59,10 +59,14 @@ public abstract class Monster extends Entity {
 		
 		//int i = (int)(Math.random()*10);
 		//Item item = new Item(map.get("dropItem."));
-		Object rawItemType = map.get("dropItem.type");
-		if(rawItemType == null || rawItemType.equals(""))
+		//Object rawItemType = map.get("dropItem.type");
+		//if(rawItemType == null || rawItemType.equals(""))
+		//	return;
+		Object uncastItemMap = map.get("dropItem");
+		if(!(uncastItemMap instanceof HashMap))
 			return;
-		String itemType = (String) map.get("dropItem.type");
+		HashMap<String, Object> itemMap = (HashMap<String, Object>) uncastItemMap;
+		String itemType = (String) itemMap.get("type");
 		//System.out.println(i);
 		if(itemType.equals("HealthPotion")) {
 			dropItem = new HealthPotion(this.x, this.y, 50, 50);
@@ -130,12 +134,12 @@ public abstract class Monster extends Entity {
 			for(Wall wall : walls)
 				wallRectangles.addAll(wall.getRectangles());
 		}
-		/*if(monsters != null) {
+		if(monsters != null) {
 			for(Monster m : monsters)
 				if(!m.equals(this))
 					wallRectangles.add(new Rectangle((int) m.getX(), (int) m.getY(), (int) m.getWidth(), (int) m.getHeight()));
 			
-		}*/
+		}
 		super.move();
 		
 		

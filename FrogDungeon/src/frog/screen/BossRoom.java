@@ -9,6 +9,7 @@ import frog.entities.Fly;
 import frog.entities.Frog;
 import frog.entities.Monster;
 import frog.entities.Sorcerer;
+import frog.misc.Wall;
 import frog.util.Button;
 import frog.weapons.Projectile;
 import processing.core.PApplet;
@@ -22,12 +23,18 @@ public class BossRoom extends Screen {
 	private PImage frame1;
 	private PImage frame2;
 	private int ticks;
+	private ArrayList<Wall> walls;
 	
 	public BossRoom(DrawingSurface surface) {
 		super(surface);
 		//double health = surface.getFrog().getHealth();
-		
-		surface.getFrog().moveTo(0, 0);
+		walls = new ArrayList<Wall>();
+		walls.add(new Wall(-20.0, -20.0, 840.0, 20.0, true));
+		walls.add(new Wall(-20.0, -20.0, 20.0, 840.0, false));
+		walls.add(new Wall(800.0, -20.0, 20.0, 840.0, false));
+		walls.add(new Wall(-20.0, 800.0, 840.0, 20.0, true));
+		//surface.getFrog().moveTo(50, 50);
+		//((FrogDungeon)(surface.getScreen(DrawingSurface.GAME_SCREEN))).getFrog().moveTo(50, 50);
 		//player.setHealth(health);
 		boss = new Sorcerer(600, 600, 100, 100, 1000);
 		bossMaxHealth = boss.getHealth();
@@ -39,11 +46,14 @@ public class BossRoom extends Screen {
 		frame2 = surface.loadImage("resources/frame2.png");
 		ticks = 0;
 	}
+	
+	public void resetPlayerPosition() {
+		surface.getFrog().moveTo(20, 20);
+	}
 
 	public void draw() {
-		
 		surface.background(28, 29, 30);
-		surface.getFrog().move(null, surface);
+		surface.getFrog().move(walls, surface);
 		//surface.background(0);
 		//surface.translate(0 - (float) player.getX() - (float) player.getWidth()/2 + 400, 0 - (float) player.getY() - (float) player.getHeight()/2 + 300); 
 		surface.getFrog().draw(surface);
@@ -73,6 +83,7 @@ public class BossRoom extends Screen {
 				}
 				if(pBoss.get(i).shouldDie() || pBoss.get(i).hitPlayer(surface.getFrog())) {
 					pBoss.remove(i);
+					surface.getFrog().setHealth(surface.getFrog().getHealth()-10);
 					i--;
 				} else {
 					pBoss.get(i).move();
@@ -82,7 +93,7 @@ public class BossRoom extends Screen {
 		}
 		
 		for(int i = 0; i < monsters.size(); i++) {
-			monsters.get(i).move(null, monsters, surface.getFrog().getX(), surface.getFrog().getY());
+			monsters.get(i).move(walls, monsters, surface.getFrog().getX(), surface.getFrog().getY());
 			Rectangle hb = new Rectangle((int)monsters.get(i).getX(), (int)monsters.get(i).getY(), (int)monsters.get(i).getWidth(), (int)monsters.get(i).getHeight());
 			if(surface.getFrog().isTouching(hb) && ticks%60 == 0) {
 				surface.getFrog().setHealth(surface.getFrog().getHealth()-boss.getDamage());

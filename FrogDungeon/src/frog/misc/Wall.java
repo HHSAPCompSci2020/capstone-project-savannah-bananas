@@ -71,6 +71,26 @@ public class Wall {
 		}
 	}
 	
+	/**
+	 * Creates a custom wall with the given params
+	 */
+	public Wall(double x, double y, double width, double height, boolean isHorizontal) {
+		this.x = x;
+		this.y = y;
+		this.type = WALL;
+		if(isHorizontal) {
+			this.width = (int) width;
+			this.height = (int) height;
+		} else {
+			this.width = (int) height;
+			this.height = (int) width;
+		}
+	}
+	
+	/**
+	 * Loads a wall from the given HashMap
+	 * @param map HashMap that contains x, y, width, height and type values
+	 */
 	public Wall(Map<String, Object> map) {
 		this.x = (double) map.get("x");
 		this.y = (double) map.get("y");

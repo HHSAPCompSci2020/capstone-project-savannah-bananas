@@ -31,7 +31,8 @@ public class Shopkeeper extends Entity{
 	 */
 	public void draw(PApplet marker) {
 		marker.fill(255);
-		marker.image(shopkeeper, (float)(x-width/2), (float)(y-height/2), (float)width, (float)height);
+		//marker.image(shopkeeper, (float)(x-width/2), (float)(y-height/2), (float)width, (float)height);
+		marker.image(shopkeeper, (float)x, (float)y, (float)width, (float)height);
 		//marker.ellipse((float)x, (float)y, (float)width, (float)height);
 		
 	}

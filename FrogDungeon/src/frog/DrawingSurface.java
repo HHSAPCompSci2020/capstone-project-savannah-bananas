@@ -167,10 +167,23 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 */
 	public void resetGame() {
 		screens.set(GAME_SCREEN, new FrogDungeon(this));
+		resetBossRoom();
 	}
 	
+	/**
+	 * Loads the game from the file at the given path
+	 * @param filePath
+	 */
 	public void loadGameFromFile(String filePath) {
 		screens.set(GAME_SCREEN, new FrogDungeon(this, new File(filePath)));
+		resetBossRoom();
+	}
+	
+	/**
+	 * Resets the Boss room
+	 */
+	public void resetBossRoom() {
+		screens.set(BOSS_SCREEN, new BossRoom(this));
 	}
 	
 	/**
