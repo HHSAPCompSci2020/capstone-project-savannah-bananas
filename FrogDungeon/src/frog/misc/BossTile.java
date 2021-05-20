@@ -70,6 +70,10 @@ public class BossTile {
 		return false;
 	}
 	
+	public PImage getImage() {
+		return trapdoor;
+	}
+	
 	public Map<String, Object> asMap() {
 		 Map<String, Object> data = new HashMap<String, Object>();
 		 data.put("x", x);

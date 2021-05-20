@@ -90,7 +90,7 @@ public class BossRoom extends Screen {
 					if(monster == 0) {
 						monsters.add(new Fly(x, y, 50, 50, 50, surface));
 					} else {
-						monsters.add(new Snake(x, y, 50, 50, 50, surface));
+						monsters.add(new Snake(x, y, 50, 50, 75, surface));
 					}
 					pBoss.remove(i);
 					i--;

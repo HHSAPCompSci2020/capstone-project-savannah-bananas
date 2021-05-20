@@ -357,6 +357,10 @@ public class Frog extends Entity{
 		coins += amount;
 	}
 	
+	public PImage getImage() {
+		return idleRightImages.get(0);
+	}
+	
 	public Map<String, Object> asMap() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		

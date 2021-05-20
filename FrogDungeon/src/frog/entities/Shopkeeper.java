@@ -45,4 +45,11 @@ public class Shopkeeper extends Entity{
 		//System.out.println("yaya");
 		surface.switchScreen(surface.SHOPKEEPER_GUI);
 	}
+	
+	/**
+	 * Returns the shopkeeper image
+	 */
+	public PImage getImage() {
+		return shopkeeper;
+	}
 }

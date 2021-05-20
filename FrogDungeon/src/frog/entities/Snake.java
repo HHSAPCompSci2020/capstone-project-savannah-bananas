@@ -19,22 +19,26 @@ public class Snake extends Monster{
 	public static final double SNAKE_RANGE = 500.0;
 	public static final double SNAKE_SPEED = 1.5;
 	public static final int SNAKE_COIN_VALUE = 10;
-	private PImage snakeImage;
-	private PImage snakeLeftImage;
+	private static PImage snakeImage;
+	private static PImage snakeLeftImage;
 	private int ticks;
 	
 	//Constructors
 	public Snake(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
-		snakeImage = marker.loadImage("resources/snake.png");
-		snakeLeftImage = marker.loadImage("resources/snakeLeft.png");
+		if(snakeImage == null)
+			snakeImage = marker.loadImage("resources/snake.png");
+		if(snakeLeftImage == null)
+			snakeLeftImage = marker.loadImage("resources/snakeLeft.png");
 		ticks = 0;
 	}
 	
 	public Snake(Map<String, Object> map, PApplet marker) {
 		super(map, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
-		snakeImage = marker.loadImage("resources/snake.png");
-		snakeLeftImage = marker.loadImage("resources/snakeLeft.png");
+		if(snakeImage == null)
+			snakeImage = marker.loadImage("resources/snake.png");
+		if(snakeLeftImage == null)
+			snakeLeftImage = marker.loadImage("resources/snakeLeft.png");
 		ticks = 0;
 	}
 	

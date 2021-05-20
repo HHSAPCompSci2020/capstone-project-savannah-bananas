@@ -98,7 +98,7 @@ public class FrogDungeon extends Screen {
 		else if(corner == 3)
 			coordsInTile = new Point(10, 340);
 		//boss = new BossTile(2000+Math.random()*1950, 2000+Math.random()*1950, surface);
-		boss = new BossTile(2000 + bossTile.x * 400 + coordsInTile.x, 2000 + bossTile.y * 400 + coordsInTile.y, surface);
+		boss = new BossTile(bossTile.x * 400 + coordsInTile.x, bossTile.y * 400 + coordsInTile.y, surface);
 		//boss = new BossTile(400,400, surface);
 		items = new ArrayList<Item>();
 		//items.add(new HealthPotion(100, 100, 50, 50));
@@ -152,7 +152,7 @@ public class FrogDungeon extends Screen {
 								if(isFly) 
 									m = new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface);
 								else
-									m = new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface);
+									m = new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 75, surface);
 								
 								Rectangle rect = new Rectangle((int) m.getX(), (int) m.getY(), 50, 50);
 								boolean touchedOneMonster = false;
@@ -453,7 +453,10 @@ public class FrogDungeon extends Screen {
 		surface.rect(5, 485, 110, 110, 5);
 		surface.fill(255);
 		surface.noStroke();
-		surface.ellipse((float) (10 + 100*player.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)), (float) (490 + 100*player.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)), 5, 5);
+		//surface.ellipse((float) (10 + 100*player.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)), (float) (490 + 100*player.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)), 5, 5);
+		surface.image(shopKeep.getImage(), (float) (10 + 100*shopKeep.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)) - 12, (float) (490 + 100 * shopKeep.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)) - 12, 25, 25); 
+		surface.image(player.getImage(), (float) (10 + 100*player.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)) - 12, (float) (490 + 100 * player.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)) - 12, 25, 25); 
+		surface.image(boss.getImage(), (float) (100*boss.getX()/(Wall.WALL_WIDTH * MAZE_SIZE)), (float) (490 + 100 * boss.getY()/(Wall.WALL_WIDTH * MAZE_SIZE)) - 10, 20, 20); 
 		
 		//FPS
 		surface.fill(255);
