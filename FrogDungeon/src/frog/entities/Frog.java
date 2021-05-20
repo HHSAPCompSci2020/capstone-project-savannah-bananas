@@ -357,6 +357,10 @@ public class Frog extends Entity{
 		coins += amount;
 	}
 	
+	/**
+	 * Returns first idle image
+	 * @return One image, always the idle one. No animation
+	 */
 	public PImage getImage() {
 		return idleRightImages.get(0);
 	}

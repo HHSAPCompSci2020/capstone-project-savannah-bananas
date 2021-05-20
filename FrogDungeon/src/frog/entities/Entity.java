@@ -200,6 +200,10 @@ public abstract class Entity {
 		strengthMultiplyer += amount;
 	}
 	
+	/**
+	 * Returns this Entity's unique fields as a HashMap with key/value pairs
+	 * @return HashMap containing all unique fields of this Entity
+	 */
 	public Map<String, Object> asMap() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		data.put("x", x);
