@@ -2,6 +2,8 @@ package frog.entities;
 
 import java.util.Map;
 
+import frog.DrawingSurface;
+import frog.screen.FrogDungeon;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -18,23 +20,35 @@ public class Snake extends Monster{
 	public static final double SNAKE_SPEED = 1.5;
 	public static final int SNAKE_COIN_VALUE = 10;
 	private PImage snakeImage;
+	private PImage snakeLeftImage;
+	private int ticks;
 	
 	//Constructors
 	public Snake(double x, double y, double width, double height, double health, PApplet marker) {
 		super(x, y, width, height, health, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
 		snakeImage = marker.loadImage("resources/snake.png");
+		snakeLeftImage = marker.loadImage("resources/snakeLeft.png");
+		ticks = 0;
 	}
 	
 	public Snake(Map<String, Object> map, PApplet marker) {
 		super(map, SNAKE_DAMAGE, SNAKE_RANGE, SNAKE_SPEED, SNAKE_COIN_VALUE);
 		snakeImage = marker.loadImage("resources/snake.png");
+		snakeLeftImage = marker.loadImage("resources/snakeLeft.png");
+		ticks = 0;
 	}
 	
 	//Methods
 	public void draw(PApplet marker) {
+		ticks++;
 		marker.pushStyle();
 		
-		marker.image(snakeImage, (float)x, (float)y, (float)width, (float)height);
+		if(ticks%40 < 20)
+			marker.image(snakeImage, (float)x, (float)y, (float)width, (float)height);
+		else 
+			marker.image(snakeLeftImage, (float)x, (float)y, (float)width, (float)height);
+		
+		
 		
 		
 		//marker.fill(0, 0, 256);

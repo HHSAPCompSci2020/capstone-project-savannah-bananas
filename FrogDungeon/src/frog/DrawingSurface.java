@@ -69,7 +69,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 	 * Strange-Dungeon.mp3 plays in the boss screen
 	 * sad_recorder.mp3 plays when the player dies
 	 */
-	private SoundFile menuMusic, gameMusic, bossMusic, deathMusic;
+	private SoundFile menuMusic, gameMusic, bossMusic, deathMusic, victoryMusic;
 	
 	//Constructors
 	public DrawingSurface() {
@@ -90,6 +90,7 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		menuMusic = new SoundFile(this, "resources/music/Dungeon-King.wav");
 		bossMusic = new SoundFile(this, "resources/music/Strange-Dungeon.wav");
 		deathMusic = new SoundFile(this, "resources/music/sad_recorder.wav");
+		victoryMusic = new SoundFile(this, "resources/music/victoryMusic.wav");
 		
 		//System.out.println("loaded files");
 		this.ensureDirExists("saves");
@@ -255,6 +256,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 			playFile(gameMusic);
 		else if(index == GAME_OVER_SCREEN)
 			playFile(deathMusic);
+		else if(index == VICTORY_SCREEN)
+			playFile(victoryMusic);
 		else if(!menuMusic.isPlaying())
 			playFile(menuMusic);
 	}
@@ -268,6 +271,8 @@ public class DrawingSurface extends PApplet implements ScreenSwitcher {
 		bossMusic.stop();
 		deathMusic.jump(0);
 		deathMusic.stop();
+		victoryMusic.jump(0);
+		victoryMusic.stop();
 		
 		file.loop();
 	}

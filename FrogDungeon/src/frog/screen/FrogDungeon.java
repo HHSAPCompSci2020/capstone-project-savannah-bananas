@@ -70,7 +70,7 @@ public class FrogDungeon extends Screen {
 		player.loadImages(surface);
 		
 		//shopKeep = new Shopkeeper(50, 50, 75, 75, 100, surface);
-		Point shopTile = new Point((int) (Math.random() * MAZE_SIZE), (int) (Math.random() * MAZE_SIZE));
+		Point shopTile = new Point((int) (Math.random() * 5), (int) (Math.random() * 5));
 		int corner = (int) (Math.random() * 4);
 		Point coordsInTile = new Point(200, 200);
 		if(corner == 0)
@@ -136,31 +136,41 @@ public class FrogDungeon extends Screen {
 						int numMonsters = (int)(Math.random()*5+3);
 						boolean isFly = ((((int)(Math.random()*10) >= 3)));
 						for(int k = 0; k < numMonsters; k++) {
+							
 							int topLeftX = i*400;
 							int topLeftY = j*400;
 							
 							int randomX = (int)(Math.random()*200 + 75);
 							int randomY = (int)(Math.random()*200 + 75);
 							boolean foundValidSpot = false;
+							Monster m = null;
 							while(foundValidSpot == false) {
+								
 								randomX = (int)(Math.random()*250 + 75);
 								randomY = (int)(Math.random()*250 + 75);
 								
-								Rectangle rect = new Rectangle(randomX, randomY, 50, 50);
+								if(isFly) 
+									m = new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface);
+								else
+									m = new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface);
+								
+								Rectangle rect = new Rectangle((int) m.getX(), (int) m.getY(), 50, 50);
 								boolean touchedOneMonster = false;
-								for(Monster m : monsters) {
-									if(m.isTouching(rect))
+								for(Monster otherM : monsters) {
+									if(otherM.isTouching(rect))
 										touchedOneMonster = true;
 								}
+								for(Wall w : walls) {
+									for(Rectangle r : w.getRectangles())
+										if(m.isTouching(r))
+											touchedOneMonster = true;
+								}
+								
 								if(touchedOneMonster == false)
 									foundValidSpot = true;
 							}
 							
-							
-							if(isFly) 
-								monsters.add(new Fly(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
-							else
-								monsters.add(new Snake(topLeftX + randomX, topLeftY + randomY, 50, 50, 50, surface));
+							monsters.add(m);
 							
 						}
 					}
