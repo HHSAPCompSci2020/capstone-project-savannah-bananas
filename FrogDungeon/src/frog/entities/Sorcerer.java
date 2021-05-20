@@ -22,6 +22,8 @@ public class Sorcerer extends Monster {
 	public static final double SORCERER_SPEED = 0.5;
 	public static final int SORCERER_COIN_VALUE = 15;
 	private PImage sorcerer;
+	private PImage sorcerer1;
+	private int ticks;
 	
 	private Bow bow;
 	
@@ -29,16 +31,26 @@ public class Sorcerer extends Monster {
 	public Sorcerer(double x, double y, double width, double height, double health) {
 		super(x, y, width, height, health, SORCERER_DAMAGE, SORCERER_RANGE, SORCERER_SPEED, SORCERER_COIN_VALUE);
 		bow = new Bow(null);
+		ticks = 0;
+		
 	}
 	
 	//Methods
 	public void draw(PApplet marker) {
 		if(sorcerer == null)
 			sorcerer = marker.loadImage("resources/sorcerer.png");
+		if (sorcerer1 == null)
+			sorcerer1 = marker.loadImage("resources/sorcerer1.png");
+		ticks++;
+		
+		if(ticks%40 < 20)
+			marker.image(sorcerer1, (float)x, (float)y, (float)width, (float)height);
+		else 
+			marker.image(sorcerer, (float)x, (float)y, (float)width, (float)height);
 		//marker.fill(255);
 		//marker.ellipseMode(marker.CORNER);
 		//marker.ellipse((float)x, (float)y, (float)width, (float)height);
-		marker.image(sorcerer, (float) x, (float) y, (float) width, (float) height);
+		//marker.image(sorcerer, (float) x, (float) y, (float) width, (float) height);
 	}
 	
 	/**
