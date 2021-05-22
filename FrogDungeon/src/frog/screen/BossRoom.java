@@ -158,7 +158,8 @@ public class BossRoom extends Screen {
 			surface.getFrog().getProjectile().draw(surface, 525, 40, 50, 50);
 		}
 		
-		
+		if(surface.getFrog().getHealth() <= 0)
+			surface.switchScreen(DrawingSurface.GAME_OVER_SCREEN);
 		ticks++;
 		
 	}
