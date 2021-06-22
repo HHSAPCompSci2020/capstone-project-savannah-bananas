@@ -1,3 +1,5 @@
+// you're on the right track! keep looking here :)
+
 package frog.entities;
 
 import java.awt.Point;
@@ -378,3 +380,7 @@ public class Frog extends Entity{
 	}
 	
 }
+
+/**
+key 2: enepraon
+*/
